@@ -1,0 +1,585 @@
+{
+ "sources": {
+  "sonnet": "results/always-mid/20260924T162945Z.jsonl",
+  "haiku": "results/always-cheap/20260924T190155Z.jsonl",
+  "sonnet_cached_24": "results/always-mid/20260924T034753Z.jsonl (24 non-expert questions)",
+  "sonnet_uncached_24": "results/always-mid-nocache/20260924T043458Z.jsonl"
+ },
+ "per_million_usd": {
+  "sonnet_32": 11347,
+  "haiku_32": 7739,
+  "opus_32": 19840,
+  "deepseek_trimmed_32": 766,
+  "sonnet_cached_24": 10283,
+  "sonnet_uncached_24": 42183,
+  "caching_saving_24": 31900,
+  "perfect_haiku_or_sonnet_saving": 3588,
+  "expert_to_sonnet_rule_saving": 3984,
+  "haiku_classifier_decision": 1542,
+  "jev_question_only_decision": 18,
+  "jev_with_layer_decision": 261,
+  "haiku_checker_call": 2845
+ },
+ "shares_of_sonnet": {
+  "perfect_haiku_or_sonnet": 0.3162,
+  "expert_to_sonnet_rule": 0.3511,
+  "caching_24": 0.7562
+ },
+ "decision_cost_share_of_perfect_saving": {
+  "jev_question_only": 0.0051,
+  "jev_with_layer": 0.0726,
+  "haiku_classifier": 0.4299,
+  "haiku_checker_call": 0.793
+ },
+ "breakeven": {
+  "assumptions": "Router sends every Haiku-safe question to Haiku, pays Jev question-only per decision, and misroutes a share b of the questions Haiku gets wrong; each misroute is a wrong answer.",
+  "haiku_safe_share": 0.8438,
+  "needs_sonnet_share": 0.1562,
+  "needs_sonnet_per_million": 156250,
+  "sonnet_minus_haiku_on_safe": 0.004252,
+  "haiku_minus_sonnet_on_needs_sonnet": -0.000131,
+  "rows": [
+   {
+    "wrong_answer_cost_usd": 0.1,
+    "max_misroute_share": 0.2287,
+    "wrong_answers_per_million": 35741
+   },
+   {
+    "wrong_answer_cost_usd": 1.0,
+    "max_misroute_share": 0.0228,
+    "wrong_answers_per_million": 3570
+   },
+   {
+    "wrong_answer_cost_usd": 10.0,
+    "max_misroute_share": 0.0023,
+    "wrong_answers_per_million": 357
+   }
+  ]
+ },
+ "rows": [
+  {
+   "label": "Sonnet 5 on everything",
+   "config": "always-mid",
+   "source": "results/always-mid/20260924T162945Z.jsonl",
+   "correct": 32,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.3631,
+   "mean_s": 7.4,
+   "median_s": 7.1,
+   "p95_s": 12.9
+  },
+  {
+   "label": "Haiku 4.5 on everything",
+   "config": "always-cheap",
+   "source": "results/always-cheap/20260924T190155Z.jsonl",
+   "correct": 27,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.2476,
+   "mean_s": 19.2,
+   "median_s": 6.5,
+   "p95_s": 190.5
+  },
+  {
+   "label": "Opus 5.5 on everything",
+   "config": "always-top",
+   "source": "results/always-top/20260924T040934Z.jsonl",
+   "correct": 32,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.6349,
+   "mean_s": 7.5,
+   "median_s": 7.2,
+   "p95_s": 12.9
+  },
+  {
+   "label": "DeepSeek V4 Flash on everything, trimmed layer",
+   "config": "venice/always-mid-levels-model-topic",
+   "source": "results/venice/always-mid-levels-model-topic/20260924T063449Z.jsonl",
+   "correct": 32,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.0245,
+   "mean_s": 40.1,
+   "median_s": 30.0,
+   "p95_s": 128.5
+  },
+  {
+   "label": "DeepSeek V4 Flash on everything, full layer",
+   "config": "venice/always-mid",
+   "source": "results/venice/always-mid/20260924T064920Z.jsonl",
+   "correct": 31,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.0285,
+   "mean_s": 38.5,
+   "median_s": 20.1,
+   "p95_s": 147.8
+  },
+  {
+   "label": "Qwen 3.5 9B on everything",
+   "config": "venice/always-cheap",
+   "source": "results/venice/always-cheap/20260924T190903Z.jsonl",
+   "correct": 64,
+   "total": 96,
+   "passes": 3,
+   "cost_per_pass_usd": 0.0865,
+   "mean_s": 13.5,
+   "median_s": 7.8,
+   "p95_s": 38.0
+  },
+  {
+   "label": "Muse on everything",
+   "config": "muse/always-muse",
+   "source": "results/muse/always-muse/20260925T025144Z.jsonl",
+   "correct": 31,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.1225,
+   "mean_s": 55.4,
+   "median_s": 36.6,
+   "p95_s": 143.8
+  },
+  {
+   "label": "Word-count router",
+   "config": "heuristic",
+   "source": "results/heuristic/20260924T184116Z.jsonl",
+   "correct": 32,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.3672,
+   "mean_s": 7.5,
+   "median_s": 6.9,
+   "p95_s": 12.3
+  },
+  {
+   "label": "Haiku classifier",
+   "config": "classifier",
+   "source": "results/classifier/20260924T043814Z.jsonl",
+   "correct": 32,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.4734,
+   "mean_s": 8.7,
+   "median_s": 8.3,
+   "p95_s": 13.1
+  },
+  {
+   "label": "Similar-questions router",
+   "config": "embedding",
+   "source": "results/embedding/20260924T045143Z.jsonl",
+   "correct": 32,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.5519,
+   "mean_s": 7.6,
+   "median_s": 7.0,
+   "p95_s": 12.9
+  },
+  {
+   "label": "Jev classifier",
+   "config": "jev-classifier",
+   "source": "results/jev-classifier/20260924T190322Z.jsonl",
+   "correct": 32,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.5801,
+   "mean_s": 8.6,
+   "median_s": 8.8,
+   "p95_s": 15.1
+  },
+  {
+   "label": "Haiku, escalate on errors",
+   "config": "cascade-signals",
+   "source": "results/cascade-signals/20260924T045926Z.jsonl",
+   "correct": 26,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.2252,
+   "mean_s": 7.1,
+   "median_s": 5.5,
+   "p95_s": 12.8
+  },
+  {
+   "label": "Haiku with Haiku checker",
+   "config": "cascade-verify-haiku",
+   "source": "results/cascade-verify-haiku/20260924T050212Z.jsonl",
+   "correct": 30,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.4425,
+   "mean_s": 12.6,
+   "median_s": 8.3,
+   "p95_s": 36.6
+  },
+  {
+   "label": "Haiku with Jev checker",
+   "config": "cascade-verify-jev",
+   "source": "results/cascade-verify-jev/20260924T190535Z.jsonl",
+   "correct": 30,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.3444,
+   "mean_s": 12.4,
+   "median_s": 8.7,
+   "p95_s": 37.2
+  },
+  {
+   "label": "Haiku with Sonnet checker",
+   "config": "cascade-verify-sonnet",
+   "source": "results/cascade-verify-sonnet/20260924T050453Z.jsonl",
+   "correct": 30,
+   "total": 32,
+   "passes": 1,
+   "cost_per_pass_usd": 0.4619,
+   "mean_s": 12.4,
+   "median_s": 7.4,
+   "p95_s": 44.0
+  }
+ ],
+ "repeats": [
+  {
+   "config": "always-mid",
+   "runs": [
+    {
+     "file": "results/always-mid/20260924T162945Z.jsonl",
+     "correct": 32,
+     "total": 32,
+     "cost_usd": 0.3631
+    },
+    {
+     "file": "results/always-mid-repeats/20260926T153808Z.jsonl",
+     "correct": 32,
+     "total": 32,
+     "cost_usd": 0.3924
+    },
+    {
+     "file": "results/always-mid-repeats/20260926T153808Z.jsonl",
+     "correct": 32,
+     "total": 32,
+     "cost_usd": 0.3732
+    }
+   ],
+   "original": {
+    "correct": 32,
+    "cost_usd": 0.3631
+   },
+   "mean_correct": 32,
+   "correct_range": [
+    32,
+    32
+   ],
+   "mean_cost_usd": 0.3762,
+   "cost_range_usd": [
+    0.3631,
+    0.3924
+   ]
+  },
+  {
+   "config": "always-cheap",
+   "runs": [
+    {
+     "file": "results/always-cheap/20260924T190155Z.jsonl",
+     "correct": 27,
+     "total": 32,
+     "cost_usd": 0.2476
+    },
+    {
+     "file": "results/always-cheap-repeats/20260926T154120Z.jsonl",
+     "correct": 27,
+     "total": 32,
+     "cost_usd": 0.2158
+    },
+    {
+     "file": "results/always-cheap-repeats/20260926T154120Z.jsonl",
+     "correct": 27,
+     "total": 32,
+     "cost_usd": 0.1787
+    }
+   ],
+   "original": {
+    "correct": 27,
+    "cost_usd": 0.2476
+   },
+   "mean_correct": 27,
+   "correct_range": [
+    27,
+    27
+   ],
+   "mean_cost_usd": 0.2141,
+   "cost_range_usd": [
+    0.1787,
+    0.2476
+   ]
+  },
+  {
+   "config": "heuristic",
+   "runs": [
+    {
+     "file": "results/heuristic/20260924T184116Z.jsonl",
+     "correct": 32,
+     "total": 32,
+     "cost_usd": 0.3672
+    },
+    {
+     "file": "results/heuristic-repeats/20260926T154357Z.jsonl",
+     "correct": 32,
+     "total": 32,
+     "cost_usd": 0.424
+    },
+    {
+     "file": "results/heuristic-repeats/20260926T154357Z.jsonl",
+     "correct": 31,
+     "total": 32,
+     "cost_usd": 0.38
+    }
+   ],
+   "original": {
+    "correct": 32,
+    "cost_usd": 0.3672
+   },
+   "mean_correct": 31.67,
+   "correct_range": [
+    31,
+    32
+   ],
+   "mean_cost_usd": 0.3904,
+   "cost_range_usd": [
+    0.3672,
+    0.424
+   ]
+  },
+  {
+   "config": "cascade-signals",
+   "runs": [
+    {
+     "file": "results/cascade-signals/20260924T045926Z.jsonl",
+     "correct": 26,
+     "total": 32,
+     "cost_usd": 0.2252
+    },
+    {
+     "file": "results/cascade-signals-repeats/20260926T154737Z.jsonl",
+     "correct": 30,
+     "total": 32,
+     "cost_usd": 0.2258
+    },
+    {
+     "file": "results/cascade-signals-repeats/20260926T154737Z.jsonl",
+     "correct": 28,
+     "total": 32,
+     "cost_usd": 0.198
+    }
+   ],
+   "original": {
+    "correct": 26,
+    "cost_usd": 0.2252
+   },
+   "mean_correct": 28,
+   "correct_range": [
+    26,
+    30
+   ],
+   "mean_cost_usd": 0.2163,
+   "cost_range_usd": [
+    0.198,
+    0.2258
+   ]
+  },
+  {
+   "config": "cascade-verify-jev",
+   "runs": [
+    {
+     "file": "results/cascade-verify-jev/20260924T190535Z.jsonl",
+     "correct": 30,
+     "total": 32,
+     "cost_usd": 0.3444
+    },
+    {
+     "file": "results/cascade-verify-jev-repeats/20260926T155331Z.jsonl",
+     "correct": 29,
+     "total": 32,
+     "cost_usd": 0.449
+    },
+    {
+     "file": "results/cascade-verify-jev-repeats/20260926T155331Z.jsonl",
+     "correct": 30,
+     "total": 32,
+     "cost_usd": 0.3718
+    }
+   ],
+   "original": {
+    "correct": 30,
+    "cost_usd": 0.3444
+   },
+   "mean_correct": 29.67,
+   "correct_range": [
+    29,
+    30
+   ],
+   "mean_cost_usd": 0.3884,
+   "cost_range_usd": [
+    0.3444,
+    0.449
+   ]
+  }
+ ],
+ "expert_questions": [
+  {
+   "label": "Haiku 4.5, thinking off",
+   "files": [
+    "results/always-cheap/20260924T190155Z.jsonl",
+    "results/always-cheap-repeats/20260926T154120Z.jsonl"
+   ],
+   "answers": 24,
+   "correct": 10,
+   "cost_per_answer_usd": 0.01296,
+   "mean_s": 27.9,
+   "median_s": 11.8,
+   "p95_s": 190.5,
+   "per_question": {
+    "x01": "1/3",
+    "x02": "2/3",
+    "x03": "0/3",
+    "x04": "0/3",
+    "x05": "2/3",
+    "x06": "2/3",
+    "x07": "3/3",
+    "x08": "0/3"
+   }
+  },
+  {
+   "label": "Haiku 4.5, 4096-token thinking budget",
+   "files": [
+    "results/always-cheap-subset-thinking/20260926T155727Z.jsonl"
+   ],
+   "answers": 24,
+   "correct": 21,
+   "cost_per_answer_usd": 0.01907,
+   "mean_s": 21.7,
+   "median_s": 20.7,
+   "p95_s": 30.6,
+   "per_question": {
+    "x01": "2/3",
+    "x02": "3/3",
+    "x03": "3/3",
+    "x04": "1/3",
+    "x05": "3/3",
+    "x06": "3/3",
+    "x07": "3/3",
+    "x08": "3/3"
+   }
+  },
+  {
+   "label": "Sonnet 5",
+   "files": [
+    "results/always-mid/20260924T162945Z.jsonl",
+    "results/always-mid-repeats/20260926T153808Z.jsonl"
+   ],
+   "answers": 24,
+   "correct": 24,
+   "cost_per_answer_usd": 0.01697,
+   "mean_s": 10.6,
+   "median_s": 11.2,
+   "p95_s": 13.9,
+   "per_question": {
+    "x01": "3/3",
+    "x02": "3/3",
+    "x03": "3/3",
+    "x04": "3/3",
+    "x05": "3/3",
+    "x06": "3/3",
+    "x07": "3/3",
+    "x08": "3/3"
+   }
+  }
+ ],
+ "route_context": {
+  "file": "results/always-cheap-routectx/20260926T160100Z.jsonl",
+  "passes": [
+   {
+    "correct": 32,
+    "total": 32,
+    "cost_usd": 0.1717374
+   },
+   {
+    "correct": 30,
+    "total": 32,
+    "cost_usd": 0.15752745
+   },
+   {
+    "correct": 31,
+    "total": 32,
+    "cost_usd": 0.15497455
+   }
+  ],
+  "mean_s": 6.5,
+  "median_s": 6.1,
+  "p95_s": 14.5,
+  "expert": {
+   "label": "Haiku 4.5 with context routing",
+   "files": [
+    "results/always-cheap-routectx/20260926T160100Z.jsonl"
+   ],
+   "answers": 24,
+   "correct": 21,
+   "cost_per_answer_usd": 0.00739,
+   "mean_s": 9.9,
+   "median_s": 8.5,
+   "p95_s": 15.4,
+   "per_question": {
+    "x01": "2/3",
+    "x02": "2/3",
+    "x03": "3/3",
+    "x04": "3/3",
+    "x05": "2/3",
+    "x06": "3/3",
+    "x07": "3/3",
+    "x08": "3/3"
+   }
+  }
+ },
+ "bird": [
+  {
+   "label": "Opus 5.5",
+   "config": "bird/always-top",
+   "source": "results/bird/always-top/20260924T235715Z.jsonl",
+   "execution_check": 27,
+   "total": 30,
+   "cost_usd": 0.4875
+  },
+  {
+   "label": "Haiku 4.5",
+   "config": "bird/always-cheap",
+   "source": "results/bird/always-cheap/20260924T235053Z.jsonl",
+   "execution_check": 20,
+   "total": 30,
+   "cost_usd": 0.1634
+  },
+  {
+   "label": "Qwen 3.5 9B",
+   "config": "bird/venice/always-cheap",
+   "source": "results/bird/venice/always-cheap/20260924T231559Z.jsonl",
+   "execution_check": 22,
+   "total": 30,
+   "cost_usd": 0.0466
+  },
+  {
+   "label": "Qwen 3.7 Plus",
+   "config": "bird/venice/always-top",
+   "source": "results/bird/venice/always-top/20260924T232339Z.jsonl",
+   "execution_check": 22,
+   "total": 30,
+   "cost_usd": 0.1084
+  },
+  {
+   "label": "DeepSeek V4 Flash",
+   "config": "bird/venice/always-mid",
+   "source": "results/bird/venice/always-mid/20260924T232048Z.jsonl",
+   "execution_check": 16,
+   "total": 30,
+   "cost_usd": 0.0258
+  }
+ ]
+}

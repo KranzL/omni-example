@@ -1,0 +1,50 @@
+{
+  "config": "always-cheap",
+  "provider": "anthropic",
+  "tag": "thinking",
+  "timestamp": "20260926T155727Z",
+  "source": "results/always-cheap-subset-thinking/20260926T155727Z.jsonl",
+  "repeat": 3,
+  "total": 24,
+  "correct": 21,
+  "accuracy": 0.875,
+  "correct_strict": 21,
+  "accuracy_strict": 0.875,
+  "by_difficulty": {
+    "expert": {
+      "total": 24,
+      "correct": 21,
+      "accuracy": 0.875,
+      "correct_strict": 21,
+      "accuracy_strict": 0.875
+    }
+  },
+  "total_cost_usd": 0.4575661999999999,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0,
+  "confusion": {
+    "expert": {
+      "cheap": 24
+    }
+  },
+  "route_match": 0,
+  "fail_reasons": {
+    "wrong_number": 3
+  },
+  "cost_per_correct_usd": 0.021788866666666663,
+  "mean_latency_ms": 21701.958333333332,
+  "p95_latency_ms": 30581,
+  "omni": {
+    "questions": 8,
+    "repeats": 3,
+    "total_tokens": 636835,
+    "tokens_per_correct": 30325.47619047619,
+    "median_latency_ms": 20674,
+    "error_free": 21,
+    "error_free_rate": 0.875,
+    "consistent": 6,
+    "consistency_rate": 0.75,
+    "answers_changed": 2,
+    "answer_texts_changed": 5
+  }
+}

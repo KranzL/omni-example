@@ -1,0 +1,301 @@
+{
+ "mid_total": 0.3631025,
+ "rows": [
+  {
+   "correct": 32,
+   "agent_cost": 0.3631025,
+   "overhead": 0.0,
+   "total": 0.3631025,
+   "n_cheap": 0,
+   "name": "always-mid",
+   "source": "results/always-mid/20260924T162945Z.jsonl"
+  },
+  {
+   "correct": 27,
+   "agent_cost": 0.24764485,
+   "overhead": 0.0,
+   "total": 0.24764485,
+   "n_cheap": 32,
+   "name": "always-cheap",
+   "source": "results/always-cheap/20260924T190155Z.jsonl"
+  },
+  {
+   "correct": 32,
+   "agent_cost": 0.23561975000000002,
+   "overhead": 0.0,
+   "total": 0.23561975000000002,
+   "n_cheap": 24,
+   "name": "hindsight e/m/h cheap, x mid",
+   "source": "difficulty labels"
+  },
+  {
+   "correct": 32,
+   "agent_cost": 0.24829895,
+   "overhead": 0.0,
+   "total": 0.24829895,
+   "n_cheap": 27,
+   "name": "oracle (label)",
+   "source": "per-question outcome"
+  },
+  {
+   "correct": 32,
+   "agent_cost": 0.27912645,
+   "overhead": 0,
+   "total": 0.27912645,
+   "n_cheap": 16,
+   "name": "heuristic two-tier",
+   "source": "results/heuristic/20260924T184116Z.jsonl",
+   "missed": [],
+   "over": [
+    "m05",
+    "h01",
+    "h02",
+    "h04",
+    "h05",
+    "h06",
+    "h07",
+    "h08",
+    "x02",
+    "x06",
+    "x07"
+   ],
+   "mix3": {
+    "cheap": 16,
+    "mid": 7,
+    "top": 9
+   }
+  },
+  {
+   "correct": 32,
+   "agent_cost": 0.27912645,
+   "overhead": 0,
+   "total": 0.27912645,
+   "n_cheap": 16,
+   "name": "heuristic-v2 two-tier",
+   "source": "results/heuristic-v2/20260924T183941Z.jsonl",
+   "missed": [],
+   "over": [
+    "m05",
+    "h01",
+    "h02",
+    "h04",
+    "h05",
+    "h06",
+    "h07",
+    "h08",
+    "x02",
+    "x06",
+    "x07"
+   ],
+   "mix3": {
+    "cheap": 16,
+    "mid": 6,
+    "top": 10
+   }
+  },
+  {
+   "correct": 32,
+   "agent_cost": 0.31008565000000005,
+   "overhead": 0.049356,
+   "total": 0.35944165000000006,
+   "n_cheap": 12,
+   "name": "classifier two-tier",
+   "source": "results/classifier/20260924T043814Z.jsonl",
+   "missed": [],
+   "over": [
+    "m01",
+    "m02",
+    "m03",
+    "m06",
+    "m08",
+    "h01",
+    "h02",
+    "h03",
+    "h05",
+    "h06",
+    "h07",
+    "h08",
+    "x02",
+    "x06",
+    "x07"
+   ],
+   "mix3": {
+    "cheap": 12,
+    "mid": 7,
+    "top": 13
+   }
+  },
+  {
+   "correct": 32,
+   "agent_cost": 0.34787780000000007,
+   "overhead": 0.00011,
+   "total": 0.34798780000000007,
+   "n_cheap": 4,
+   "name": "embedding two-tier",
+   "source": "results/embedding/20260924T045143Z.jsonl (cold cost from docs/routers.md; run was cached)",
+   "missed": [],
+   "over": [
+    "e04",
+    "e05",
+    "e07",
+    "e08",
+    "m01",
+    "m02",
+    "m03",
+    "m04",
+    "m05",
+    "m06",
+    "m07",
+    "m08",
+    "h01",
+    "h02",
+    "h03",
+    "h04",
+    "h05",
+    "h06",
+    "h07",
+    "h08",
+    "x02",
+    "x06",
+    "x07"
+   ],
+   "mix3": {
+    "cheap": 4,
+    "mid": 15,
+    "top": 13
+   }
+  },
+  {
+   "correct": 32,
+   "agent_cost": 0.31008565000000005,
+   "overhead": 0.026208204,
+   "total": 0.33629385400000006,
+   "n_cheap": 12,
+   "name": "jev-classifier two-tier",
+   "source": "results/jev-classifier/20260924T190322Z.jsonl",
+   "missed": [],
+   "over": [
+    "m01",
+    "m02",
+    "m03",
+    "m06",
+    "m08",
+    "h01",
+    "h02",
+    "h03",
+    "h05",
+    "h06",
+    "h07",
+    "h08",
+    "x02",
+    "x06",
+    "x07"
+   ],
+   "mix3": {
+    "cheap": 12,
+    "mid": 6,
+    "top": 14
+   }
+  },
+  {
+   "correct": 32,
+   "agent_cost": 0.31008565000000005,
+   "overhead": 0.008441454000000001,
+   "total": 0.31852710400000006,
+   "n_cheap": 12,
+   "name": "jev-classifier two-tier, Jev-only overhead",
+   "source": "primary_cost_usd only"
+  }
+ ],
+ "cache_writes": {
+  "cheap": [
+   [
+    "h02",
+    1305,
+    0.00860975
+   ],
+   [
+    "x01",
+    21061,
+    0.04419415
+   ],
+   [
+    "x02",
+    1154,
+    0.0075854
+   ],
+   [
+    "x06",
+    17384,
+    0.0334616
+   ],
+   [
+    "x07",
+    8518,
+    0.018743799999999998
+   ],
+   [
+    "x08",
+    8103,
+    0.01595345
+   ]
+  ],
+  "mid": []
+ },
+ "recorded": {
+  "heuristic": {
+   "mix": {
+    "cheap": 16,
+    "mid": 7,
+    "top": 9
+   },
+   "overhead": 0,
+   "src": "results/heuristic/20260924T184116Z.jsonl"
+  },
+  "heuristic-v2": {
+   "mix": {
+    "cheap": 16,
+    "mid": 6,
+    "top": 10
+   },
+   "overhead": 0,
+   "src": "results/heuristic-v2/20260924T183941Z.jsonl"
+  },
+  "classifier": {
+   "mix": {
+    "cheap": 12,
+    "mid": 7,
+    "top": 13
+   },
+   "overhead": 0.049356,
+   "src": "results/classifier/20260924T043814Z.jsonl"
+  },
+  "embedding": {
+   "mix": {
+    "cheap": 4,
+    "mid": 15,
+    "top": 13
+   },
+   "overhead": 0.00011,
+   "src": "results/embedding/20260924T045143Z.jsonl"
+  },
+  "jev_fallbacks": [
+   "m04",
+   "m05",
+   "m06",
+   "m07",
+   "h02",
+   "h04"
+  ],
+  "jev_primary_cost": 0.008441454000000001,
+  "jev-classifier": {
+   "mix": {
+    "cheap": 12,
+    "mid": 6,
+    "top": 14
+   },
+   "overhead": 0.026208204,
+   "src": "results/jev-classifier/20260924T190322Z.jsonl"
+  }
+ }
+}

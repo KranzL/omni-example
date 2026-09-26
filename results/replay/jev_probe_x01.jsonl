@@ -1,0 +1,1 @@
+{"id": "x01", "choice": "nested", "probs": {"single_pass": 0.0, "nested": 1.0}, "confidence": 1.0, "input_tokens": 525, "output_tokens": 32, "cost_usd": 2.2050000000000004e-05, "latency_ms": 330, "attempts": 1, "model": "jev-1.13.0"}

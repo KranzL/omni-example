@@ -1,0 +1,13 @@
+{
+ "run": "results/always-cheap-routectx/20260926T160100Z.jsonl",
+ "captured_requests": 200,
+ "distinct_model_system_tools_prefixes": 1,
+ "prefix_sha256": [
+  "6ad95c9c4001cb21558a7c5ef7d625fb1c7e0d15889a0bcaab6f9084841373bd"
+ ],
+ "requests_with_hint_in_first_user_message": 45,
+ "requests_with_hint_in_system_or_tools": 0,
+ "expert_answers": 24,
+ "expert_answers_reading_cache": 24,
+ "note": "Captured with --capture-requests during the run above. results/requests/ is gitignored, so this file records the check."
+}

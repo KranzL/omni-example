@@ -1,0 +1,11 @@
+{"provider": "venice", "what": "bge-m3 embeddings", "texts": 97, "tokens": 2189, "cost_usd": 0.00032835, "latency_ms": 2094}
+{"provider": "jev", "what": "bench nosl", "calls": 1, "tokens": 525, "cost_usd": 2.2050000000000004e-05}
+{"provider": "jev", "what": "bench nosl v0", "calls": 32, "tokens": 13819, "cost_usd": 0.0005803980000000001}
+{"provider": "jev", "what": "bench sl v0", "calls": 32, "tokens": 198491, "cost_usd": 0.008336622000000002}
+{"provider": "jev", "what": "bench nosl v1", "calls": 32, "tokens": 16699, "cost_usd": 0.0007013580000000001}
+{"provider": "jev", "what": "bench sl v1", "calls": 32, "tokens": 201371, "cost_usd": 0.008457582000000002}
+{"provider": "jev", "what": "seeds nosl v0", "calls": 36, "tokens": 15300, "cost_usd": 0.0006426000000000001}
+{"provider": "jev", "what": "seeds sl v0", "calls": 36, "tokens": 223056, "cost_usd": 0.009368352000000002}
+{"provider": "jev", "what": "bird nosl v0", "calls": 30, "tokens": 12833, "cost_usd": 0.0005389860000000001}
+{"provider": "jev", "what": "bird sl v0", "calls": 30, "tokens": 59546, "cost_usd": 0.0025009320000000004}
+{"provider": "jev", "what": "bench nosl v0", "calls": 32, "tokens": 13819, "cost_usd": 0.0005803980000000001}
