@@ -1,0 +1,131 @@
+{
+  "config": "cascade-verify-jev",
+  "provider": "anthropic",
+  "timestamp": "20260924T190535Z",
+  "source": "results/cascade-verify-jev/20260924T190535Z.jsonl",
+  "repeat": 1,
+  "total": 32,
+  "correct": 30,
+  "accuracy": 0.9375,
+  "correct_strict": 26,
+  "accuracy_strict": 0.8125,
+  "by_difficulty": {
+    "easy": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 8,
+      "accuracy_strict": 1
+    },
+    "expert": {
+      "total": 8,
+      "correct": 6,
+      "accuracy": 0.75,
+      "correct_strict": 6,
+      "accuracy_strict": 0.75
+    },
+    "hard": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 7,
+      "accuracy_strict": 0.875
+    },
+    "moderate": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 5,
+      "accuracy_strict": 0.625
+    }
+  },
+  "total_cost_usd": 0.344415648,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0.08807619800000001,
+  "confusion": {
+    "easy": {
+      "cheap": 7,
+      "mid": 1
+    },
+    "expert": {
+      "cheap": 5,
+      "mid": 3
+    },
+    "hard": {
+      "cheap": 7,
+      "mid": 1
+    },
+    "moderate": {
+      "cheap": 8
+    }
+  },
+  "route_match": 7,
+  "escalation": {
+    "easy": {
+      "total": 8,
+      "escalated": 1,
+      "rate": 0.125,
+      "reached_top": 0
+    },
+    "expert": {
+      "total": 8,
+      "escalated": 3,
+      "rate": 0.375,
+      "reached_top": 0
+    },
+    "hard": {
+      "total": 8,
+      "escalated": 1,
+      "rate": 0.125,
+      "reached_top": 0
+    },
+    "moderate": {
+      "total": 8,
+      "escalated": 0,
+      "rate": 0,
+      "reached_top": 0
+    }
+  },
+  "signals": {
+    "no_submit": 1,
+    "verifier_reject": 4
+  },
+  "verifier": {
+    "verified": 36,
+    "accepted": 32,
+    "rejected": 4,
+    "errors": 0,
+    "accepted_correct": 30,
+    "accepted_wrong": 2,
+    "rejected_correct": 1,
+    "rejected_wrong": 3,
+    "false_reject_rate": 0.03225806451612903,
+    "false_accept_rate": 0.4
+  },
+  "fail_reasons": {
+    "wrong_number": 2
+  },
+  "format_reasons": {
+    "count_appended": 2,
+    "month_format": 1,
+    "unit_words": 1
+  },
+  "cost_per_correct_usd": 0.0114805216,
+  "mean_latency_ms": 12444.0625,
+  "p95_latency_ms": 37187,
+  "omni": {
+    "questions": 32,
+    "repeats": 1,
+    "total_tokens": 1061993,
+    "tokens_per_correct": 35399.76666666667,
+    "median_latency_ms": 8678,
+    "error_free": 31,
+    "error_free_rate": 0.96875
+  },
+  "regraded": {
+    "at": "2026-09-25T00:37:02Z",
+    "lines": 32,
+    "verdicts_changed": 0,
+    "strict_changed": 0
+  }
+}

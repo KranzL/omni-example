@@ -1,0 +1,459 @@
+schema: public
+dataset: theLook apparel ecommerce data with customers, orders, inventory, web events, products, and warehouses
+tables:
+  - name: distribution_centers
+    purpose: Fulfillment warehouses that stock products and ship customer orders.
+    grain: One row per warehouse.
+    approx_rows: 10
+    primary_key: id
+    foreign_keys: []
+    columns:
+      - name: id
+        type: integer
+        description: Warehouse identifier and primary key with values 1 through 10.
+      - name: name
+        type: character varying(255)
+        description: Warehouse name with its city, for example Memphis TN or Chicago IL.
+      - name: latitude
+        type: double precision
+        description: Warehouse latitude in decimal degrees for map plots and distance math.
+      - name: longitude
+        type: double precision
+        description: Warehouse longitude in decimal degrees for map plots and distance math.
+  - name: events
+    purpose: Website interaction log used for traffic, funnel, and conversion analysis.
+    grain: One row per tracked website interaction.
+    approx_rows: 5312000
+    primary_key: id
+    foreign_keys:
+      - column: user_id
+        references: users.id
+    columns:
+      - name: id
+        type: integer
+        description: Event identifier and primary key, unique per interaction.
+      - name: sequence_number
+        type: integer
+        description: Position of this event inside its session starting at 1, used to order funnel steps.
+      - name: session_id
+        type: character varying(255)
+        description: Browsing session identifier shared by all events of one visit, about 2.5M distinct values.
+      - name: created_at
+        type: timestamp without time zone
+        description: Moment the interaction happened, the default timestamp for traffic questions.
+      - name: ip_address
+        type: character varying(255)
+        description: Visitor IP address as logged by the tracker.
+      - name: city
+        type: character varying(255)
+        description: Visitor city resolved from the IP address at event time.
+      - name: state
+        type: character varying(255)
+        description: Visitor state resolved from the IP address at event time.
+      - name: country
+        type: character varying(255)
+        description: Visitor country resolved from the IP address at event time.
+      - name: zip
+        type: character varying(255)
+        description: Visitor postal code stored as text, not a number.
+      - name: latitude
+        type: double precision
+        description: Geocoded latitude of the visitor location for map plots.
+      - name: longitude
+        type: double precision
+        description: Geocoded longitude of the visitor location for map plots.
+      - name: os
+        type: character varying(255)
+        description: Visitor operating system, one of Macintosh, Windows, or Linux.
+      - name: browser
+        type: character varying(255)
+        description: Visitor browser, one of Chrome, Safari, Firefox, IE, or Other.
+      - name: traffic_source
+        type: character varying(255)
+        description: Channel credited with the session. The set differs from the users table set.
+      - name: user_id
+        type: integer
+        description: Logged-in account referencing users.id, null for about 3.5M anonymous events.
+      - name: uri
+        type: character varying(1024)
+        description: Page viewed, for example /product/29012 or /department/Men/category/Accessories/brand/Dopp.
+      - name: event_type
+        type: character varying(255)
+        description: Interaction kind. Page views are Home, Product, Brand, and Category. Funnel steps are Cart, History, Purchase, and Register. Cancel marks a cancellation.
+      - name: ad_event_id
+        type: integer
+        description: Advertising click identifier when the session came from a paid ad, null otherwise.
+      - name: referrer_code
+        type: character varying(255)
+        description: Referral code carried into the session, null when none was used.
+  - name: inventory_items
+    purpose: Physical stock units with cost and denormalized product attributes.
+    grain: One row per physical inventory unit.
+    approx_rows: 261000
+    primary_key: id
+    foreign_keys:
+      - column: product_id
+        references: products.id
+      - column: product_distribution_center_id
+        references: distribution_centers.id
+    columns:
+      - name: id
+        type: integer
+        description: Physical unit identifier and primary key, unique per unit.
+      - name: product_id
+        type: integer
+        description: Product this unit is an instance of, references products.id.
+      - name: created_at
+        type: timestamp without time zone
+        description: Moment the unit entered inventory. Some rows predate 2023-01-01.
+      - name: sold_at
+        type: timestamp without time zone
+        description: Moment the unit sold, null for the roughly 10K units still in stock. Prefer order_items for sales analysis.
+      - name: cost
+        type: double precision
+        description: Unit cost in dollars. Subtract it from sale_price for margin math.
+      - name: product_category
+        type: character varying(255)
+        description: Denormalized category copied from products at stocking time.
+      - name: product_name
+        type: character varying(1024)
+        description: Denormalized product name up to 1024 characters.
+      - name: product_brand
+        type: character varying(255)
+        description: Denormalized brand copied from products at stocking time.
+      - name: product_retail_price
+        type: double precision
+        description: Denormalized list price in dollars, often above the actual sale_price.
+      - name: product_department
+        type: character varying(255)
+        description: Denormalized department copied from products, Men or Women.
+      - name: product_sku
+        type: character varying(255)
+        description: Denormalized stock keeping unit code copied from products.
+      - name: product_distribution_center_id
+        type: integer
+        description: Warehouse holding this unit, references distribution_centers.id.
+  - name: order_items
+    purpose: Line items of customer orders, the source of truth for sales.
+    grain: One row per item within a customer order.
+    approx_rows: 251000
+    primary_key: id
+    foreign_keys:
+      - column: user_id
+        references: users.id
+      - column: inventory_item_id
+        references: inventory_items.id
+    columns:
+      - name: id
+        type: integer
+        description: Line-item identifier and primary key, unique per row.
+      - name: order_id
+        type: integer
+        description: Groups line items into one customer order since there is no orders table. About 245K distinct orders average 1.03 items each.
+      - name: user_id
+        type: integer
+        description: Buyer account referencing users.id. Every row matches a users row.
+      - name: inventory_item_id
+        type: integer
+        description: Physical unit sold referencing inventory_items.id. Every row matches an inventory_items row.
+      - name: sale_price
+        type: double precision
+        description: Price charged for this one item in dollars, never null. Per item, not per order.
+      - name: status
+        type: character varying
+        description: Fulfillment state. Complete dominates with about 237K rows, then Cancelled with about 9K, Returned with about 2.4K, Shipped with about 1.7K, and Processing with about 1.1K.
+      - name: created_at
+        type: timestamp without time zone
+        description: Moment the item was ordered, the default timestamp for all sales questions.
+      - name: returned_at
+        type: timestamp without time zone
+        description: Moment the item was returned, null unless status is Returned.
+      - name: shipped_at
+        type: timestamp without time zone
+        description: Moment the item shipped, null for orders that never shipped.
+      - name: delivered_at
+        type: timestamp without time zone
+        description: Moment the item was delivered, null for orders never delivered.
+  - name: products
+    purpose: Product catalog with pricing, brand, and warehouse assignment.
+    grain: One row per sellable product.
+    approx_rows: 29000
+    primary_key: id
+    foreign_keys:
+      - column: distribution_center_id
+        references: distribution_centers.id
+    columns:
+      - name: id
+        type: integer
+        description: Product identifier and primary key, unique per product.
+      - name: cost
+        type: double precision
+        description: Unit cost in dollars at the product level. Margin math uses inventory_items.cost instead.
+      - name: category
+        type: character varying(255)
+        description: Product category, one of 26 values from Accessories to Underwear.
+      - name: name
+        type: character varying(1024)
+        description: Full product name up to 1024 characters.
+      - name: brand
+        type: character varying(255)
+        description: Manufacturer brand with 2757 distinct values, so group or filter rather than listing all.
+      - name: retail_price
+        type: double precision
+        description: List price in dollars. The actual sale_price on order_items can differ.
+      - name: department
+        type: character varying(255)
+        description: Store department, Men or Women.
+      - name: sku
+        type: character varying(255)
+        description: Stock keeping unit code identifying the product.
+      - name: distribution_center_id
+        type: integer
+        description: Home warehouse referencing distribution_centers.id.
+  - name: users
+    purpose: Registered customer accounts with demographics and acquisition channel.
+    grain: One row per registered user account.
+    approx_rows: 157000
+    primary_key: id
+    foreign_keys: []
+    columns:
+      - name: id
+        type: integer
+        description: Account identifier and primary key. Values start at 1 and rise with each registration.
+      - name: first_name
+        type: character varying(255)
+        description: Customer first name in upper case as entered at registration.
+      - name: last_name
+        type: character varying(255)
+        description: Customer last name in upper case as entered at registration.
+      - name: email
+        type: character varying(255)
+        description: Contact email address, unique per account in practice.
+      - name: age
+        type: integer
+        description: Customer age in years at registration time.
+      - name: city
+        type: character varying(255)
+        description: Home city from the account address.
+      - name: state
+        type: character varying(255)
+        description: Home state or province from the account address.
+      - name: country
+        type: character varying(255)
+        description: Home country from the account address. Nearly all rows are USA.
+      - name: zip
+        type: character varying(255)
+        description: Postal code from the account address, stored as text.
+      - name: latitude
+        type: double precision
+        description: Geocoded latitude of the account address for map plots.
+      - name: longitude
+        type: double precision
+        description: Geocoded longitude of the account address for map plots.
+      - name: gender
+        type: character varying(30)
+        description: Self-reported gender, one of Female or Male with no other values present.
+      - name: created_at
+        type: timestamp without time zone
+        description: Registration moment. This is the timestamp for new-user questions and cohort windows.
+      - name: traffic_source
+        type: character varying(255)
+        description: Marketing channel credited with acquiring the user. The set differs from the events table set.
+enums:
+  - column: events.browser
+    values: [Chrome, Firefox, IE, Other, Safari]
+  - column: events.event_type
+    values: [Brand, Cancel, Cart, Category, History, Home, Product, Purchase, Register]
+  - column: events.os
+    values: [Linux, Macintosh, Windows]
+  - column: events.traffic_source
+    values: [Adwords, Email, Facebook, Organic, YouTube]
+  - column: inventory_items.product_category
+    values: [Accessories, Active, Blazers & Jackets, Clothing Sets, Dresses, Fashion Hoodies & Sweatshirts, Intimates, Jeans, Jumpsuits & Rompers, Leggings, Maternity, Outerwear & Coats, Pants, Pants & Capris, Plus, Shorts, Skirts, Sleep & Lounge, Socks, Socks & Hosiery, Suits, Suits & Sport Coats, Sweaters, Swim, Tops & Tees, Underwear]
+  - column: inventory_items.product_department
+    values: [Men, Women]
+  - column: order_items.status
+    values: [Cancelled, Complete, Processing, Returned, Shipped]
+  - column: products.category
+    values: [Accessories, Active, Blazers & Jackets, Clothing Sets, Dresses, Fashion Hoodies & Sweatshirts, Intimates, Jeans, Jumpsuits & Rompers, Leggings, Maternity, Outerwear & Coats, Pants, Pants & Capris, Plus, Shorts, Skirts, Sleep & Lounge, Socks, Socks & Hosiery, Suits, Suits & Sport Coats, Sweaters, Swim, Tops & Tees, Underwear]
+  - column: products.department
+    values: [Men, Women]
+  - column: users.gender
+    values: [Female, Male]
+  - column: users.traffic_source
+    values: [Display, Email, Facebook, Organic, Search]
+metrics:
+  - name: average_order_value
+    description: Mean gross revenue per order that kept at least one non-cancelled item. Divide the gross revenue expression by the distinct count of non-cancelled orders.
+    status_filter: Excludes Cancelled from both the revenue sum and the order count.
+    sql: |
+      SELECT SUM(CASE WHEN status <> 'Cancelled' THEN sale_price ELSE 0 END) / NULLIF(COUNT(DISTINCT CASE WHEN status <> 'Cancelled' THEN order_id END), 0) AS average_order_value FROM public.order_items
+  - name: cancellation_rate
+    description: Share of placed line items that were cancelled. The denominator counts every row because a cancelled item was still placed.
+    status_filter: No filter on the denominator. The numerator counts only Cancelled rows.
+    sql: |
+      SELECT COUNT(*) FILTER (WHERE status = 'Cancelled')::double precision / NULLIF(COUNT(*), 0) AS cancellation_rate FROM public.order_items
+  - name: conversion_rate
+    description: Share of browsing sessions that included at least one Purchase event. Sessions are the denominator because most visits never log in.
+    status_filter: No order status filter. Uses event_type where Purchase marks a converting session.
+    sql: |
+      SELECT COUNT(DISTINCT CASE WHEN event_type = 'Purchase' THEN session_id END)::double precision / NULLIF(COUNT(DISTINCT session_id), 0) AS conversion_rate FROM public.events
+  - name: gross_margin
+    description: Revenue kept after unit cost, summed over items the customer kept. Joins order_items to inventory_items for the per-unit cost of the exact unit sold.
+    status_filter: Excludes Cancelled and Returned rows.
+    sql: |
+      SELECT SUM(oi.sale_price - ii.cost) AS gross_margin FROM public.order_items oi JOIN public.inventory_items ii ON ii.id = oi.inventory_item_id WHERE oi.status NOT IN ('Cancelled', 'Returned')
+  - name: gross_revenue
+    description: Total dollars charged before returns. Cancelled orders never charged the customer, so they stay out, while returned orders stay in because the charge happened.
+    status_filter: Excludes Cancelled. Includes Complete, Shipped, Processing, and Returned.
+    sql: |
+      SELECT SUM(CASE WHEN status <> 'Cancelled' THEN sale_price ELSE 0 END) AS gross_revenue FROM public.order_items
+  - name: net_revenue
+    description: Total dollars kept after removing cancelled and returned items. This is the revenue figure for profit and growth questions unless the question says gross.
+    status_filter: Excludes Cancelled and Returned. Includes Complete, Shipped, and Processing.
+    sql: |
+      SELECT SUM(CASE WHEN status NOT IN ('Cancelled', 'Returned') THEN sale_price ELSE 0 END) AS net_revenue FROM public.order_items
+  - name: new_users_per_period
+    description: Count of accounts registered in each period, grouped by the truncated users.created_at timestamp. Add a closed created_at window for one period.
+    status_filter: No status filter. The users table has no status column.
+    sql: |
+      SELECT DATE_TRUNC('month', created_at) AS period, COUNT(*) AS new_users FROM public.users GROUP BY 1 ORDER BY 1
+  - name: order_count
+    description: Count of distinct customer orders placed. Every placed order counts, even one whose items were all cancelled later.
+    status_filter: No status filter. Counts every distinct order_id in order_items.
+    sql: |
+      SELECT COUNT(DISTINCT order_id) AS order_count FROM public.order_items
+  - name: return_rate
+    description: Share of non-cancelled line items that came back as returns. Cancelled items never shipped, so they stay out of the denominator.
+    status_filter: Excludes Cancelled from the denominator. The numerator counts only Returned rows.
+    sql: |
+      SELECT COUNT(*) FILTER (WHERE status = 'Returned')::double precision / NULLIF(COUNT(*) FILTER (WHERE status <> 'Cancelled'), 0) AS return_rate FROM public.order_items
+  - name: sessions
+    description: Count of distinct browsing sessions in the events log. This is the denominator for traffic and funnel ratios.
+    status_filter: No status filter. Counts every distinct session_id in events.
+    sql: |
+      SELECT COUNT(DISTINCT session_id) AS sessions FROM public.events
+  - name: units_sold
+    description: Count of line items the customer paid for and kept. Each order_items row is one unit, so this is a filtered row count.
+    status_filter: Excludes Cancelled and Returned rows.
+    sql: |
+      SELECT COUNT(*) AS units_sold FROM public.order_items WHERE status NOT IN ('Cancelled', 'Returned')
+paths:
+  - name: order_item_to_unit
+    description: Each line item to the physical inventory unit sold. Prefer the denormalized product_category, product_brand, and product_department columns on inventory_items over joining products.
+    grain: One row per order item.
+    steps:
+      - from: order_items
+        join: inventory_items
+        on: inventory_items.id = order_items.inventory_item_id
+  - name: order_item_to_product
+    description: Each line item to its catalog product through the physical unit. Needed only for catalog columns missing from inventory_items, such as name or sku.
+    grain: One row per order item.
+    steps:
+      - from: order_items
+        join: inventory_items
+        on: inventory_items.id = order_items.inventory_item_id
+      - from: inventory_items
+        join: products
+        on: products.id = inventory_items.product_id
+  - name: order_item_to_warehouse
+    description: Each line item to the warehouse that stocked its physical unit. This is the path for sales or margin by distribution center. Never route through products for this.
+    grain: One row per order item.
+    steps:
+      - from: order_items
+        join: inventory_items
+        on: inventory_items.id = order_items.inventory_item_id
+      - from: inventory_items
+        join: distribution_centers
+        on: distribution_centers.id = inventory_items.product_distribution_center_id
+  - name: product_to_warehouse
+    description: Each catalog product to its home warehouse. Use only for catalog questions. Sales questions use order_item_to_warehouse instead.
+    grain: One row per product.
+    steps:
+      - from: products
+        join: distribution_centers
+        on: distribution_centers.id = products.distribution_center_id
+  - name: user_to_orders
+    description: Each customer to that customer's own line items. Cohort questions add a window relative to each user's created_at.
+    grain: One row per order item, NULL-extended when a LEFT JOIN keeps users without orders.
+    steps:
+      - from: users
+        join: order_items
+        on: order_items.user_id = users.id
+  - name: event_to_user
+    description: Each website event to the logged-in account behind it. Anonymous events drop out of an inner join, so funnel denominators use session_id instead.
+    grain: One row per event.
+    steps:
+      - from: events
+        join: users
+        on: users.id = events.user_id
+synonyms:
+  - term: warehouse
+    refers_to: distribution_centers
+  - term: customer
+    refers_to: users
+  - term: line item
+    refers_to: order_items
+  - term: visit
+    refers_to: events.session_id
+conventions:
+  - Every question needs an explicit time window. Add WHERE created_at >= 'start' AND created_at < 'end' with a closed end date.
+  - Use created_at unless the question names another timestamp such as shipped_at, delivered_at, or sold_at.
+  - The data grows daily from 2023-01-01 onward, so only closed windows give reproducible answers. Never compare a partial current period against a full past period.
+  - Query schema public only. The source schema behind the views is not readable.
+  - Measure sales from order_items, never from inventory_items.sold_at.
+  - An order is the set of order_items rows sharing one order_id. There is no orders table.
+  - sale_price is the price of one item, not of the whole order. Sum it for revenue.
+  - Money columns are double precision. Cast to numeric before rounding with ROUND(value::numeric, 2), because round with two double precision arguments does not exist.
+  - events.user_id is null for anonymous visitors. Use session_id for traffic and funnel denominators.
+  - Status, event_type, traffic_source, and category values are case sensitive. Copy them exactly from this prompt.
+gotchas:
+  - When a question groups by user, order, or session and then aggregates across those groups with a median, a percentile, or a count, filter rows with WHERE on status, never with SUM(CASE WHEN ...) inside the grouped query, because the CASE form keeps zero-value groups that shift the result.
+  - One order_id owns several order_items rows with slightly different created_at values, so the time of an order is MIN(created_at) over its items. Rank and difference orders, never raw items.
+  - Cohort questions join each user to that user's own orders inside a window relative to the user's created_at, for example oi.created_at < c.created_at + INTERVAL '90 days', not inside one shared calendar window.
+  - "For ranked_list answers, format the output as one item per line with only the ranked value, never append counts or metrics as suffix text like 'Brand: 123'."
+  - When a ranked list question asks for categories or names, return only the category or name values in order, one per line, without appending metrics like revenue or counts.
+  - "When formatting tabular answers, output a CSV header row with column names, then one data row per group, with numeric values unrounded and untruncated to preserve precision. Never use key=value inline notation like 'users=2300, net_revenue=167962.75' for table results."
+examples:
+  - question: What was gross revenue by month in 2024?
+    sql: |
+      SELECT DATE_TRUNC('month', created_at) AS month, ROUND((SUM(CASE WHEN status <> 'Cancelled' THEN sale_price ELSE 0 END))::numeric, 2) AS gross_revenue FROM public.order_items WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01' GROUP BY 1 ORDER BY 1
+  - question: What was net revenue by month in 2024?
+    sql: |
+      SELECT DATE_TRUNC('month', created_at) AS month, ROUND((SUM(CASE WHEN status NOT IN ('Cancelled', 'Returned') THEN sale_price ELSE 0 END))::numeric, 2) AS net_revenue FROM public.order_items WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01' GROUP BY 1 ORDER BY 1
+  - question: Which 10 brands earned the most gross revenue in 2024?
+    sql: |
+      SELECT p.brand, ROUND((SUM(CASE WHEN oi.status <> 'Cancelled' THEN oi.sale_price ELSE 0 END))::numeric, 2) AS gross_revenue FROM public.order_items oi JOIN public.inventory_items ii ON ii.id = oi.inventory_item_id JOIN public.products p ON p.id = ii.product_id WHERE oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01' GROUP BY 1 ORDER BY 2 DESC LIMIT 10
+  - question: How many users came from each traffic source?
+    sql: |
+      SELECT traffic_source, COUNT(*) AS users FROM public.users GROUP BY 1 ORDER BY 2 DESC
+  - question: How many orders were placed per week in January 2024?
+    sql: |
+      SELECT DATE_TRUNC('week', created_at) AS week, COUNT(DISTINCT order_id) AS orders FROM public.order_items WHERE created_at >= '2024-01-01' AND created_at < '2024-02-01' GROUP BY 1 ORDER BY 1
+  - question: What was average order value by month in 2024?
+    sql: |
+      SELECT DATE_TRUNC('month', created_at) AS month, ROUND((SUM(CASE WHEN status <> 'Cancelled' THEN sale_price ELSE 0 END) / NULLIF(COUNT(DISTINCT CASE WHEN status <> 'Cancelled' THEN order_id END), 0))::numeric, 2) AS average_order_value FROM public.order_items WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01' GROUP BY 1 ORDER BY 1
+  - question: Which categories sold the most units in 2024?
+    sql: |
+      SELECT p.category, COUNT(*) AS units_sold FROM public.order_items oi JOIN public.inventory_items ii ON ii.id = oi.inventory_item_id JOIN public.products p ON p.id = ii.product_id WHERE oi.status NOT IN ('Cancelled', 'Returned') AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01' GROUP BY 1 ORDER BY 2 DESC LIMIT 10
+  - question: What is the return rate by product category for 2024 orders?
+    sql: |
+      SELECT p.category, ROUND((COUNT(*) FILTER (WHERE oi.status = 'Returned')::double precision / NULLIF(COUNT(*) FILTER (WHERE oi.status <> 'Cancelled'), 0))::numeric, 4) AS return_rate FROM public.order_items oi JOIN public.inventory_items ii ON ii.id = oi.inventory_item_id JOIN public.products p ON p.id = ii.product_id WHERE oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01' GROUP BY 1 ORDER BY 2 DESC
+  - question: How many new users registered per month in 2024?
+    sql: |
+      SELECT DATE_TRUNC('month', created_at) AS month, COUNT(*) AS new_users FROM public.users WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01' GROUP BY 1 ORDER BY 1
+  - question: How many sessions came from each traffic source in March 2024?
+    sql: |
+      SELECT traffic_source, COUNT(DISTINCT session_id) AS sessions FROM public.events WHERE created_at >= '2024-03-01' AND created_at < '2024-04-01' GROUP BY 1 ORDER BY 2 DESC
+  - question: What share of sessions included a purchase in 2024?
+    sql: |
+      SELECT ROUND((COUNT(DISTINCT CASE WHEN event_type = 'Purchase' THEN session_id END)::double precision / NULLIF(COUNT(DISTINCT session_id), 0))::numeric, 4) AS conversion_rate FROM public.events WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01'
+  - question: What was gross margin by department in 2024?
+    sql: |
+      SELECT p.department, ROUND((SUM(oi.sale_price - ii.cost))::numeric, 2) AS gross_margin FROM public.order_items oi JOIN public.inventory_items ii ON ii.id = oi.inventory_item_id JOIN public.products p ON p.id = ii.product_id WHERE oi.status NOT IN ('Cancelled', 'Returned') AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01' GROUP BY 1 ORDER BY 2 DESC
+  - question: Which 10 products earned the most net revenue in 2024?
+    sql: |
+      SELECT p.name, ROUND((SUM(CASE WHEN oi.status NOT IN ('Cancelled', 'Returned') THEN oi.sale_price ELSE 0 END))::numeric, 2) AS net_revenue FROM public.order_items oi JOIN public.inventory_items ii ON ii.id = oi.inventory_item_id JOIN public.products p ON p.id = ii.product_id WHERE oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01' GROUP BY 1 ORDER BY 2 DESC LIMIT 10
+  - question: What was gross revenue by user state in 2024?
+    sql: |
+      SELECT u.state, ROUND((SUM(CASE WHEN oi.status <> 'Cancelled' THEN oi.sale_price ELSE 0 END))::numeric, 2) AS gross_revenue FROM public.order_items oi JOIN public.users u ON u.id = oi.user_id WHERE oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01' GROUP BY 1 ORDER BY 2 DESC LIMIT 20

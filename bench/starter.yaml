@@ -1,0 +1,28 @@
+name: starter
+note: >-
+  The ten questions a new user of an ecommerce analytics chat asks first, taken from the 32 in
+  questions.yaml. Omni's evals post starts with ten real questions and grows to 15 or 20; the full
+  32 in questions.yaml is this harness's grown set. Four of the ten are revenue and orders, then one
+  each for traffic source, return rate and a cohort, and three plain counts. The set has no expert
+  question because users rarely open with one.
+questions:
+  - id: m01
+    why: revenue by product category, the first question on most ecommerce dashboards
+  - id: m07
+    why: orders per month, the basic volume trend
+  - id: m04
+    why: average order value for one month
+  - id: m08
+    why: top categories by net revenue
+  - id: m06
+    why: revenue by user traffic source, the closest of the 32 to users by source
+  - id: m03
+    why: return rate by department
+  - id: h08
+    why: the cohort question, users and net revenue by acquisition month
+  - id: e05
+    why: new users in a year
+  - id: e04
+    why: cancelled order items, a status count
+  - id: e07
+    why: purchase events in one month, the funnel count

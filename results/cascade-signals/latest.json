@@ -1,0 +1,116 @@
+{
+  "config": "cascade-signals",
+  "provider": "anthropic",
+  "timestamp": "20260924T045926Z",
+  "source": "results/cascade-signals/20260924T045926Z.jsonl",
+  "repeat": 1,
+  "total": 32,
+  "correct": 26,
+  "accuracy": 0.8125,
+  "correct_strict": 23,
+  "accuracy_strict": 0.71875,
+  "by_difficulty": {
+    "easy": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 8,
+      "accuracy_strict": 1
+    },
+    "expert": {
+      "total": 8,
+      "correct": 2,
+      "accuracy": 0.25,
+      "correct_strict": 2,
+      "accuracy_strict": 0.25
+    },
+    "hard": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 7,
+      "accuracy_strict": 0.875
+    },
+    "moderate": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 6,
+      "accuracy_strict": 0.75
+    }
+  },
+  "total_cost_usd": 0.2251922,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0,
+  "confusion": {
+    "easy": {
+      "cheap": 7,
+      "mid": 1
+    },
+    "expert": {
+      "cheap": 8
+    },
+    "hard": {
+      "cheap": 8
+    },
+    "moderate": {
+      "cheap": 6,
+      "mid": 2
+    }
+  },
+  "route_match": 9,
+  "escalation": {
+    "easy": {
+      "total": 8,
+      "escalated": 1,
+      "rate": 0.125,
+      "reached_top": 0
+    },
+    "expert": {
+      "total": 8,
+      "escalated": 0,
+      "rate": 0,
+      "reached_top": 0
+    },
+    "hard": {
+      "total": 8,
+      "escalated": 0,
+      "rate": 0,
+      "reached_top": 0
+    },
+    "moderate": {
+      "total": 8,
+      "escalated": 2,
+      "rate": 0.25,
+      "reached_top": 0
+    }
+  },
+  "signals": {
+    "no_submit": 3
+  },
+  "fail_reasons": {
+    "wrong_number": 6
+  },
+  "format_reasons": {
+    "count_appended": 2,
+    "month_format": 1
+  },
+  "cost_per_correct_usd": 0.008661238461538462,
+  "mean_latency_ms": 7107.46875,
+  "p95_latency_ms": 12835,
+  "omni": {
+    "questions": 32,
+    "repeats": 1,
+    "total_tokens": 576826,
+    "tokens_per_correct": 22185.615384615383,
+    "median_latency_ms": 5516,
+    "error_free": 30,
+    "error_free_rate": 0.9375
+  },
+  "regraded": {
+    "at": "2026-09-25T00:37:02Z",
+    "lines": 32,
+    "verdicts_changed": 0,
+    "strict_changed": 0
+  }
+}

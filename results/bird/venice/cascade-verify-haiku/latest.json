@@ -1,0 +1,121 @@
+{
+  "config": "cascade-verify-haiku",
+  "provider": "venice",
+  "timestamp": "20260924T233743Z",
+  "source": "results/bird/venice/cascade-verify-haiku/20260924T233743Z.jsonl",
+  "repeat": 1,
+  "total": 30,
+  "correct": 19,
+  "accuracy": 0.6333333333333333,
+  "correct_strict": 19,
+  "accuracy_strict": 0.6333333333333333,
+  "by_difficulty": {
+    "challenging": {
+      "total": 10,
+      "correct": 7,
+      "accuracy": 0.7,
+      "correct_strict": 7,
+      "accuracy_strict": 0.7,
+      "ex_correct": 8,
+      "ex_accuracy": 0.8
+    },
+    "moderate": {
+      "total": 10,
+      "correct": 7,
+      "accuracy": 0.7,
+      "correct_strict": 7,
+      "accuracy_strict": 0.7,
+      "ex_correct": 5,
+      "ex_accuracy": 0.5
+    },
+    "simple": {
+      "total": 10,
+      "correct": 5,
+      "accuracy": 0.5,
+      "correct_strict": 5,
+      "accuracy_strict": 0.5,
+      "ex_correct": 8,
+      "ex_accuracy": 0.8
+    }
+  },
+  "total_cost_usd": 0.11145530400000002,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0.011296499999999998,
+  "confusion": {
+    "challenging": {
+      "cheap": 3,
+      "mid": 5,
+      "top": 2
+    },
+    "moderate": {
+      "cheap": 6,
+      "mid": 4
+    },
+    "simple": {
+      "cheap": 5,
+      "mid": 1,
+      "top": 4
+    }
+  },
+  "route_match": 11,
+  "escalation": {
+    "challenging": {
+      "total": 10,
+      "escalated": 7,
+      "rate": 0.7,
+      "reached_top": 2
+    },
+    "moderate": {
+      "total": 10,
+      "escalated": 4,
+      "rate": 0.4,
+      "reached_top": 0
+    },
+    "simple": {
+      "total": 10,
+      "escalated": 5,
+      "rate": 0.5,
+      "reached_top": 4
+    }
+  },
+  "signals": {
+    "low_confidence": 1,
+    "no_submit": 4,
+    "sql_errors": 2,
+    "verifier_reject": 18,
+    "zero_rows": 1
+  },
+  "verifier": {
+    "verified": 42,
+    "accepted": 24,
+    "rejected": 18,
+    "errors": 0,
+    "accepted_correct": 16,
+    "accepted_wrong": 8,
+    "rejected_correct": 10,
+    "rejected_wrong": 8,
+    "false_reject_rate": 0.38461538461538464,
+    "false_accept_rate": 0.5
+  },
+  "fail_reasons": {
+    "wrong_items": 4,
+    "wrong_number": 2,
+    "wrong_row_labels": 5
+  },
+  "cost_per_correct_usd": 0.005866068631578948,
+  "ex_correct": 21,
+  "ex_total": 30,
+  "ex_accuracy": 0.7,
+  "cost_per_ex_correct_usd": 0.0053073954285714296,
+  "mean_latency_ms": 24769.466666666667,
+  "p95_latency_ms": 63248,
+  "omni": {
+    "questions": 30,
+    "repeats": 1,
+    "total_tokens": 1144719,
+    "tokens_per_correct": 60248.36842105263,
+    "median_latency_ms": 16510,
+    "error_free": 26,
+    "error_free_rate": 0.8666666666666667
+  }
+}

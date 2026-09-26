@@ -1,0 +1,383 @@
+schema: main
+dataset: BIRD Mini-Dev thrombosis_prediction database (SQLite)
+title: the BIRD Mini-Dev thrombosis_prediction SQLite database
+tables:
+    - name: Examination
+      purpose: The Examination table of the database.
+      grain: One row per Examination record.
+      approx_rows: 106
+      primary_key: ID
+      foreign_keys:
+        - column: ID
+          references: Patient.ID
+      columns:
+        - name: ID
+          type: INTEGER
+          description: The ID column (INTEGER).
+        - name: Examination Date
+          type: DATE
+          description: The Examination Date column (DATE).
+        - name: aCL IgG
+          type: REAL
+          description: The aCL IgG column (REAL).
+        - name: aCL IgM
+          type: REAL
+          description: The aCL IgM column (REAL).
+        - name: ANA
+          type: INTEGER
+          description: The ANA column (INTEGER).
+        - name: ANA Pattern
+          type: TEXT
+          description: The ANA Pattern column (TEXT).
+        - name: aCL IgA
+          type: INTEGER
+          description: The aCL IgA column (INTEGER).
+        - name: Diagnosis
+          type: TEXT
+          description: The Diagnosis column (TEXT).
+        - name: KCT
+          type: TEXT
+          description: The KCT column (TEXT).
+        - name: RVVT
+          type: TEXT
+          description: The RVVT column (TEXT).
+        - name: LAC
+          type: TEXT
+          description: The LAC column (TEXT).
+        - name: Symptoms
+          type: TEXT
+          description: The Symptoms column (TEXT).
+        - name: Thrombosis
+          type: INTEGER
+          description: The Thrombosis column (INTEGER).
+    - name: Laboratory
+      purpose: The Laboratory table of the database.
+      grain: One row per Laboratory record.
+      approx_rows: 13908
+      primary_key: ID
+      foreign_keys:
+        - column: ID
+          references: Patient.ID
+      columns:
+        - name: ID
+          type: INTEGER
+          description: The ID column (INTEGER). Part of the primary key.
+        - name: Date
+          type: DATE
+          description: The Date column (DATE). Part of the primary key.
+        - name: GOT
+          type: INTEGER
+          description: The GOT column (INTEGER).
+        - name: GPT
+          type: INTEGER
+          description: The GPT column (INTEGER).
+        - name: LDH
+          type: INTEGER
+          description: The LDH column (INTEGER).
+        - name: ALP
+          type: INTEGER
+          description: The ALP column (INTEGER).
+        - name: TP
+          type: REAL
+          description: The TP column (REAL).
+        - name: ALB
+          type: REAL
+          description: The ALB column (REAL).
+        - name: UA
+          type: REAL
+          description: The UA column (REAL).
+        - name: UN
+          type: INTEGER
+          description: The UN column (INTEGER).
+        - name: CRE
+          type: REAL
+          description: The CRE column (REAL).
+        - name: T-BIL
+          type: REAL
+          description: The T-BIL column (REAL).
+        - name: T-CHO
+          type: INTEGER
+          description: The T-CHO column (INTEGER).
+        - name: TG
+          type: INTEGER
+          description: The TG column (INTEGER).
+        - name: CPK
+          type: INTEGER
+          description: The CPK column (INTEGER).
+        - name: GLU
+          type: INTEGER
+          description: The GLU column (INTEGER).
+        - name: WBC
+          type: REAL
+          description: The WBC column (REAL).
+        - name: RBC
+          type: REAL
+          description: The RBC column (REAL).
+        - name: HGB
+          type: REAL
+          description: The HGB column (REAL).
+        - name: HCT
+          type: REAL
+          description: The HCT column (REAL).
+        - name: PLT
+          type: INTEGER
+          description: The PLT column (INTEGER).
+        - name: PT
+          type: REAL
+          description: The PT column (REAL).
+        - name: APTT
+          type: INTEGER
+          description: The APTT column (INTEGER).
+        - name: FG
+          type: REAL
+          description: The FG column (REAL).
+        - name: PIC
+          type: INTEGER
+          description: The PIC column (INTEGER).
+        - name: TAT
+          type: INTEGER
+          description: The TAT column (INTEGER).
+        - name: TAT2
+          type: INTEGER
+          description: The TAT2 column (INTEGER).
+        - name: U-PRO
+          type: TEXT
+          description: The U-PRO column (TEXT).
+        - name: IGG
+          type: INTEGER
+          description: The IGG column (INTEGER).
+        - name: IGA
+          type: INTEGER
+          description: The IGA column (INTEGER).
+        - name: IGM
+          type: INTEGER
+          description: The IGM column (INTEGER).
+        - name: CRP
+          type: TEXT
+          description: The CRP column (TEXT).
+        - name: RA
+          type: TEXT
+          description: The RA column (TEXT).
+        - name: RF
+          type: TEXT
+          description: The RF column (TEXT).
+        - name: C3
+          type: INTEGER
+          description: The C3 column (INTEGER).
+        - name: C4
+          type: INTEGER
+          description: The C4 column (INTEGER).
+        - name: RNP
+          type: TEXT
+          description: The RNP column (TEXT).
+        - name: SM
+          type: TEXT
+          description: The SM column (TEXT).
+        - name: SC170
+          type: TEXT
+          description: The SC170 column (TEXT).
+        - name: SSA
+          type: TEXT
+          description: The SSA column (TEXT).
+        - name: SSB
+          type: TEXT
+          description: The SSB column (TEXT).
+        - name: CENTROMEA
+          type: TEXT
+          description: The CENTROMEA column (TEXT).
+        - name: DNA
+          type: TEXT
+          description: The DNA column (TEXT).
+        - name: DNA-II
+          type: INTEGER
+          description: The DNA-II column (INTEGER).
+    - name: Patient
+      purpose: The Patient table of the database.
+      grain: One row per Patient record.
+      approx_rows: 1238
+      primary_key: ID
+      foreign_keys: []
+      columns:
+        - name: ID
+          type: INTEGER
+          description: The ID column (INTEGER). Part of the primary key.
+        - name: SEX
+          type: TEXT
+          description: The SEX column (TEXT).
+        - name: Birthday
+          type: DATE
+          description: The Birthday column (DATE).
+        - name: Description
+          type: DATE
+          description: The Description column (DATE).
+        - name: First Date
+          type: DATE
+          description: The First Date column (DATE).
+        - name: Admission
+          type: TEXT
+          description: The Admission column (TEXT).
+        - name: Diagnosis
+          type: TEXT
+          description: The Diagnosis column (TEXT).
+enums:
+    - column: Examination.ANA
+      values:
+        - "0"
+        - "1024"
+        - "16"
+        - "256"
+        - "4"
+        - "4096"
+        - "64"
+    - column: Examination.ANA Pattern
+      values:
+        - D,P,S
+        - P
+        - P,S
+        - S
+        - S,D
+        - S,P
+    - column: Examination.KCT
+      values:
+        - +
+        - '-'
+    - column: Examination.RVVT
+      values:
+        - +
+        - '-'
+    - column: Examination.LAC
+      values:
+        - +
+        - '-'
+    - column: Examination.Symptoms
+      values:
+        - AMI
+        - Apo
+        - CNS lupus
+        - CNS susp
+        - CVA, epilepsy
+        - DVT
+        - PH
+        - brain infarction
+        - thrombocytopenia
+        - thrombophlebitis
+    - column: Examination.Thrombosis
+      values:
+        - "0"
+        - "1"
+        - "2"
+        - "3"
+    - column: Laboratory.U-PRO
+      values:
+        - '%%'
+        - +1(30)
+        - +2(100)
+        - '-'
+        - "-15"
+        - "0"
+        - "1"
+        - "100"
+        - "2"
+        - "3"
+        - "30"
+        - "300"
+        - "4"
+        - '>=1000'
+        - '>=300'
+        - TR
+    - column: Laboratory.RA
+      values:
+        - +
+        - +-
+        - '-'
+        - 2+
+        - 7-
+    - column: Laboratory.RNP
+      values:
+        - "0"
+        - "1"
+        - "15"
+        - "16"
+        - "256"
+        - "4"
+        - "64"
+        - negative
+    - column: Laboratory.SM
+      values:
+        - "0"
+        - "1"
+        - "2"
+        - "8"
+        - negative
+    - column: Laboratory.SC170
+      values:
+        - "0"
+        - "1"
+        - "16"
+        - "4"
+        - negative
+    - column: Laboratory.SSA
+      values:
+        - "0"
+        - "1"
+        - "16"
+        - "256"
+        - "4"
+        - "64"
+        - negative
+    - column: Laboratory.SSB
+      values:
+        - "0"
+        - "1"
+        - "2"
+        - "32"
+        - "8"
+        - negative
+    - column: Laboratory.CENTROMEA
+      values:
+        - "0"
+        - negative
+    - column: Patient.SEX
+      values:
+        - F
+        - M
+    - column: Patient.Admission
+      values:
+        - +
+        - +(
+        - '-'
+metrics: []
+paths:
+    - name: Examination-to-Patient
+      description: Join Examination to Patient.
+      grain: One row per Examination row.
+      steps:
+        - from: Examination
+          join: Patient
+          "on": Examination.ID = Patient.ID
+    - name: Laboratory-to-Patient
+      description: Join Laboratory to Patient.
+      grain: One row per Laboratory row.
+      steps:
+        - from: Laboratory
+          join: Patient
+          "on": Laboratory.ID = Patient.ID
+synonyms:
+    - term: examination
+      refers_to: Examination
+    - term: laboratory
+      refers_to: Laboratory
+    - term: patient
+      refers_to: Patient
+conventions:
+    - 'This database is SQLite. Use SQLite syntax and functions: STRFTIME for dates, || for string concatenation, CAST(x AS FLOAT) for ratios.'
+    - Query read-only with one SELECT or WITH statement and no trailing semicolon.
+    - Quote identifiers that contain spaces or special characters with double quotes.
+    - Copy ON clauses from the join paths verbatim.
+gotchas:
+    - 'Integer division truncates: CAST one side to FLOAT before dividing.'
+    - Some columns store dates as TEXT; compare them as strings in YYYY-MM-DD form.
+    - NULL values never equal anything; use IS NULL or IS NOT NULL to test them.
+examples:
+    - question: How many rows are in Laboratory?
+      sql: SELECT COUNT(*) FROM Laboratory

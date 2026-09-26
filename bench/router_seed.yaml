@@ -1,0 +1,108 @@
+- id: se01
+  difficulty: easy
+  question: What is the full name of the user with id 5000?
+- id: se02
+  difficulty: easy
+  question: Which department does the product with id 250 belong to?
+- id: se03
+  difficulty: easy
+  question: How many products have a retail price above 100 dollars?
+- id: se04
+  difficulty: easy
+  question: How many users list Canada as their country?
+- id: se05
+  difficulty: easy
+  question: What city is the distribution center with id 3 located in?
+- id: se06
+  difficulty: easy
+  question: How many events were recorded on 2024-01-15?
+- id: se07
+  difficulty: easy
+  question: What is the status of the order item with id 999?
+- id: se08
+  difficulty: easy
+  question: How many products are in the Swim category?
+- id: se09
+  difficulty: easy
+  question: What is the retail price of the product with id 777?
+- id: se10
+  difficulty: easy
+  question: How many users arrived through the Email traffic source?
+- id: se11
+  difficulty: easy
+  question: How many distribution centers are located in the United States?
+- id: se12
+  difficulty: easy
+  question: What is the username of the user with id 7?
+- id: sm01
+  difficulty: moderate
+  question: What was the total net revenue in calendar 2023?
+- id: sm02
+  difficulty: moderate
+  question: Which 5 products sold the most units in February 2024?
+- id: sm03
+  difficulty: moderate
+  question: What was the average retail price of products by brand?
+- id: sm04
+  difficulty: moderate
+  question: How many orders were delivered in each quarter of 2023?
+- id: sm05
+  difficulty: moderate
+  question: What was the cancellation rate by product category in 2023?
+- id: sm06
+  difficulty: moderate
+  question: Which traffic source brought the most new users in 2024?
+- id: sm07
+  difficulty: moderate
+  question: What was the gross revenue by user gender in calendar 2024?
+- id: sm08
+  difficulty: moderate
+  question: What are the top 3 cities by number of orders in 2024?
+- id: sm09
+  difficulty: moderate
+  question: How many distinct products were sold in each month of 2023?
+- id: sm10
+  difficulty: moderate
+  question: What was the average number of items per order in 2024?
+- id: sm11
+  difficulty: moderate
+  question: Which distribution center handled the most returned items in 2023?
+- id: sm12
+  difficulty: moderate
+  question: What was the total cost of goods sold by department in 2024?
+- id: sh01
+  difficulty: hard
+  question: What share of users who bought something in January 2024 bought again the next month?
+- id: sh02
+  difficulty: hard
+  question: What was the median order value by traffic source for repeat buyers in 2024?
+- id: sh03
+  difficulty: hard
+  question: Which product category grew fastest between 2023 and 2024 in net revenue?
+- id: sh04
+  difficulty: hard
+  question: What was the 30-day repeat purchase rate for users acquired in March 2024?
+- id: sh05
+  difficulty: hard
+  question: Which brand shows the highest average days between the first and third purchase?
+- id: sh06
+  difficulty: hard
+  question: What fraction of 2024 revenue came from users created before 2023?
+- id: sh07
+  difficulty: hard
+  question: What was the median time from signup to first order by country in 2024?
+- id: sh08
+  difficulty: hard
+  question: Which month of 2023 had the steepest week-over-week drop in order volume?
+- id: sh09
+  difficulty: hard
+  question: What share of sessions with a Cart event ended in a Purchase within one day?
+- id: sh10
+  difficulty: hard
+  question: Which distribution center has the slowest median delivery time for orders over 50 dollars?
+- id: sh11
+  difficulty: hard
+  question: How did the return rate change from the first half to the second half of 2024 by department?
+- id: sh12
+  difficulty: hard
+  question: What was the 75th percentile of days from first to fifth order among 2024 buyers?

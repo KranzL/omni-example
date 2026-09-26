@@ -1,0 +1,94 @@
+{
+  "config": "jev-classifier",
+  "provider": "venice",
+  "timestamp": "20260924T222227Z",
+  "source": "results/venice/jev-classifier/20260924T222227Z.jsonl",
+  "repeat": 3,
+  "total": 96,
+  "correct": 89,
+  "accuracy": 0.9270833333333334,
+  "correct_strict": 79,
+  "accuracy_strict": 0.8229166666666666,
+  "by_difficulty": {
+    "easy": {
+      "total": 24,
+      "correct": 22,
+      "accuracy": 0.9166666666666666,
+      "correct_strict": 22,
+      "accuracy_strict": 0.9166666666666666
+    },
+    "expert": {
+      "total": 24,
+      "correct": 19,
+      "accuracy": 0.7916666666666666,
+      "correct_strict": 19,
+      "accuracy_strict": 0.7916666666666666
+    },
+    "hard": {
+      "total": 24,
+      "correct": 24,
+      "accuracy": 1,
+      "correct_strict": 21,
+      "accuracy_strict": 0.875
+    },
+    "moderate": {
+      "total": 24,
+      "correct": 24,
+      "accuracy": 1,
+      "correct_strict": 17,
+      "accuracy_strict": 0.7083333333333334
+    }
+  },
+  "total_cost_usd": 0.35494522799999995,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0.036890711999999985,
+  "confusion": {
+    "easy": {
+      "cheap": 24
+    },
+    "expert": {
+      "top": 24
+    },
+    "hard": {
+      "cheap": 3,
+      "mid": 3,
+      "top": 18
+    },
+    "moderate": {
+      "cheap": 9,
+      "mid": 15
+    }
+  },
+  "route_match": 81,
+  "fail_reasons": {
+    "wrong_items": 2,
+    "wrong_number": 5
+  },
+  "format_reasons": {
+    "count_appended": 6,
+    "month_format": 1,
+    "unit_words": 3
+  },
+  "cost_per_correct_usd": 0.003988148629213483,
+  "mean_latency_ms": 20432.697916666668,
+  "p95_latency_ms": 65754,
+  "omni": {
+    "questions": 32,
+    "repeats": 3,
+    "total_tokens": 2348251,
+    "tokens_per_correct": 26384.842696629214,
+    "median_latency_ms": 14035,
+    "error_free": 94,
+    "error_free_rate": 0.9791666666666666,
+    "consistent": 29,
+    "consistency_rate": 0.90625,
+    "answers_changed": 3,
+    "answer_texts_changed": 11
+  },
+  "regraded": {
+    "at": "2026-09-25T00:37:02Z",
+    "lines": 96,
+    "verdicts_changed": 0,
+    "strict_changed": 0
+  }
+}

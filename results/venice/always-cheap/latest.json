@@ -1,0 +1,93 @@
+{
+  "config": "always-cheap",
+  "provider": "venice",
+  "timestamp": "20260924T190903Z",
+  "source": "results/venice/always-cheap/20260924T190903Z.jsonl",
+  "repeat": 3,
+  "total": 96,
+  "correct": 64,
+  "accuracy": 0.6666666666666666,
+  "correct_strict": 61,
+  "accuracy_strict": 0.6354166666666666,
+  "by_difficulty": {
+    "easy": {
+      "total": 24,
+      "correct": 23,
+      "accuracy": 0.9583333333333334,
+      "correct_strict": 23,
+      "accuracy_strict": 0.9583333333333334
+    },
+    "expert": {
+      "total": 24,
+      "correct": 6,
+      "accuracy": 0.25,
+      "correct_strict": 6,
+      "accuracy_strict": 0.25
+    },
+    "hard": {
+      "total": 24,
+      "correct": 15,
+      "accuracy": 0.625,
+      "correct_strict": 15,
+      "accuracy_strict": 0.625
+    },
+    "moderate": {
+      "total": 24,
+      "correct": 20,
+      "accuracy": 0.8333333333333334,
+      "correct_strict": 17,
+      "accuracy_strict": 0.7083333333333334
+    }
+  },
+  "total_cost_usd": 0.2594104000000001,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0,
+  "confusion": {
+    "easy": {
+      "cheap": 24
+    },
+    "expert": {
+      "cheap": 24
+    },
+    "hard": {
+      "cheap": 24
+    },
+    "moderate": {
+      "cheap": 24
+    }
+  },
+  "route_match": 24,
+  "fail_reasons": {
+    "no_answer": 2,
+    "wrong_items": 2,
+    "wrong_number": 18,
+    "wrong_row_labels": 4,
+    "wrong_row_values": 4,
+    "wrong_value": 2
+  },
+  "format_reasons": {
+    "count_appended": 3
+  },
+  "cost_per_correct_usd": 0.0040532875000000015,
+  "mean_latency_ms": 13515.166666666666,
+  "p95_latency_ms": 37972,
+  "omni": {
+    "questions": 32,
+    "repeats": 3,
+    "total_tokens": 2544320,
+    "tokens_per_correct": 39755,
+    "median_latency_ms": 7800,
+    "error_free": 69,
+    "error_free_rate": 0.71875,
+    "consistent": 22,
+    "consistency_rate": 0.6875,
+    "answers_changed": 10,
+    "answer_texts_changed": 19
+  },
+  "regraded": {
+    "at": "2026-09-25T00:37:02Z",
+    "lines": 96,
+    "verdicts_changed": 0,
+    "strict_changed": 0
+  }
+}

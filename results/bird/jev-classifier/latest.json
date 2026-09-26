@@ -1,0 +1,82 @@
+{
+  "config": "jev-classifier",
+  "provider": "anthropic",
+  "timestamp": "20260924T235556Z",
+  "source": "results/bird/jev-classifier/20260924T235556Z.jsonl",
+  "repeat": 1,
+  "total": 30,
+  "correct": 23,
+  "accuracy": 0.7666666666666667,
+  "correct_strict": 23,
+  "accuracy_strict": 0.7666666666666667,
+  "by_difficulty": {
+    "challenging": {
+      "total": 10,
+      "correct": 8,
+      "accuracy": 0.8,
+      "correct_strict": 8,
+      "accuracy_strict": 0.8,
+      "ex_correct": 7,
+      "ex_accuracy": 0.7
+    },
+    "moderate": {
+      "total": 10,
+      "correct": 9,
+      "accuracy": 0.9,
+      "correct_strict": 9,
+      "accuracy_strict": 0.9,
+      "ex_correct": 6,
+      "ex_accuracy": 0.6
+    },
+    "simple": {
+      "total": 10,
+      "correct": 6,
+      "accuracy": 0.6,
+      "correct_strict": 6,
+      "accuracy_strict": 0.6,
+      "ex_correct": 7,
+      "ex_accuracy": 0.7
+    }
+  },
+  "total_cost_usd": 0.404210642,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0.08249969199999997,
+  "confusion": {
+    "challenging": {
+      "cheap": 2,
+      "mid": 7,
+      "top": 1
+    },
+    "moderate": {
+      "cheap": 6,
+      "mid": 4
+    },
+    "simple": {
+      "cheap": 8,
+      "mid": 1,
+      "top": 1
+    }
+  },
+  "route_match": 13,
+  "fail_reasons": {
+    "wrong_number": 2,
+    "wrong_row_labels": 4,
+    "wrong_row_values": 1
+  },
+  "cost_per_correct_usd": 0.017574375739130434,
+  "ex_correct": 20,
+  "ex_total": 30,
+  "ex_accuracy": 0.6666666666666666,
+  "cost_per_ex_correct_usd": 0.0202105321,
+  "mean_latency_ms": 9859.4,
+  "p95_latency_ms": 24530,
+  "omni": {
+    "questions": 30,
+    "repeats": 1,
+    "total_tokens": 632452,
+    "tokens_per_correct": 27497.91304347826,
+    "median_latency_ms": 7736,
+    "error_free": 30,
+    "error_free_rate": 1
+  }
+}

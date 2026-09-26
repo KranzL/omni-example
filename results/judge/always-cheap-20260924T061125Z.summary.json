@@ -1,0 +1,54 @@
+{
+  "config": "always-cheap",
+  "source": "results/always-cheap/20260924T034617Z.jsonl",
+  "timestamp": "20260924T061125Z",
+  "total": 32,
+  "judge_pass": 24,
+  "supervised": 9,
+  "overturns": 1,
+  "agree_lenient": 30,
+  "agree_strict": 32,
+  "agreement_lenient": 0.9375,
+  "agreement_strict": 1,
+  "judge_cost_usd": 0.129025,
+  "disagreements": [
+    {
+      "id": "m02",
+      "difficulty": "moderate",
+      "lenient_correct": true,
+      "strict_correct": false,
+      "judge_final_correct": false,
+      "judge_reason": "The agent provided the correct five brands in the correct order but appended unit counts, which per the close-but-wrong examples fails the strict verdict despite passing the lenient verdict.",
+      "supervisor_decision": "agree",
+      "supervisor_reason": "Per the rubric's explicit close-but-wrong example, appending counts like \"Levi's: 3013\" fails the strict verdict, so the fail verdict is correct.",
+      "answer": "Levi's: 3013\nDockers: 1289\nAllegra K: 1263\nColumbia: 1217\nRay-Ban: 1151",
+      "expected": [
+        "Levi's",
+        "Dockers",
+        "Allegra K",
+        "Columbia",
+        "Ray-Ban"
+      ],
+      "human_sides_with": "lenient"
+    },
+    {
+      "id": "m08",
+      "difficulty": "moderate",
+      "lenient_correct": true,
+      "strict_correct": false,
+      "judge_final_correct": false,
+      "judge_reason": "The agent provided the correct five categories in the correct order, but violated the rubric requirement by appending revenue values, which is explicitly noted in the close-but-wrong examples as failing the strict verdict.",
+      "supervisor_decision": "agree",
+      "supervisor_reason": "The rubric explicitly states that appending revenue values to the correct categories fails the strict verdict, matching this case exactly.",
+      "answer": "Jeans: 379473.50\nAccessories: 229758.06\nOuterwear & Coats: 205414.18\nFashion Hoodies & Sweatshirts: 181423.25\nTops & Tees: 168391.11",
+      "expected": [
+        "Jeans",
+        "Accessories",
+        "Outerwear & Coats",
+        "Fashion Hoodies & Sweatshirts",
+        "Tops & Tees"
+      ],
+      "human_sides_with": "lenient"
+    }
+  ]
+}

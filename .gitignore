@@ -1,0 +1,12 @@
+.env
+bin/
+.DS_Store
+results/traces/
+results/embeddings/
+results/requests/
+/harness
+.env.*
+!.env.example
+/local/
+/results/*.md
+/results/*.svg

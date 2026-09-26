@@ -1,0 +1,62 @@
+{
+  "config": "always-mid",
+  "provider": "anthropic",
+  "tag": "verify",
+  "timestamp": "20260924T162818Z",
+  "source": "results/always-mid-verify/20260924T162818Z.jsonl",
+  "repeat": 1,
+  "total": 3,
+  "correct": 3,
+  "accuracy": 1,
+  "correct_strict": 2,
+  "accuracy_strict": 0.6666666666666666,
+  "by_difficulty": {
+    "hard": {
+      "total": 1,
+      "correct": 1,
+      "accuracy": 1,
+      "correct_strict": 0,
+      "accuracy_strict": 0
+    },
+    "moderate": {
+      "total": 2,
+      "correct": 2,
+      "accuracy": 1,
+      "correct_strict": 2,
+      "accuracy_strict": 1
+    }
+  },
+  "total_cost_usd": 0.059379100000000004,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0,
+  "confusion": {
+    "hard": {
+      "mid": 1
+    },
+    "moderate": {
+      "mid": 2
+    }
+  },
+  "route_match": 2,
+  "format_reasons": {
+    "csv_rows": 1
+  },
+  "cost_per_correct_usd": 0.019793033333333335,
+  "mean_latency_ms": 7618,
+  "p95_latency_ms": 8698,
+  "omni": {
+    "questions": 3,
+    "repeats": 1,
+    "total_tokens": 65521,
+    "tokens_per_correct": 21840.333333333332,
+    "median_latency_ms": 7595,
+    "error_free": 3,
+    "error_free_rate": 1
+  },
+  "regraded": {
+    "at": "2026-09-25T00:37:02Z",
+    "lines": 3,
+    "verdicts_changed": 0,
+    "strict_changed": 0
+  }
+}

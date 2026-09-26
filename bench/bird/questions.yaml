@@ -1,0 +1,300 @@
+- id: b01
+  bird_id: 750
+  db_id: superhero
+  difficulty: simple
+  question: "What is the average weight of all female superheroes?"
+  evidence: "female refers to gender = 'Female'; average weight refers to AVG(weight_kg)"
+  ground_truth_sql: "SELECT AVG(T1.weight_kg) FROM superhero AS T1 INNER JOIN gender AS T2 ON T1.gender_id = T2.id WHERE T2.gender = 'Female'"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 750 on superhero; gold returns 1 rows x 1 cols."
+- id: b02
+  bird_id: 764
+  db_id: superhero
+  difficulty: simple
+  question: "What are the superpowers of heroes with ID 1?"
+  evidence: "superpowers refers to power_name; heroes with ID 1 refers to hero_id = 1;"
+  ground_truth_sql: "SELECT DISTINCT T2.power_name FROM hero_power AS T1 INNER JOIN superpower AS T2 ON T1.power_id = T2.id WHERE T1.hero_id = 1"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 764 on superhero; gold returns 4 rows x 1 cols."
+- id: b03
+  bird_id: 779
+  db_id: superhero
+  difficulty: simple
+  question: "How many powers does Amazo hero have?"
+  evidence: "Amazo hero refers to superhero_name = 'Amazo';"
+  ground_truth_sql: "SELECT COUNT(T1.power_id) FROM hero_power AS T1 INNER JOIN superhero AS T2 ON T1.hero_id = T2.id WHERE T2.superhero_name = 'Amazo'"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 779 on superhero; gold returns 1 rows x 1 cols."
+- id: b04
+  bird_id: 792
+  db_id: superhero
+  difficulty: simple
+  question: "What is Abomination's superpower?"
+  evidence: "Abomination refers to superhero_name = 'Abomination'; superpower refers to power_name;"
+  ground_truth_sql: "SELECT T3.power_name FROM superhero AS T1 INNER JOIN hero_power AS T2 ON T1.id = T2.hero_id INNER JOIN superpower AS T3 ON T2.power_id = T3.id WHERE T1.superhero_name = 'Abomination'"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 792 on superhero; gold returns 8 rows x 1 cols."
+- id: b05
+  bird_id: 1153
+  db_id: thrombosis_prediction
+  difficulty: simple
+  question: "What is the disease patient '30609' diagnosed with. List all the date of laboratory tests done for this patient."
+  evidence: "'30609' is the Patient ID; disease means Diagnosis"
+  ground_truth_sql: "SELECT T1.Diagnosis, T2.Date FROM Patient AS T1 INNER JOIN Laboratory AS T2 ON T1.ID = T2.ID WHERE T1.ID = 30609"
+  answer_type: table
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 1153 on thrombosis_prediction; gold returns 60 rows x 2 cols."
+- id: b06
+  bird_id: 1157
+  db_id: thrombosis_prediction
+  difficulty: simple
+  question: "For patients with severe degree of thrombosis, list their ID, sex and disease the patient is diagnosed with."
+  evidence: "severe degree of thrombosis refers to thrombosis = 2; disease refers to diagnosis;"
+  ground_truth_sql: "SELECT DISTINCT T1.ID, T1.SEX, T1.Diagnosis FROM Patient AS T1 INNER JOIN Examination AS T2 ON T1.ID = T2.ID WHERE T2.Thrombosis = 2"
+  answer_type: table
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 1157 on thrombosis_prediction; gold returns 3 rows x 3 cols."
+- id: b07
+  bird_id: 1220
+  db_id: thrombosis_prediction
+  difficulty: simple
+  question: "Provide all ID, sex and birthday of patients whose urea nitrogen (UN) just within the borderline of passing?"
+  evidence: "urea nitrogen (UN) just within the borderline of passing refers to UN = 29; "
+  ground_truth_sql: "SELECT DISTINCT T1.ID, T1.SEX, T1.Birthday FROM Patient AS T1 INNER JOIN Laboratory AS T2 ON T1.ID = T2.ID WHERE T2.UN = 29"
+  answer_type: table
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 1220 on thrombosis_prediction; gold returns 20 rows x 3 cols."
+- id: b08
+  bird_id: 200
+  db_id: toxicology
+  difficulty: simple
+  question: "Find the triple-bonded molecules which are carcinogenic."
+  evidence: "triple-bonded molecules refers to bond_type = '#'; carcinogenic refers to label = '+'"
+  ground_truth_sql: "SELECT DISTINCT T2.molecule_id FROM bond AS T1 INNER JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id WHERE T1.bond_type = '#' AND T2.label = '+'"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 200 on toxicology; gold returns 2 rows x 1 cols."
+- id: b09
+  bird_id: 227
+  db_id: toxicology
+  difficulty: simple
+  question: "What is the percentage of molecules that are carcinogenic? Please provide your answer as a percentage with three decimal places."
+  evidence: "label = '+' mean molecules are carcinogenic; percentage = DIVIDE(SUM(label = '+'), COUNT(molecule_id)) as percent"
+  ground_truth_sql: "SELECT ROUND(CAST(COUNT(CASE WHEN T.label = '+' THEN T.molecule_id ELSE NULL END) AS REAL) * 100 / COUNT(T.molecule_id),3) FROM molecule t"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 227 on toxicology; gold returns 1 rows x 1 cols."
+- id: b10
+  bird_id: 239
+  db_id: toxicology
+  difficulty: simple
+  question: "How many connections does the atom 19 have?"
+  evidence: "connections refers to bond_id; atom 19 refers to atom_id like 'TR%_19';"
+  ground_truth_sql: "SELECT COUNT(T.bond_id) FROM connected AS T WHERE SUBSTR(T.atom_id, -2) = '19'"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 239 on toxicology; gold returns 1 rows x 1 cols."
+- id: b11
+  bird_id: 736
+  db_id: superhero
+  difficulty: moderate
+  question: "Who is the dumbest superhero?"
+  evidence: "the dumbest superhero refers to MIN(attribute_value) where attribute_name = 'Intelligence'"
+  ground_truth_sql: "SELECT T1.superhero_name FROM superhero AS T1 INNER JOIN hero_attribute AS T2 ON T1.id = T2.hero_id INNER JOIN attribute AS T3 ON T2.attribute_id = T3.id WHERE T3.attribute_name = 'Intelligence' ORDER BY T2.attribute_value LIMIT 1"
+  answer_type: string
+  tolerance: 0
+  note: "BIRD Mini-Dev 736 on superhero; gold returns 1 rows x 1 cols."
+- id: b12
+  bird_id: 739
+  db_id: superhero
+  difficulty: moderate
+  question: "What are the names of the superheroes with the power of death touch?"
+  evidence: "name of superheroes refers to refers to superhero_name; the power of death touch refers to power_name = 'Death Touch'"
+  ground_truth_sql: "SELECT T1.superhero_name FROM superhero AS T1 INNER JOIN hero_power AS T2 ON T1.id = T2.hero_id INNER JOIN superpower AS T3 ON T2.power_id = T3.id WHERE T3.power_name = 'Death Touch'"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 739 on superhero; gold returns 7 rows x 1 cols."
+- id: b13
+  bird_id: 794
+  db_id: superhero
+  difficulty: moderate
+  question: "Which hero was the fastest?"
+  evidence: "which hero refers to superhero_name; fastest refers to MAX(attribute_value) WHERE attribute_name = 'Speed';"
+  ground_truth_sql: "SELECT T1.superhero_name FROM superhero AS T1 INNER JOIN hero_attribute AS T2 ON T1.id = T2.hero_id INNER JOIN attribute AS T3 ON T2.attribute_id = T3.id WHERE T3.attribute_name = 'Speed' ORDER BY T2.attribute_value DESC LIMIT 1"
+  answer_type: string
+  tolerance: 0
+  note: "BIRD Mini-Dev 794 on superhero; gold returns 1 rows x 1 cols."
+- id: b14
+  bird_id: 825
+  db_id: superhero
+  difficulty: moderate
+  question: "Identify the gender of the superhero who has the ability of Phoenix Force."
+  evidence: "ability of Phoenix Force refers to power_name = 'Phoenix Force';"
+  ground_truth_sql: "SELECT T4.gender FROM superhero AS T1 INNER JOIN hero_power AS T2 ON T1.id = T2.hero_id INNER JOIN superpower AS T3 ON T2.power_id = T3.id INNER JOIN gender AS T4 ON T1.gender_id = T4.id WHERE T3.power_name = 'Phoenix Force'"
+  answer_type: string
+  tolerance: 0
+  note: "BIRD Mini-Dev 825 on superhero; gold returns 1 rows x 1 cols."
+- id: b15
+  bird_id: 1195
+  db_id: thrombosis_prediction
+  difficulty: moderate
+  question: "What is the average blood albumin level for female patients with a PLT greater than 400 who have been diagnosed with SLE?"
+  evidence: "average blood albumin level refers to AVG(ALB); female refers to SEX = 'F'; PLT greater than 400 refers to PLT > 400; diagnosed with SLE refers to Diagnosis= 'SLE'"
+  ground_truth_sql: "SELECT AVG(T2.ALB) FROM Patient AS T1 INNER JOIN Laboratory AS T2 ON T1.ID = T2.ID WHERE T2.PLT > 400 AND T1.Diagnosis = 'SLE' AND T1.SEX = 'F'"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 1195 on thrombosis_prediction; gold returns 1 rows x 1 cols."
+- id: b16
+  bird_id: 1227
+  db_id: thrombosis_prediction
+  difficulty: moderate
+  question: "What is the average age of the male patient with high cholesterol?"
+  evidence: "average age = DIVIDE(SUM(SUBTRACT(YEAR(NOW()), YEAR(birthday))), COUNT(ID)); male patient refers to sex = 'M'; high cholesterol refers to `T-CHO` > = 250;"
+  ground_truth_sql: "SELECT AVG(STRFTIME('%Y', date('NOW')) - STRFTIME('%Y', T1.Birthday)) FROM Patient AS T1 INNER JOIN Laboratory AS T2 ON T1.ID = T2.ID WHERE T2.`T-CHO` >= 250 AND T1.SEX = 'M'"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 1227 on thrombosis_prediction; gold returns 1 rows x 1 cols."
+- id: b17
+  bird_id: 1267
+  db_id: thrombosis_prediction
+  difficulty: moderate
+  question: "Among the patients with normal anti-SM, how many of them does not have thrombosis?"
+  evidence: "normal anti-SM refers to SM IN('-', '+-'); SM = 'negative' means '-'; SM = '0' means '+-'; SM = '1' means '+'; does not have thrombosis refers to Thrombosis = 0;"
+  ground_truth_sql: "SELECT COUNT(T1.ID) FROM Examination AS T1 INNER JOIN Laboratory AS T2 ON T1.ID = T2.ID WHERE T2.SM IN ('negative','0') AND T1.Thrombosis = 0"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 1267 on thrombosis_prediction; gold returns 1 rows x 1 cols."
+- id: b18
+  bird_id: 226
+  db_id: toxicology
+  difficulty: moderate
+  question: "What is the percentage of double bonds in the molecule TR008? Please provide your answer as a percentage with five decimal places."
+  evidence: "double bond refers to bond_type = '='; TR008 is the molecule id; percentage = DIVIDE(SUM(bond_type = '='), COUNT(bond_id)) as percent where molecule_id = 'TR008'"
+  ground_truth_sql: "SELECT ROUND(CAST(COUNT(CASE WHEN T.bond_type = '=' THEN T.bond_id ELSE NULL END) AS REAL) * 100 / COUNT(T.bond_id),5) FROM bond AS T WHERE T.molecule_id = 'TR008'"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 226 on toxicology; gold returns 1 rows x 1 cols."
+- id: b19
+  bird_id: 242
+  db_id: toxicology
+  difficulty: moderate
+  question: "Among all the atoms from 21 to 25, list all the molecules that are carcinogenic."
+  evidence: "atoms from 21 to 25 refers to SUBSTR(atom_id, 7, 2) between '21' and '25'; label = '+' mean molecules are carcinogenic"
+  ground_truth_sql: "SELECT DISTINCT T2.molecule_id FROM atom AS T1 INNER JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id WHERE SUBSTR(T1.atom_id, -2) BETWEEN '21' AND '25' AND T2.label = '+'"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 242 on toxicology; gold returns 75 rows x 1 cols."
+- id: b20
+  bird_id: 243
+  db_id: toxicology
+  difficulty: moderate
+  question: "What are the bonds that have phosphorus and nitrogen as their atom elements?"
+  evidence: "have phosphorus as atom elements refers to element = 'p'; have nitrogen as atom elements refers to element = 'n'"
+  ground_truth_sql: "SELECT T2.bond_id FROM atom AS T1 INNER JOIN connected AS T2 ON T1.atom_id = T2.atom_id WHERE T2.bond_id IN ( SELECT T3.bond_id FROM connected AS T3 INNER JOIN atom AS T4 ON T3.atom_id = T4.atom_id WHERE T4.element = 'p' ) AND T1.element = 'n'"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 243 on toxicology; gold returns 6 rows x 1 cols."
+- id: b21
+  bird_id: 724
+  db_id: superhero
+  difficulty: challenging
+  question: "Please list the superhero names of all the superheroes that have blue eyes and blond hair."
+  evidence: "blue eyes refers to colour = 'Blue' and eye_colour_id = colour.id; blond hair refers to colour = 'Blond' and hair_colour_id = colour.id; super power of \"Agility\" refers to power_name = 'Agility'"
+  ground_truth_sql: "SELECT T1.superhero_name FROM superhero AS T1 INNER JOIN colour AS T2 ON T1.eye_colour_id = T2.id INNER JOIN colour AS T3 ON T1.hair_colour_id = T3.id WHERE T2.colour = 'Blue' AND T3.colour = 'Blond'"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 724 on superhero; gold returns 90 rows x 1 cols."
+- id: b22
+  bird_id: 769
+  db_id: superhero
+  difficulty: challenging
+  question: "Which superhero has the most durability published by Dark Horse Comics?"
+  evidence: "which superhero refers to superhero_name; most durability refers to MAX(attribute_value) WHERE attribute_name = 'durability'; published by Dark Horse Comics refers to publisher_name = 'Dark Horse Comics';"
+  ground_truth_sql: "SELECT T1.superhero_name FROM superhero AS T1 INNER JOIN hero_attribute AS T2 ON T1.id = T2.hero_id INNER JOIN attribute AS T3 ON T3.id = T2.attribute_id INNER JOIN publisher AS T4 ON T4.id = T1.publisher_id WHERE T4.publisher_name = 'Dark Horse Comics' AND T3.attribute_name = 'Durability' ORDER BY T2.attribute_value DESC LIMIT 1"
+  answer_type: string
+  tolerance: 0
+  note: "BIRD Mini-Dev 769 on superhero; gold returns 1 rows x 1 cols."
+- id: b23
+  bird_id: 773
+  db_id: superhero
+  difficulty: challenging
+  question: "Which superhero has the same eyes, hair and skin colour? Indicate the publisher of the superhero."
+  evidence: "which superhero refers to superhero_name; the same eyes, hair and skin colour refers to hair_colour_id = skin_colour_id AND hair_colour_id = eye_colour_id; publisher refers to publisher_name;"
+  ground_truth_sql: "SELECT T1.superhero_name, T2.publisher_name FROM superhero AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id WHERE T1.eye_colour_id = T1.hair_colour_id AND T1.eye_colour_id = T1.skin_colour_id"
+  answer_type: table
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 773 on superhero; gold returns 157 rows x 2 cols."
+- id: b24
+  bird_id: 788
+  db_id: superhero
+  difficulty: challenging
+  question: "How many percent of female heroes were published by Marvel Comics?"
+  evidence: "percent = MULTIPLY(DIVIDE(SUM(gender = 'Female' WHERE publisher_name = 'Marvel Comics'), COUNT(publisher_name = 'Marvel Comics')), 100); female heroes refers to gender = 'Female'; Marvel Comics refers to publisher_name = 'Marvel Comics';"
+  ground_truth_sql: "SELECT CAST(COUNT(CASE WHEN T3.gender = 'Female' AND T2.publisher_name = 'Marvel Comics' THEN 1 ELSE NULL END) AS REAL) / COUNT(CASE WHEN T2.publisher_name = 'Marvel Comics' THEN 1 ELSE NULL END) * 100 FROM superhero AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id INNER JOIN gender AS T3 ON T1.gender_id = T3.id"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 788 on superhero; gold returns 1 rows x 1 cols."
+- id: b25
+  bird_id: 1189
+  db_id: thrombosis_prediction
+  difficulty: challenging
+  question: "What number of patients with a degree of thrombosis level 2 and ANA pattern of only S, have a level of anti-Cardiolip in antibody (IgM) 20% higher than average?"
+  evidence: "thrombosis level 2 refers to Thrombosis = 2; ANA pattern of only S refers to ANA = 'S'; average anti-Cardiolip in antibody (IgM) refers to AVG(`aCL IgM`); calculation = MULTIPLY(AVG + AVG, 0.2)"
+  ground_truth_sql: "SELECT COUNT(*) FROM Examination WHERE Thrombosis = 2 AND `ANA Pattern` = 'S' AND `aCL IgM` > (SELECT AVG(`aCL IgM`) * 1.2 FROM Examination WHERE Thrombosis = 2 AND `ANA Pattern` = 'S')"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 1189 on thrombosis_prediction; gold returns 1 rows x 1 cols."
+- id: b26
+  bird_id: 1192
+  db_id: thrombosis_prediction
+  difficulty: challenging
+  question: "List all patients who were followed up at the outpatient clinic who underwent a laboratory test in October 1991 and had a total blood bilirubin level within the normal range."
+  evidence: "followed up at the outpatient clinic refers to Admission = '-'; laboratory test in April 1981 refers to Date like '1991-10%'; blood bilirubin level within the normal range refers to T-BIL < 2.0; "
+  ground_truth_sql: "SELECT DISTINCT T1.ID FROM Patient AS T1 INNER JOIN Laboratory AS T2 ON T1.ID = T2.ID WHERE T1.Admission = '-' AND T2.`T-BIL` < 2.0 AND T2.Date LIKE '1991-10-%'"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 1192 on thrombosis_prediction; gold returns 6 rows x 1 cols."
+- id: b27
+  bird_id: 1270
+  db_id: thrombosis_prediction
+  difficulty: challenging
+  question: "Among the patients who has a normal anti-scl70, how many of them are female and does not have any symptom?"
+  evidence: "normal anti-scl70 refers to SC170 IN('negative', '0'); female refers to Sex = 'F'; does not have any symptom refers to symptoms IS NULL; Should consider DISTINCT in the final result;"
+  ground_truth_sql: "SELECT COUNT(DISTINCT T1.ID) FROM Patient AS T1 INNER JOIN Laboratory AS T2 ON T1.ID = T2.ID INNER JOIN Examination AS T3 ON T3.ID = T2.ID WHERE (T2.SC170 = 'negative' OR T2.SC170 = '0') AND T1.SEX = 'F' AND T3.Symptoms IS NULL"
+  answer_type: number
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 1270 on thrombosis_prediction; gold returns 1 rows x 1 cols."
+- id: b28
+  bird_id: 215
+  db_id: toxicology
+  difficulty: challenging
+  question: "How many atoms with iodine and with sulfur type elements are there in single bond molecules?"
+  evidence: "with iodine element refer to element = 'i'; with sulfur element refers to element = 's'; single type bond refers to bond_type = '-'; Should consider the distinct atoms when counting;"
+  ground_truth_sql: "SELECT COUNT(DISTINCT CASE WHEN T1.element = 'i' THEN T1.atom_id ELSE NULL END) AS iodine_nums , COUNT(DISTINCT CASE WHEN T1.element = 's' THEN T1.atom_id ELSE NULL END) AS sulfur_nums FROM atom AS T1 INNER JOIN connected AS T2 ON T1.atom_id = T2.atom_id INNER JOIN bond AS T3 ON T2.bond_id = T3.bond_id WHERE T3.bond_type = '-'"
+  answer_type: table
+  tolerance: 0.01
+  note: "BIRD Mini-Dev 215 on toxicology; gold returns 1 rows x 2 cols."
+- id: b29
+  bird_id: 240
+  db_id: toxicology
+  difficulty: challenging
+  question: "List all the elements of the toxicology of the molecule \"TR004\"."
+  evidence: "TR004 is the molecule id;"
+  ground_truth_sql: "SELECT DISTINCT T.element FROM atom AS T WHERE T.molecule_id = 'TR004'"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 240 on toxicology; gold returns 6 rows x 1 cols."
+- id: b30
+  bird_id: 249
+  db_id: toxicology
+  difficulty: challenging
+  question: "What are the elements of the atoms of TR144_8_19?"
+  evidence: "TR144_8_19 is the bond id; "
+  ground_truth_sql: "SELECT T2.element FROM connected AS T1 INNER JOIN atom AS T2 ON T1.atom_id = T2.atom_id WHERE T1.bond_id = 'TR144_8_19'"
+  answer_type: list
+  tolerance: 0
+  note: "BIRD Mini-Dev 249 on toxicology; gold returns 2 rows x 1 cols."

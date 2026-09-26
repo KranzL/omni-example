@@ -1,0 +1,78 @@
+{
+  "config": "always-muse",
+  "provider": "muse",
+  "timestamp": "20260925T025144Z",
+  "source": "results/muse/always-muse/20260925T025144Z.jsonl",
+  "repeat": 1,
+  "total": 32,
+  "correct": 31,
+  "accuracy": 0.96875,
+  "correct_strict": 25,
+  "accuracy_strict": 0.78125,
+  "by_difficulty": {
+    "easy": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 8,
+      "accuracy_strict": 1
+    },
+    "expert": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 8,
+      "accuracy_strict": 1
+    },
+    "hard": {
+      "total": 8,
+      "correct": 7,
+      "accuracy": 0.875,
+      "correct_strict": 5,
+      "accuracy_strict": 0.625
+    },
+    "moderate": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 4,
+      "accuracy_strict": 0.5
+    }
+  },
+  "total_cost_usd": 0.12247768200000003,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0,
+  "confusion": {
+    "easy": {
+      "cheap": 8
+    },
+    "expert": {
+      "cheap": 8
+    },
+    "hard": {
+      "cheap": 8
+    },
+    "moderate": {
+      "cheap": 8
+    }
+  },
+  "route_match": 8,
+  "fail_reasons": {
+    "wrong_value": 1
+  },
+  "format_reasons": {
+    "csv_rows": 6
+  },
+  "cost_per_correct_usd": 0.003950892967741936,
+  "mean_latency_ms": 55438.28125,
+  "p95_latency_ms": 143784,
+  "omni": {
+    "questions": 32,
+    "repeats": 1,
+    "total_tokens": 6743866,
+    "tokens_per_correct": 217544.06451612903,
+    "median_latency_ms": 36560,
+    "error_free": 29,
+    "error_free_rate": 0.90625
+  }
+}

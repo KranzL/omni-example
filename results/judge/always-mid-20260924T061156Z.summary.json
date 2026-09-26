@@ -1,0 +1,133 @@
+{
+  "config": "always-mid",
+  "source": "results/always-mid/20260924T055046Z.jsonl",
+  "timestamp": "20260924T061156Z",
+  "total": 32,
+  "judge_pass": 31,
+  "supervised": 2,
+  "overturns": 1,
+  "agree_lenient": 31,
+  "agree_strict": 30,
+  "agreement_lenient": 0.96875,
+  "agreement_strict": 0.9375,
+  "judge_cost_usd": 0.070544,
+  "disagreements": [
+    {
+      "id": "m02",
+      "difficulty": "moderate",
+      "lenient_correct": true,
+      "strict_correct": false,
+      "judge_final_correct": false,
+      "judge_reason": "The agent provided the top 5 brands in the correct order with appended counts, but the rubric specifies close-but-wrong examples explicitly state that appending counts \"passes the lenient verdict but fails the strict verdict,\" and this appears to be a strict evaluation context.",
+      "supervisor_decision": "agree",
+      "supervisor_reason": "The rubric explicitly states that appended counts fail the strict verdict, which the judge correctly applied.",
+      "answer": "Levi's: 3013\nDockers: 1289\nAllegra K: 1263\nColumbia: 1217\nRay-Ban: 1151",
+      "expected": [
+        "Levi's",
+        "Dockers",
+        "Allegra K",
+        "Columbia",
+        "Ray-Ban"
+      ],
+      "human_sides_with": "lenient"
+    },
+    {
+      "id": "m08",
+      "difficulty": "moderate",
+      "lenient_correct": true,
+      "strict_correct": false,
+      "judge_final_correct": true,
+      "judge_reason": "The close-but-wrong example explicitly states that appending revenue values (e.g., \"Jeans: 379473.50\") passes the lenient verdict but fails the strict verdict, and the rubric requires only category names.",
+      "supervisor_decision": "overturn",
+      "supervisor_reason": "The rubric's close-but-wrong note explicitly states this exact pattern (correct categories with appended revenue) passes the lenient verdict, and no strict-mode requirement was specified for this grading, so it should pass.",
+      "answer": "Jeans: 379473.50\nAccessories: 229758.06\nOuterwear & Coats: 205414.18\nFashion Hoodies & Sweatshirts: 181423.25\nTops & Tees: 168391.11",
+      "expected": [
+        "Jeans",
+        "Accessories",
+        "Outerwear & Coats",
+        "Fashion Hoodies & Sweatshirts",
+        "Tops & Tees"
+      ],
+      "human_sides_with": "lenient"
+    },
+    {
+      "id": "h08",
+      "difficulty": "hard",
+      "lenient_correct": true,
+      "strict_correct": false,
+      "judge_final_correct": true,
+      "judge_reason": "All 12 months present with user counts exactly matching and net revenue values within 1% relative tolerance when rounded to 2 decimal places.",
+      "answer": "2024-01: users=2300, net_revenue=167962.75\n2024-02: users=2353, net_revenue=165514.52\n2024-03: users=2558, net_revenue=168568.44\n2024-04: users=2599, net_revenue=161347.53\n2024-05: users=2365, net_revenue=141627.69\n2024-06: users=2486, net_revenue=143120.20\n2024-07: users=2655, net_revenue=147680.32\n2024-08: users=2778, net_revenue=143150.22\n2024-09: users=3207, net_revenue=149305.72\n2024-10: users=3272, net_revenue=135084.15\n2024-11: users=3976, net_revenue=145668.30\n2024-12: users=3981, net_revenue=132670.57",
+      "expected": {
+        "columns": [
+          "month",
+          "new_users",
+          "net_revenue"
+        ],
+        "rows": [
+          [
+            "2024-01",
+            "2300",
+            "167962.7505016327"
+          ],
+          [
+            "2024-02",
+            "2353",
+            "165514.5206129551"
+          ],
+          [
+            "2024-03",
+            "2558",
+            "168568.44048762321"
+          ],
+          [
+            "2024-04",
+            "2599",
+            "161347.5306415558"
+          ],
+          [
+            "2024-05",
+            "2365",
+            "141627.6906324625"
+          ],
+          [
+            "2024-06",
+            "2486",
+            "143120.20055055618"
+          ],
+          [
+            "2024-07",
+            "2655",
+            "147680.32056188583"
+          ],
+          [
+            "2024-08",
+            "2778",
+            "143150.22040116787"
+          ],
+          [
+            "2024-09",
+            "3207",
+            "149305.72051131725"
+          ],
+          [
+            "2024-10",
+            "3272",
+            "135084.15051162243"
+          ],
+          [
+            "2024-11",
+            "3976",
+            "145668.30046653748"
+          ],
+          [
+            "2024-12",
+            "3981",
+            "132670.5704343319"
+          ]
+        ]
+      },
+      "human_sides_with": "lenient"
+    }
+  ]
+}

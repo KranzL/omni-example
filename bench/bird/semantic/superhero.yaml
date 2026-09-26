@@ -1,0 +1,398 @@
+schema: main
+dataset: BIRD Mini-Dev superhero database (SQLite)
+title: the BIRD Mini-Dev superhero SQLite database
+tables:
+    - name: alignment
+      purpose: The alignment table of the database.
+      grain: One row per alignment record.
+      approx_rows: 4
+      primary_key: id
+      foreign_keys: []
+      columns:
+        - name: id
+          type: INTEGER
+          description: The id column (INTEGER). Part of the primary key.
+        - name: alignment
+          type: TEXT
+          description: The alignment column (TEXT).
+    - name: attribute
+      purpose: The attribute table of the database.
+      grain: One row per attribute record.
+      approx_rows: 6
+      primary_key: id
+      foreign_keys: []
+      columns:
+        - name: id
+          type: INTEGER
+          description: The id column (INTEGER). Part of the primary key.
+        - name: attribute_name
+          type: TEXT
+          description: The attribute_name column (TEXT).
+    - name: colour
+      purpose: The colour table of the database.
+      grain: One row per colour record.
+      approx_rows: 35
+      primary_key: id
+      foreign_keys: []
+      columns:
+        - name: id
+          type: INTEGER
+          description: The id column (INTEGER). Part of the primary key.
+        - name: colour
+          type: TEXT
+          description: The colour column (TEXT).
+    - name: gender
+      purpose: The gender table of the database.
+      grain: One row per gender record.
+      approx_rows: 3
+      primary_key: id
+      foreign_keys: []
+      columns:
+        - name: id
+          type: INTEGER
+          description: The id column (INTEGER). Part of the primary key.
+        - name: gender
+          type: TEXT
+          description: The gender column (TEXT).
+    - name: hero_attribute
+      purpose: The hero_attribute table of the database.
+      grain: One row per hero_attribute record.
+      approx_rows: 3738
+      primary_key: hero_id
+      foreign_keys:
+        - column: hero_id
+          references: superhero.id
+        - column: attribute_id
+          references: attribute.id
+      columns:
+        - name: hero_id
+          type: INTEGER
+          description: The hero_id column (INTEGER).
+        - name: attribute_id
+          type: INTEGER
+          description: The attribute_id column (INTEGER).
+        - name: attribute_value
+          type: INTEGER
+          description: The attribute_value column (INTEGER).
+    - name: hero_power
+      purpose: The hero_power table of the database.
+      grain: One row per hero_power record.
+      approx_rows: 5825
+      primary_key: hero_id
+      foreign_keys:
+        - column: power_id
+          references: superpower.id
+        - column: hero_id
+          references: superhero.id
+      columns:
+        - name: hero_id
+          type: INTEGER
+          description: The hero_id column (INTEGER).
+        - name: power_id
+          type: INTEGER
+          description: The power_id column (INTEGER).
+    - name: publisher
+      purpose: The publisher table of the database.
+      grain: One row per publisher record.
+      approx_rows: 25
+      primary_key: id
+      foreign_keys: []
+      columns:
+        - name: id
+          type: INTEGER
+          description: The id column (INTEGER). Part of the primary key.
+        - name: publisher_name
+          type: TEXT
+          description: The publisher_name column (TEXT).
+    - name: race
+      purpose: The race table of the database.
+      grain: One row per race record.
+      approx_rows: 61
+      primary_key: id
+      foreign_keys: []
+      columns:
+        - name: id
+          type: INTEGER
+          description: The id column (INTEGER). Part of the primary key.
+        - name: race
+          type: TEXT
+          description: The race column (TEXT).
+    - name: superhero
+      purpose: The superhero table of the database.
+      grain: One row per superhero record.
+      approx_rows: 750
+      primary_key: id
+      foreign_keys:
+        - column: skin_colour_id
+          references: colour.id
+        - column: race_id
+          references: race.id
+        - column: publisher_id
+          references: publisher.id
+        - column: hair_colour_id
+          references: colour.id
+        - column: gender_id
+          references: gender.id
+        - column: eye_colour_id
+          references: colour.id
+        - column: alignment_id
+          references: alignment.id
+      columns:
+        - name: id
+          type: INTEGER
+          description: The id column (INTEGER). Part of the primary key.
+        - name: superhero_name
+          type: TEXT
+          description: The superhero_name column (TEXT).
+        - name: full_name
+          type: TEXT
+          description: The full_name column (TEXT).
+        - name: gender_id
+          type: INTEGER
+          description: The gender_id column (INTEGER).
+        - name: eye_colour_id
+          type: INTEGER
+          description: The eye_colour_id column (INTEGER).
+        - name: hair_colour_id
+          type: INTEGER
+          description: The hair_colour_id column (INTEGER).
+        - name: skin_colour_id
+          type: INTEGER
+          description: The skin_colour_id column (INTEGER).
+        - name: race_id
+          type: INTEGER
+          description: The race_id column (INTEGER).
+        - name: publisher_id
+          type: INTEGER
+          description: The publisher_id column (INTEGER).
+        - name: alignment_id
+          type: INTEGER
+          description: The alignment_id column (INTEGER).
+        - name: height_cm
+          type: INTEGER
+          description: The height_cm column (INTEGER).
+        - name: weight_kg
+          type: INTEGER
+          description: The weight_kg column (INTEGER).
+    - name: superpower
+      purpose: The superpower table of the database.
+      grain: One row per superpower record.
+      approx_rows: 167
+      primary_key: id
+      foreign_keys: []
+      columns:
+        - name: id
+          type: INTEGER
+          description: The id column (INTEGER). Part of the primary key.
+        - name: power_name
+          type: TEXT
+          description: The power_name column (TEXT).
+enums:
+    - column: alignment.id
+      values:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+    - column: alignment.alignment
+      values:
+        - Bad
+        - Good
+        - N/A
+        - Neutral
+    - column: attribute.id
+      values:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+    - column: attribute.attribute_name
+      values:
+        - Combat
+        - Durability
+        - Intelligence
+        - Power
+        - Speed
+        - Strength
+    - column: gender.id
+      values:
+        - "1"
+        - "2"
+        - "3"
+    - column: gender.gender
+      values:
+        - Female
+        - Male
+        - N/A
+    - column: hero_attribute.attribute_id
+      values:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+    - column: hero_attribute.attribute_value
+      values:
+        - "10"
+        - "100"
+        - "15"
+        - "20"
+        - "25"
+        - "30"
+        - "35"
+        - "40"
+        - "45"
+        - "5"
+        - "50"
+        - "55"
+        - "60"
+        - "65"
+        - "70"
+        - "75"
+        - "80"
+        - "85"
+        - "90"
+        - "95"
+    - column: superhero.gender_id
+      values:
+        - "1"
+        - "2"
+        - "3"
+    - column: superhero.skin_colour_id
+      values:
+        - "1"
+        - "12"
+        - "13"
+        - "14"
+        - "19"
+        - "20"
+        - "21"
+        - "22"
+        - "23"
+        - "24"
+        - "28"
+        - "31"
+        - "33"
+        - "4"
+        - "7"
+        - "8"
+    - column: superhero.alignment_id
+      values:
+        - "1"
+        - "2"
+        - "3"
+metrics: []
+paths:
+    - name: hero_attribute-to-superhero
+      description: Join hero_attribute to superhero.
+      grain: One row per hero_attribute row.
+      steps:
+        - from: hero_attribute
+          join: superhero
+          "on": hero_attribute.hero_id = superhero.id
+    - name: hero_attribute-to-attribute
+      description: Join hero_attribute to attribute.
+      grain: One row per hero_attribute row.
+      steps:
+        - from: hero_attribute
+          join: attribute
+          "on": hero_attribute.attribute_id = attribute.id
+    - name: hero_power-to-superpower
+      description: Join hero_power to superpower.
+      grain: One row per hero_power row.
+      steps:
+        - from: hero_power
+          join: superpower
+          "on": hero_power.power_id = superpower.id
+    - name: hero_power-to-superhero
+      description: Join hero_power to superhero.
+      grain: One row per hero_power row.
+      steps:
+        - from: hero_power
+          join: superhero
+          "on": hero_power.hero_id = superhero.id
+    - name: superhero-to-colour
+      description: Join superhero to colour.
+      grain: One row per superhero row.
+      steps:
+        - from: superhero
+          join: colour
+          "on": superhero.skin_colour_id = colour.id
+    - name: superhero-to-race
+      description: Join superhero to race.
+      grain: One row per superhero row.
+      steps:
+        - from: superhero
+          join: race
+          "on": superhero.race_id = race.id
+    - name: superhero-to-publisher
+      description: Join superhero to publisher.
+      grain: One row per superhero row.
+      steps:
+        - from: superhero
+          join: publisher
+          "on": superhero.publisher_id = publisher.id
+    - name: superhero-to-colour-on-hair_colour_id
+      description: Join superhero to colour.
+      grain: One row per superhero row.
+      steps:
+        - from: superhero
+          join: colour
+          "on": superhero.hair_colour_id = colour.id
+    - name: superhero-to-gender
+      description: Join superhero to gender.
+      grain: One row per superhero row.
+      steps:
+        - from: superhero
+          join: gender
+          "on": superhero.gender_id = gender.id
+    - name: superhero-to-colour-on-eye_colour_id
+      description: Join superhero to colour.
+      grain: One row per superhero row.
+      steps:
+        - from: superhero
+          join: colour
+          "on": superhero.eye_colour_id = colour.id
+    - name: superhero-to-alignment
+      description: Join superhero to alignment.
+      grain: One row per superhero row.
+      steps:
+        - from: superhero
+          join: alignment
+          "on": superhero.alignment_id = alignment.id
+synonyms:
+    - term: alignment
+      refers_to: alignment
+    - term: attribute
+      refers_to: attribute
+    - term: colour
+      refers_to: colour
+    - term: gender
+      refers_to: gender
+    - term: hero attribute
+      refers_to: hero_attribute
+    - term: hero power
+      refers_to: hero_power
+    - term: publisher
+      refers_to: publisher
+    - term: race
+      refers_to: race
+    - term: superhero
+      refers_to: superhero
+    - term: superpower
+      refers_to: superpower
+conventions:
+    - 'This database is SQLite. Use SQLite syntax and functions: STRFTIME for dates, || for string concatenation, CAST(x AS FLOAT) for ratios.'
+    - Query read-only with one SELECT or WITH statement and no trailing semicolon.
+    - Quote identifiers that contain spaces or special characters with double quotes.
+    - Copy ON clauses from the join paths verbatim.
+gotchas:
+    - 'Integer division truncates: CAST one side to FLOAT before dividing.'
+    - Some columns store dates as TEXT; compare them as strings in YYYY-MM-DD form.
+    - NULL values never equal anything; use IS NULL or IS NOT NULL to test them.
+examples:
+    - question: How many rows are in hero_power?
+      sql: SELECT COUNT(*) FROM hero_power

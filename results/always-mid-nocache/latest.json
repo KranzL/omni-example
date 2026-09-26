@@ -1,0 +1,66 @@
+{
+  "config": "always-mid",
+  "provider": "anthropic",
+  "no_cache": true,
+  "timestamp": "20260924T043458Z",
+  "source": "results/always-mid-nocache/20260924T043458Z.jsonl",
+  "repeat": 1,
+  "total": 24,
+  "correct": 22,
+  "accuracy": 0.9166666666666666,
+  "correct_strict": 20,
+  "accuracy_strict": 0.8333333333333334,
+  "by_difficulty": {
+    "easy": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 8,
+      "accuracy_strict": 1
+    },
+    "hard": {
+      "total": 8,
+      "correct": 6,
+      "accuracy": 0.75,
+      "correct_strict": 6,
+      "accuracy_strict": 0.75
+    },
+    "moderate": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 6,
+      "accuracy_strict": 0.75
+    }
+  },
+  "total_cost_usd": 1.0123840000000002,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0,
+  "confusion": null,
+  "route_match": 0,
+  "fail_reasons": {
+    "wrong_row_labels": 1,
+    "wrong_value": 1
+  },
+  "format_reasons": {
+    "count_appended": 2
+  },
+  "cost_per_correct_usd": 0.046017454545454556,
+  "mean_latency_ms": 6584.25,
+  "p95_latency_ms": 9886,
+  "omni": {
+    "questions": 24,
+    "repeats": 1,
+    "total_tokens": 460636,
+    "tokens_per_correct": 20938,
+    "median_latency_ms": 6101,
+    "error_free": 24,
+    "error_free_rate": 1
+  },
+  "regraded": {
+    "at": "2026-09-25T00:37:02Z",
+    "lines": 24,
+    "verdicts_changed": 0,
+    "strict_changed": 0
+  }
+}

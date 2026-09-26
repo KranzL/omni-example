@@ -1,0 +1,516 @@
+- id: e01
+  difficulty: easy
+  question: What is the email address of the user with id 123?
+  ground_truth_sql: >-
+    SELECT email FROM users WHERE id = 123
+  answer_type: string
+  tolerance: 0
+  note: Time-invariant single-row lookup by primary key. No window needed.
+- id: e02
+  difficulty: easy
+  question: What brand makes the product with id 100?
+  ground_truth_sql: >-
+    SELECT brand FROM products WHERE id = 100
+  answer_type: string
+  tolerance: 0
+  note: Time-invariant single-row lookup by primary key. No window needed.
+- id: e03
+  difficulty: easy
+  question: How many distribution centers are there?
+  ground_truth_sql: >-
+    SELECT COUNT(*) FROM distribution_centers
+  answer_type: number
+  tolerance: 0.01
+  note: Full count of a small static dimension table. No window needed.
+- id: e04
+  difficulty: easy
+  question: How many order items had status Cancelled in calendar 2024?
+  ground_truth_sql: >-
+    SELECT COUNT(*) FROM order_items
+    WHERE status = 'Cancelled'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+  answer_type: number
+  tolerance: 0.01
+  note: One table, one status filter plus a closed 2024 window.
+- id: e05
+  difficulty: easy
+  question: How many users were created in calendar 2023?
+  ground_truth_sql: >-
+    SELECT COUNT(*) FROM users
+    WHERE created_at >= '2023-01-01' AND created_at < '2024-01-01'
+  answer_type: number
+  tolerance: 0.01
+  note: One table, one closed-window count.
+- id: e06
+  difficulty: easy
+  question: How many products are in the Jeans category?
+  ground_truth_sql: >-
+    SELECT COUNT(*) FROM products WHERE category = 'Jeans'
+  answer_type: number
+  tolerance: 0.01
+  note: Catalog snapshot count over the static products table. No window needed.
+- id: e07
+  difficulty: easy
+  question: How many events of type Purchase occurred in March 2024?
+  ground_truth_sql: >-
+    SELECT COUNT(*) FROM events
+    WHERE event_type = 'Purchase'
+    AND created_at >= '2024-03-01' AND created_at < '2024-04-01'
+  answer_type: number
+  tolerance: 0.01
+  note: One table, one event-type filter plus a closed month window.
+- id: e08
+  difficulty: easy
+  question: Which distinct order item statuses were observed in calendar 2024?
+  ground_truth_sql: >-
+    SELECT DISTINCT status FROM order_items
+    WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    ORDER BY status ASC
+  answer_type: list
+  tolerance: 0
+  note: One table, distinct values in a closed 2024 window. Order is alphabetical for determinism; grade as a set.
+- id: m01
+  difficulty: moderate
+  question: What was the gross revenue by product category in calendar 2024?
+  ground_truth_sql: >-
+    SELECT ii.product_category AS category, SUM(oi.sale_price) AS revenue
+    FROM order_items oi
+    JOIN inventory_items ii ON ii.id = oi.inventory_item_id
+    WHERE oi.status <> 'Cancelled'
+    AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01'
+    GROUP BY ii.product_category
+    ORDER BY revenue DESC
+  answer_type: table
+  tolerance: 0.01
+  note: One join plus grouped aggregation. Gross revenue excludes Cancelled only, per the shared metric definition.
+- id: m02
+  difficulty: moderate
+  question: What are the top 5 brands by units sold in calendar 2023?
+  ground_truth_sql: >-
+    SELECT ii.product_brand AS brand
+    FROM order_items oi
+    JOIN inventory_items ii ON ii.id = oi.inventory_item_id
+    WHERE oi.status NOT IN ('Cancelled', 'Returned')
+    AND oi.created_at >= '2023-01-01' AND oi.created_at < '2024-01-01'
+    GROUP BY ii.product_brand
+    ORDER BY COUNT(*) DESC, ii.product_brand ASC
+    LIMIT 5
+  answer_type: ranked_list
+  tolerance: 0
+  note: One join, grouped count, rank by units sold. Units sold follows the semantic layer metric and excludes Cancelled and Returned. Brand name breaks ties.
+- id: m03
+  difficulty: moderate
+  question: What was the return rate by department in calendar 2024?
+  ground_truth_sql: >-
+    SELECT ii.product_department AS department,
+    COUNT(*) FILTER (WHERE oi.status = 'Returned')::float / COUNT(*) AS return_rate
+    FROM order_items oi
+    JOIN inventory_items ii ON ii.id = oi.inventory_item_id
+    WHERE oi.status <> 'Cancelled'
+    AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01'
+    GROUP BY ii.product_department
+    ORDER BY department ASC
+  answer_type: table
+  tolerance: 0.01
+  note: One join plus conditional aggregation. Return rate is Returned divided by non-cancelled items.
+- id: m04
+  difficulty: moderate
+  question: What was the average order value in March 2024?
+  ground_truth_sql: >-
+    SELECT SUM(sale_price) FILTER (WHERE status <> 'Cancelled')
+    / COUNT(DISTINCT order_id) FILTER (WHERE status <> 'Cancelled') AS avg_order_value
+    FROM order_items
+    WHERE created_at >= '2024-03-01' AND created_at < '2024-04-01'
+  answer_type: number
+  tolerance: 0.01
+  note: Gross revenue over distinct orders with at least one non-cancelled item, in a closed month window.
+- id: m05
+  difficulty: moderate
+  question: How many distinct users placed at least one non-cancelled order item in calendar 2024?
+  ground_truth_sql: >-
+    SELECT COUNT(DISTINCT user_id) FROM order_items
+    WHERE status <> 'Cancelled'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+  answer_type: number
+  tolerance: 0.01
+  note: Distinct-count aggregation with a status filter in a closed 2024 window.
+- id: m06
+  difficulty: moderate
+  question: What was the gross revenue by user traffic source in calendar 2024?
+  ground_truth_sql: >-
+    SELECT u.traffic_source AS traffic_source, SUM(oi.sale_price) AS revenue
+    FROM order_items oi
+    JOIN users u ON u.id = oi.user_id
+    WHERE oi.status <> 'Cancelled'
+    AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01'
+    GROUP BY u.traffic_source
+    ORDER BY revenue DESC
+  answer_type: table
+  tolerance: 0.01
+  note: One join attributing each order item to its ordering user's traffic source. Gross revenue excludes Cancelled only.
+- id: m07
+  difficulty: moderate
+  question: How many distinct non-cancelled orders were placed in each calendar month of 2024?
+  ground_truth_sql: >-
+    SELECT to_char(oi.created_at, 'YYYY-MM') AS month, COUNT(DISTINCT oi.order_id) AS orders
+    FROM order_items oi
+    WHERE oi.status <> 'Cancelled'
+    AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01'
+    GROUP BY to_char(oi.created_at, 'YYYY-MM')
+    ORDER BY month ASC
+  answer_type: table
+  tolerance: 0.01
+  note: Date truncation plus distinct-count grouping. Each month counts orders with at least one non-cancelled item.
+- id: m08
+  difficulty: moderate
+  question: What are the top 5 product categories by net revenue in calendar 2024?
+  ground_truth_sql: >-
+    SELECT ii.product_category AS category
+    FROM order_items oi
+    JOIN inventory_items ii ON ii.id = oi.inventory_item_id
+    WHERE oi.status NOT IN ('Cancelled', 'Returned')
+    AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01'
+    GROUP BY ii.product_category
+    ORDER BY SUM(oi.sale_price) DESC, ii.product_category ASC
+    LIMIT 5
+  answer_type: ranked_list
+  tolerance: 0
+  note: One join, grouped sum, rank by net revenue which excludes both Cancelled and Returned. Category name breaks ties.
+- id: h01
+  difficulty: hard
+  question: Which calendar month of 2024, as YYYY-MM, had the largest month-over-month increase in gross revenue in dollars?
+  ground_truth_sql: >-
+    WITH monthly AS (
+    SELECT date_trunc('month', created_at) AS month, SUM(sale_price) AS revenue
+    FROM order_items
+    WHERE status <> 'Cancelled'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    GROUP BY date_trunc('month', created_at)
+    )
+    SELECT to_char(month, 'YYYY-MM') AS month
+    FROM (SELECT month, revenue - LAG(revenue) OVER (ORDER BY month) AS growth FROM monthly) g
+    WHERE growth IS NOT NULL
+    ORDER BY growth DESC
+    LIMIT 1
+  answer_type: string
+  tolerance: 0
+  note: Monthly aggregation plus a LAG window for prior-month revenue. January has no prior month and is excluded. Gross revenue excludes Cancelled only.
+- id: h02
+  difficulty: hard
+  question: Which product had the highest return rate in calendar 2024 among products with at least 100 non-cancelled order items?
+  ground_truth_sql: >-
+    WITH sold AS (
+    SELECT ii.product_id AS product_id, COUNT(*) AS items,
+    COUNT(*) FILTER (WHERE oi.status = 'Returned') AS returned
+    FROM order_items oi
+    JOIN inventory_items ii ON ii.id = oi.inventory_item_id
+    WHERE oi.status <> 'Cancelled'
+    AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01'
+    GROUP BY ii.product_id
+    )
+    SELECT p.name AS product
+    FROM sold s
+    JOIN products p ON p.id = s.product_id
+    WHERE s.items >= 100
+    ORDER BY s.returned::float / s.items DESC, s.product_id ASC
+    LIMIT 1
+  answer_type: string
+  tolerance: 0
+  note: Two-step aggregation with a HAVING-style threshold. The threshold and the return rate denominator both count non-cancelled items, matching the semantic layer return_rate metric. Lowest product id breaks ties.
+- id: h03
+  difficulty: hard
+  question: What was the gross margin by distribution center in calendar 2024?
+  ground_truth_sql: >-
+    SELECT dc.name AS distribution_center,
+    SUM(oi.sale_price) - SUM(ii.cost) AS margin
+    FROM order_items oi
+    JOIN inventory_items ii ON ii.id = oi.inventory_item_id
+    JOIN distribution_centers dc ON dc.id = ii.product_distribution_center_id
+    WHERE oi.status NOT IN ('Cancelled', 'Returned')
+    AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01'
+    GROUP BY dc.name
+    ORDER BY margin DESC
+  answer_type: table
+  tolerance: 0.01
+  note: Two joins linking order items to item cost and distribution center. Gross margin follows the semantic layer metric and excludes Cancelled and Returned.
+- id: h04
+  difficulty: hard
+  question: What share of distinct 2024 sessions included at least one Purchase event?
+  ground_truth_sql: >-
+    SELECT COUNT(DISTINCT session_id) FILTER (WHERE event_type = 'Purchase')::float
+    / COUNT(DISTINCT session_id) AS purchase_session_share
+    FROM events
+    WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01'
+  answer_type: number
+  tolerance: 0.01
+  note: Conditional distinct count over sessions. Both numerator and denominator use the closed 2024 window.
+- id: h05
+  difficulty: hard
+  question: What share of users created in January 2024 placed at least two non-cancelled orders within 90 days after their own creation time?
+  ground_truth_sql: >-
+    WITH cohort AS (
+    SELECT id, created_at FROM users
+    WHERE created_at >= '2024-01-01' AND created_at < '2024-02-01'
+    ),
+    buyer_orders AS (
+    SELECT c.id AS user_id, COUNT(DISTINCT oi.order_id) AS orders
+    FROM cohort c
+    LEFT JOIN order_items oi ON oi.user_id = c.id
+    AND oi.status <> 'Cancelled'
+    AND oi.created_at >= c.created_at
+    AND oi.created_at < c.created_at + INTERVAL '90 days'
+    GROUP BY c.id
+    )
+    SELECT COUNT(*) FILTER (WHERE orders >= 2)::float / COUNT(*) AS repeat_rate FROM buyer_orders
+  answer_type: number
+  tolerance: 0.01
+  note: Cohort analysis with a per-user 90-day window joined against orders. Repeat means two or more distinct non-cancelled order ids.
+- id: h06
+  difficulty: hard
+  question: Which user traffic source had the highest gross revenue per user in 2024, counting users created in 2024 and their 2024 non-cancelled order revenue?
+  ground_truth_sql: >-
+    WITH cohort AS (
+    SELECT id, traffic_source FROM users
+    WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    )
+    SELECT c.traffic_source AS traffic_source
+    FROM cohort c
+    LEFT JOIN order_items oi ON oi.user_id = c.id
+    AND oi.status <> 'Cancelled'
+    AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01'
+    GROUP BY c.traffic_source
+    ORDER BY COALESCE(SUM(oi.sale_price), 0) / COUNT(DISTINCT c.id) DESC
+    LIMIT 1
+  answer_type: string
+  tolerance: 0
+  note: Cohort revenue per user by acquisition source. Both the user cohort and the revenue window are pinned to 2024. Sources with no revenue score zero.
+- id: h07
+  difficulty: hard
+  question: What was the median time in hours from creation to delivery for Complete order items created in calendar 2024?
+  ground_truth_sql: >-
+    SELECT PERCENTILE_CONT(0.5) WITHIN GROUP
+    (ORDER BY EXTRACT(EPOCH FROM (delivered_at - created_at)) / 3600.0) AS median_hours
+    FROM order_items
+    WHERE status = 'Complete' AND delivered_at IS NOT NULL
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+  answer_type: number
+  tolerance: 0.01
+  note: Ordered-set percentile over per-row delivery latency in a closed 2024 window. Null delivery times are excluded.
+- id: h08
+  difficulty: hard
+  question: For each 2024 acquisition month, how many users were created and what was their total net revenue in 2024?
+  ground_truth_sql: >-
+    WITH cohort AS (
+    SELECT id, to_char(created_at, 'YYYY-MM') AS month FROM users
+    WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    )
+    SELECT c.month AS month, COUNT(DISTINCT c.id) AS new_users,
+    COALESCE(SUM(oi.sale_price) FILTER (WHERE oi.status NOT IN ('Cancelled', 'Returned')), 0) AS net_revenue
+    FROM cohort c
+    LEFT JOIN order_items oi ON oi.user_id = c.id
+    AND oi.created_at >= '2024-01-01' AND oi.created_at < '2025-01-01'
+    GROUP BY c.month
+    ORDER BY c.month ASC
+  answer_type: table
+  tolerance: 0.01
+  note: Monthly cohort table joining new users to their 2024 orders. Net revenue excludes Cancelled and Returned. Cohorts with no orders report zero.
+- id: x01
+  difficulty: expert
+  question: What was the median days from first to second non-cancelled order for users acquired through Facebook in 2024?
+  ground_truth_sql: >-
+    WITH cohort AS (
+    SELECT id FROM users
+    WHERE traffic_source = 'Facebook'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    ),
+    orders_ranked AS (
+    SELECT oi.user_id, MIN(oi.created_at) AS order_at,
+    ROW_NUMBER() OVER (PARTITION BY oi.user_id ORDER BY MIN(oi.created_at)) AS rn
+    FROM order_items oi
+    JOIN cohort c ON c.id = oi.user_id
+    WHERE oi.status <> 'Cancelled'
+    GROUP BY oi.user_id, oi.order_id
+    ),
+    gaps AS (
+    SELECT o1.user_id, EXTRACT(EPOCH FROM (o2.order_at - o1.order_at)) / 86400.0 AS days
+    FROM orders_ranked o1
+    JOIN orders_ranked o2 ON o2.user_id = o1.user_id AND o2.rn = 2 AND o1.rn = 1
+    )
+    SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY days) AS median_days
+    FROM gaps
+  answer_type: number
+  tolerance: 0.01
+  note: Median gap between the first two orders. Each order time is the minimum created_at of its non-cancelled items. Only cohort users with at least two non-cancelled orders count. Days divide epoch seconds by 86400.
+- id: x02
+  difficulty: expert
+  question: Which 2024 acquisition month, as YYYY-MM, had the highest share of new users placing at least one non-cancelled order within 30 days after their own creation time?
+  ground_truth_sql: >-
+    WITH cohort AS (
+    SELECT id, to_char(created_at, 'YYYY-MM') AS month, created_at AS registered_at
+    FROM users
+    WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    ),
+    first_order AS (
+    SELECT user_id, MIN(created_at) AS first_at
+    FROM order_items
+    WHERE status <> 'Cancelled'
+    GROUP BY user_id
+    ),
+    monthly AS (
+    SELECT c.month AS month, COUNT(*) AS users,
+    COUNT(*) FILTER (WHERE f.first_at IS NOT NULL AND f.first_at >= c.registered_at AND f.first_at < c.registered_at + INTERVAL '30 days') AS converted
+    FROM cohort c
+    LEFT JOIN first_order f ON f.user_id = c.id
+    GROUP BY c.month
+    )
+    SELECT month
+    FROM monthly
+    ORDER BY converted::float / users DESC, month ASC
+    LIMIT 1
+  answer_type: string
+  tolerance: 0
+  note: Cohort conversion by acquisition month. Each new user converts when their first ever non-cancelled order falls within 30 days after their own registration. Month breaks ties ascending.
+- id: x03
+  difficulty: expert
+  question: What was the median days from second to third non-cancelled order for users acquired through Facebook in 2024?
+  ground_truth_sql: >-
+    WITH cohort AS (
+    SELECT id FROM users
+    WHERE traffic_source = 'Facebook'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    ),
+    orders_ranked AS (
+    SELECT oi.user_id, MIN(oi.created_at) AS order_at,
+    ROW_NUMBER() OVER (PARTITION BY oi.user_id ORDER BY MIN(oi.created_at)) AS rn
+    FROM order_items oi
+    JOIN cohort c ON c.id = oi.user_id
+    WHERE oi.status <> 'Cancelled'
+    GROUP BY oi.user_id, oi.order_id
+    ),
+    gaps AS (
+    SELECT o2.user_id, EXTRACT(EPOCH FROM (o3.order_at - o2.order_at)) / 86400.0 AS days
+    FROM orders_ranked o2
+    JOIN orders_ranked o3 ON o3.user_id = o2.user_id AND o3.rn = 3 AND o2.rn = 2
+    )
+    SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY days) AS median_days
+    FROM gaps
+  answer_type: number
+  tolerance: 0.01
+  note: Median gap between the second and third orders. Each order time is the minimum created_at of its non-cancelled items. Only cohort users with at least three non-cancelled orders count. Days divide epoch seconds by 86400.
+- id: x04
+  difficulty: expert
+  question: What was the 90th percentile of per-user 2024 gross spend, summing each user's non-cancelled items first?
+  ground_truth_sql: >-
+    WITH per_user AS (
+    SELECT user_id, SUM(sale_price) AS spend
+    FROM order_items
+    WHERE status <> 'Cancelled'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    GROUP BY user_id
+    )
+    SELECT PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY spend) AS p90
+    FROM per_user
+  answer_type: number
+  tolerance: 0.01
+  note: User-level percentile over gross spend. Each user sums their non-cancelled items in the closed 2024 window, then the 90th percentile is taken across users.
+- id: x05
+  difficulty: expert
+  question: What was the median days from first to second non-cancelled order for users acquired through Organic in 2024?
+  ground_truth_sql: >-
+    WITH cohort AS (
+    SELECT id FROM users
+    WHERE traffic_source = 'Organic'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    ),
+    orders_ranked AS (
+    SELECT oi.user_id, MIN(oi.created_at) AS order_at,
+    ROW_NUMBER() OVER (PARTITION BY oi.user_id ORDER BY MIN(oi.created_at)) AS rn
+    FROM order_items oi
+    JOIN cohort c ON c.id = oi.user_id
+    WHERE oi.status <> 'Cancelled'
+    GROUP BY oi.user_id, oi.order_id
+    ),
+    gaps AS (
+    SELECT o1.user_id, EXTRACT(EPOCH FROM (o2.order_at - o1.order_at)) / 86400.0 AS days
+    FROM orders_ranked o1
+    JOIN orders_ranked o2 ON o2.user_id = o1.user_id AND o2.rn = 2 AND o1.rn = 1
+    )
+    SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY days) AS median_days
+    FROM gaps
+  answer_type: number
+  tolerance: 0.01
+  note: Median gap between the first two orders. Each order time is the minimum created_at of its non-cancelled items. Only cohort users with at least two non-cancelled orders count. Days divide epoch seconds by 86400.
+- id: x06
+  difficulty: expert
+  question: What is the difference in median order value between first orders and repeat orders in 2024, subtracting the repeat median from the first median? Each user's earliest 2024 non-cancelled order is their first order.
+  ground_truth_sql: >-
+    WITH per_order AS (
+    SELECT user_id, order_id, SUM(sale_price) AS order_value, MIN(created_at) AS order_at
+    FROM order_items
+    WHERE status <> 'Cancelled'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    GROUP BY user_id, order_id
+    ),
+    ranked AS (
+    SELECT user_id, order_value,
+    ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY order_at) AS rn
+    FROM per_order
+    )
+    SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY order_value) FILTER (WHERE rn = 1) - PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY order_value) FILTER (WHERE rn > 1) AS median_diff
+    FROM ranked
+  answer_type: number
+  tolerance: 0.01
+  note: First minus repeat median order value. Orders aggregate non-cancelled items in the closed 2024 window and rank per user by earliest item time. The difference subtracts the repeat-order median from the first-order median.
+- id: x07
+  difficulty: expert
+  question: What was the 95th percentile of days from first to second non-cancelled order in 2024 across users with at least two non-cancelled orders in 2024?
+  ground_truth_sql: >-
+    WITH per_order AS (
+    SELECT user_id, order_id, MIN(created_at) AS order_at
+    FROM order_items
+    WHERE status <> 'Cancelled'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    GROUP BY user_id, order_id
+    ),
+    ranked AS (
+    SELECT user_id, order_at,
+    ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY order_at) AS rn
+    FROM per_order
+    ),
+    gaps AS (
+    SELECT o1.user_id, EXTRACT(EPOCH FROM (o2.order_at - o1.order_at)) / 86400.0 AS days
+    FROM ranked o1
+    JOIN ranked o2 ON o2.user_id = o1.user_id AND o2.rn = 2 AND o1.rn = 1
+    )
+    SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY days) AS p95_days
+    FROM gaps
+  answer_type: number
+  tolerance: 0.01
+  note: Upper-tail gap between the first two 2024 orders. Each order time is the minimum created_at of its non-cancelled items in the closed 2024 window. Only users with two or more 2024 orders count.
+- id: x08
+  difficulty: expert
+  question: What was the median days from first to second non-cancelled order for users acquired through Search in 2024?
+  ground_truth_sql: >-
+    WITH cohort AS (
+    SELECT id FROM users
+    WHERE traffic_source = 'Search'
+    AND created_at >= '2024-01-01' AND created_at < '2025-01-01'
+    ),
+    orders_ranked AS (
+    SELECT oi.user_id, MIN(oi.created_at) AS order_at,
+    ROW_NUMBER() OVER (PARTITION BY oi.user_id ORDER BY MIN(oi.created_at)) AS rn
+    FROM order_items oi
+    JOIN cohort c ON c.id = oi.user_id
+    WHERE oi.status <> 'Cancelled'
+    GROUP BY oi.user_id, oi.order_id
+    ),
+    gaps AS (
+    SELECT o1.user_id, EXTRACT(EPOCH FROM (o2.order_at - o1.order_at)) / 86400.0 AS days
+    FROM orders_ranked o1
+    JOIN orders_ranked o2 ON o2.user_id = o1.user_id AND o2.rn = 2 AND o1.rn = 1
+    )
+    SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY days) AS median_days
+    FROM gaps
+  answer_type: number
+  tolerance: 0.01
+  note: Median gap between the first two orders. Each order time is the minimum created_at of its non-cancelled items. Only cohort users with at least two non-cancelled orders count. Days divide epoch seconds by 86400.

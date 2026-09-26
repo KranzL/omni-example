@@ -1,0 +1,128 @@
+{
+  "config": "cascade-verify-sonnet",
+  "provider": "anthropic",
+  "timestamp": "20260924T050453Z",
+  "source": "results/cascade-verify-sonnet/20260924T050453Z.jsonl",
+  "repeat": 1,
+  "total": 32,
+  "correct": 30,
+  "accuracy": 0.9375,
+  "correct_strict": 27,
+  "accuracy_strict": 0.84375,
+  "by_difficulty": {
+    "easy": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 8,
+      "accuracy_strict": 1
+    },
+    "expert": {
+      "total": 8,
+      "correct": 6,
+      "accuracy": 0.75,
+      "correct_strict": 6,
+      "accuracy_strict": 0.75
+    },
+    "hard": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 7,
+      "accuracy_strict": 0.875
+    },
+    "moderate": {
+      "total": 8,
+      "correct": 8,
+      "accuracy": 1,
+      "correct_strict": 6,
+      "accuracy_strict": 0.75
+    }
+  },
+  "total_cost_usd": 0.46186800000000006,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0.21184120000000004,
+  "confusion": {
+    "easy": {
+      "cheap": 8
+    },
+    "expert": {
+      "cheap": 4,
+      "mid": 4
+    },
+    "hard": {
+      "cheap": 8
+    },
+    "moderate": {
+      "cheap": 8
+    }
+  },
+  "route_match": 8,
+  "escalation": {
+    "easy": {
+      "total": 8,
+      "escalated": 0,
+      "rate": 0,
+      "reached_top": 0
+    },
+    "expert": {
+      "total": 8,
+      "escalated": 4,
+      "rate": 0.5,
+      "reached_top": 0
+    },
+    "hard": {
+      "total": 8,
+      "escalated": 0,
+      "rate": 0,
+      "reached_top": 0
+    },
+    "moderate": {
+      "total": 8,
+      "escalated": 0,
+      "rate": 0,
+      "reached_top": 0
+    }
+  },
+  "signals": {
+    "verifier_reject": 4
+  },
+  "verifier": {
+    "verified": 36,
+    "accepted": 32,
+    "rejected": 4,
+    "errors": 0,
+    "accepted_correct": 30,
+    "accepted_wrong": 2,
+    "rejected_correct": 0,
+    "rejected_wrong": 4,
+    "false_reject_rate": 0,
+    "false_accept_rate": 0.3333333333333333
+  },
+  "fail_reasons": {
+    "wrong_number": 1,
+    "wrong_value": 1
+  },
+  "format_reasons": {
+    "count_appended": 2,
+    "month_format": 1
+  },
+  "cost_per_correct_usd": 0.015395600000000002,
+  "mean_latency_ms": 12431.46875,
+  "p95_latency_ms": 44017,
+  "omni": {
+    "questions": 32,
+    "repeats": 1,
+    "total_tokens": 948189,
+    "tokens_per_correct": 31606.3,
+    "median_latency_ms": 7362,
+    "error_free": 31,
+    "error_free_rate": 0.96875
+  },
+  "regraded": {
+    "at": "2026-09-25T00:37:02Z",
+    "lines": 32,
+    "verdicts_changed": 0,
+    "strict_changed": 0
+  }
+}

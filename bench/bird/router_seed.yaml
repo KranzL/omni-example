@@ -1,0 +1,108 @@
+- id: bird-743
+  difficulty: challenging
+  question: "What is the percentage of superheroes who act in their own self-interest or make decisions based on their own moral code? Indicate how many of the said superheroes were published by Marvel Comics."
+- id: bird-744
+  difficulty: challenging
+  question: "Between DC and Marvel Comics, which publisher has published more superheroes? Find the difference in the number of superheroes they have published."
+- id: bird-772
+  difficulty: challenging
+  question: "List the eyes, hair and skin colour of all female superheroes published by Dark Horse Comics."
+- id: bird-819
+  difficulty: challenging
+  question: "In superheroes with missing weight data, calculate the difference between the number of superheroes with blue eyes and no eye color."
+- id: bird-1171
+  difficulty: challenging
+  question: "How many underage patients were examined during the course of the three-year period from 1990 to 1993?"
+- id: bird-1231
+  difficulty: challenging
+  question: "For patient born between 1936-1956, how many male patients have creatinine phosphokinase beyond the normal range?"
+- id: bird-1257
+  difficulty: challenging
+  question: "Among the patients whose creatinine level is abnormal, how many of them aren't 70 yet?"
+- id: bird-1302
+  difficulty: challenging
+  question: "For the patients with a normal range of creatinine phosphokinase, how many of them have a positive measure of degree of coagulation?"
+- id: bird-206
+  difficulty: challenging
+  question: "What elements are in the TR004_8_9 bond atoms?"
+- id: bird-219
+  difficulty: challenging
+  question: "What is the percentage of carcinogenic molecules in triple type bonds?"
+- id: bird-220
+  difficulty: challenging
+  question: "Please list top three elements of the toxicology of the molecule TR000 in alphabetical order."
+- id: bird-281
+  difficulty: challenging
+  question: "Tally the toxicology element of the 4th atom of each molecule that was carcinogenic."
+- id: bird-761
+  difficulty: moderate
+  question: "Among the male superheroes, list the super hero names of superheroes with weight greater than the 79% average weight of all superheroes."
+- id: bird-796
+  difficulty: moderate
+  question: "State all of 3-D Man's attributes along with their values."
+- id: bird-797
+  difficulty: moderate
+  question: "Which superheroes have blue eyes with brown hair?"
+- id: bird-801
+  difficulty: moderate
+  question: "Find the ratio between male superheroes and female superheroes."
+- id: bird-1156
+  difficulty: moderate
+  question: "State the ID and age of patient with positive degree of coagulation."
+- id: bird-1175
+  difficulty: moderate
+  question: "How old was the patient who had the highest hemoglobin count at the time of the examination, and what is the doctor's diagnosis?"
+- id: bird-1229
+  difficulty: moderate
+  question: "For all patients with triglyceride (TG) level beyond the normal range, how many are age more than 50 years?"
+- id: bird-1238
+  difficulty: moderate
+  question: "Among the patients who were diagnosed with SLE, who is the oldest with normal hemoglobin level. Provide the ID and sex."
+- id: bird-197
+  difficulty: moderate
+  question: "Calculate the average number of oxygen atoms in single-bonded molecules."
+- id: bird-232
+  difficulty: moderate
+  question: "Please list top three molecules that have single bonds between two atoms and are not carcinogenic in alphabetical order."
+- id: bird-255
+  difficulty: moderate
+  question: "What proportion of single bonds are carcinogenic? Please provide your answer as a percentage with five decimal places."
+- id: bird-260
+  difficulty: moderate
+  question: "Calculate the total atoms with triple-bond molecules containing the element phosphorus or bromine."
+- id: bird-717
+  difficulty: simple
+  question: "Please list all the superpowers of 3-D Man."
+- id: bird-737
+  difficulty: simple
+  question: "What is Copycat's race?"
+- id: bird-738
+  difficulty: simple
+  question: "Which superheroes have a durability attribute value of less than 50?"
+- id: bird-745
+  difficulty: simple
+  question: "Give the publisher ID of Star Trek."
+- id: bird-781
+  difficulty: simple
+  question: "Provide the heights of the heroes whose eye colours are amber."
+- id: bird-806
+  difficulty: simple
+  question: "Provide the eye colour of the superhero who has Karen Beecher-Duncan as their full name."
+- id: bird-1155
+  difficulty: simple
+  question: "List the patient ID, sex and birthday of patient with LDH beyond normal range."
+- id: bird-1166
+  difficulty: simple
+  question: "What are the symptoms observed by the youngest patient to ever did a medical examination? Identify their diagnosis."
+- id: bird-1198
+  difficulty: simple
+  question: "How many female patients were given an APS diagnosis?"
+- id: bird-1251
+  difficulty: simple
+  question: "How many patients with an Ig G higher than normal?"
+- id: bird-195
+  difficulty: simple
+  question: "What is the most common bond type?"
+- id: bird-248
+  difficulty: simple
+  question: "What are the atoms of the triple bond with the molecule \"TR041\"?"

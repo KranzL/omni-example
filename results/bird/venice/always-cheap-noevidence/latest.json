@@ -1,0 +1,80 @@
+{
+  "config": "always-cheap",
+  "provider": "venice",
+  "no_evidence": true,
+  "timestamp": "20260924T234856Z",
+  "source": "results/bird/venice/always-cheap-noevidence/20260924T234856Z.jsonl",
+  "repeat": 1,
+  "total": 30,
+  "correct": 9,
+  "accuracy": 0.3,
+  "correct_strict": 9,
+  "accuracy_strict": 0.3,
+  "by_difficulty": {
+    "challenging": {
+      "total": 10,
+      "correct": 2,
+      "accuracy": 0.2,
+      "correct_strict": 2,
+      "accuracy_strict": 0.2,
+      "ex_correct": 4,
+      "ex_accuracy": 0.4
+    },
+    "moderate": {
+      "total": 10,
+      "correct": 3,
+      "accuracy": 0.3,
+      "correct_strict": 3,
+      "accuracy_strict": 0.3,
+      "ex_correct": 1,
+      "ex_accuracy": 0.1
+    },
+    "simple": {
+      "total": 10,
+      "correct": 4,
+      "accuracy": 0.4,
+      "correct_strict": 4,
+      "accuracy_strict": 0.4,
+      "ex_correct": 3,
+      "ex_accuracy": 0.3
+    }
+  },
+  "total_cost_usd": 0.07653975,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0,
+  "confusion": {
+    "challenging": {
+      "cheap": 10
+    },
+    "moderate": {
+      "cheap": 10
+    },
+    "simple": {
+      "cheap": 10
+    }
+  },
+  "route_match": 10,
+  "fail_reasons": {
+    "no_answer": 3,
+    "wrong_items": 8,
+    "wrong_number": 6,
+    "wrong_row_labels": 3,
+    "wrong_value": 1
+  },
+  "cost_per_correct_usd": 0.008504416666666667,
+  "ex_correct": 8,
+  "ex_total": 30,
+  "ex_accuracy": 0.26666666666666666,
+  "cost_per_ex_correct_usd": 0.00956746875,
+  "mean_latency_ms": 6686.366666666667,
+  "p95_latency_ms": 14606,
+  "omni": {
+    "questions": 30,
+    "repeats": 1,
+    "total_tokens": 755170,
+    "tokens_per_correct": 83907.77777777778,
+    "median_latency_ms": 4814,
+    "error_free": 20,
+    "error_free_rate": 0.6666666666666666
+  }
+}

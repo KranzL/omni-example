@@ -1,0 +1,224 @@
+- id: e01
+  correct_answer: >-
+    The email column of the single users row with id 123, pinned as jgarcia@gmail.com in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when it names any other address, looks up a different user id, returns more than one address, or returns an empty answer.
+  close_but_wrong: >-
+    The right address with an appended parenthetical such as the user id passes the lenient verdict but fails the strict verdict, because only the lenient verdict strips a trailing parenthetical.
+- id: e02
+  correct_answer: >-
+    The brand column of the single products row with id 100, pinned as Annalee + Hope in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when it names any other brand, returns the product name or category instead of the brand, or looks up a different product id.
+  close_but_wrong: >-
+    Writing the brand as Annalee and Hope with the word and instead of the plus sign fails both verdicts, and a trailing parenthetical passes lenient but fails strict.
+- id: e03
+  correct_answer: >-
+    The row count of the distribution_centers table, pinned as 10 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when it counts any other table, filters rows out of the count, or returns a list of names instead of a number.
+  close_but_wrong: >-
+    Listing the center names instead of counting them fails because the grader finds no number, and a count of 9 or 11 from a stale snapshot fails outside tolerance.
+- id: e04
+  correct_answer: >-
+    The count of order_items rows with status Cancelled and created_at from 2024-01-01 inclusive to 2025-01-01 exclusive, pinned as 1968 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the status filter names any other status, the window covers any other period, the upper bound is missing, or distinct orders are counted instead of items.
+  close_but_wrong: >-
+    The all-time cancelled count is larger than 1968 and fails, and the 2023 cancelled count fails, because both use the wrong window.
+- id: e05
+  correct_answer: >-
+    The count of users rows with created_at from 2023-01-01 inclusive to 2024-01-01 exclusive, pinned as 24084 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the window covers any other period, the bounds are off by a day or a month, or any table other than users is counted.
+  close_but_wrong: >-
+    Counting users created in 2024 instead of 2023 returns a larger number and fails, and an open-ended window with no upper bound fails.
+- id: e06
+  correct_answer: >-
+    The count of products rows with category exactly Jeans, pinned as 1999 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the category string differs, inventory_items rows are counted instead of products rows, or a date window is added that the question does not ask for.
+  close_but_wrong: >-
+    Filtering on jeans in lowercase matches nothing in Postgres and returns 0, which fails, and counting inventory items returns a far larger number and fails.
+- id: e07
+  correct_answer: >-
+    The count of events rows with event_type Purchase and created_at from 2024-03-01 inclusive to 2024-04-01 exclusive, pinned as 3885 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the event type filter names any other type, the window covers any other month or year, or sessions are counted instead of events.
+  close_but_wrong: >-
+    Counting Purchase events over all of 2024 returns a far larger number and fails, and counting distinct sessions instead of events returns a smaller number and fails.
+- id: e08
+  correct_answer: >-
+    The distinct status values of order_items rows with created_at from 2024-01-01 inclusive to 2025-01-01 exclusive, pinned as Cancelled, Complete and Returned in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when any of the three statuses is missing, any extra status is added, the window covers any other period, or the values come from any other table.
+  close_but_wrong: >-
+    Appending a count to each status such as Complete: 50000 passes the lenient verdict but fails the strict verdict, because only the lenient verdict keeps the label before the colon.
+- id: m01
+  correct_answer: >-
+    Gross revenue by product category in calendar 2024, which is SUM of order_items sale_price joined through inventory_items, excluding Cancelled only, grouped by category and ordered by revenue descending, pinned as the 14-row table in bench/answers.json with Jeans first at 382665.62.
+  failure_criteria: >-
+    The answer is wrong when Returned items are excluded as well so the values are net instead of gross, when Cancelled items are included, when the window differs, when the grouping uses department or brand instead of category, or when rows are missing.
+  close_but_wrong: >-
+    A committed run returned the right categories with every value 100 times too large at 38266562.00 for Jeans, which fails outside tolerance, and net-revenue values fail because every row differs.
+- id: m02
+  correct_answer: >-
+    The top 5 brands by units sold in calendar 2023, where units sold counts order_items excluding Cancelled and Returned, ordered by count descending with brand name breaking ties, pinned as Levi's, Dockers, Allegra K, Columbia, Ray-Ban in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the status filter includes Returned items, the window covers any other year, the ranking uses revenue instead of units, the order is wrong, or any of the five brands is missing or replaced.
+  close_but_wrong: >-
+    The right five brands in the right order with appended counts such as Levi's: 3013 passes the lenient verdict but fails the strict verdict, and the same five brands in the wrong order fails both.
+- id: m03
+  correct_answer: >-
+    Return rate by department in calendar 2024, which is Returned items divided by non-cancelled items per product department, pinned as Men 0.01006 and Women 0.01022 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the denominator includes Cancelled items, the numerator counts any other status, the grouping uses category instead of department, or the window differs.
+  close_but_wrong: >-
+    Reporting the rates as percentages such as 1.006 instead of ratios fails 100 times outside tolerance, and rates over all time fail because the values differ.
+- id: m04
+  correct_answer: >-
+    Average order value in March 2024, which is gross revenue over distinct orders with at least one non-cancelled item in the closed March 2024 window, pinned as 47.17632 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the denominator counts items instead of distinct orders, Cancelled revenue is included, the window covers any other month, or a plain average of sale_price per item is returned.
+  close_but_wrong: >-
+    The per-item average of sale_price is lower than the per-order value and fails, while 47.18 rounded to cents passes within the 1 percent tolerance.
+- id: m05
+  correct_answer: >-
+    The count of distinct users with at least one non-cancelled order item in calendar 2024, pinned as 32914 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when items or orders are counted instead of distinct users, users whose only items were cancelled are included, or the window covers any other period.
+  close_but_wrong: >-
+    Counting all order items instead of distinct users returns a far larger number and fails, and counting distinct users over all time fails because the window is wrong.
+- id: m06
+  correct_answer: >-
+    Gross revenue by user traffic source in calendar 2024, joining each order item to its ordering user and excluding Cancelled only, pinned as the 5-row table in bench/answers.json with Search first at 1838928.51.
+  failure_criteria: >-
+    The answer is wrong when revenue is attributed to any other user or session field, Returned items are excluded so the values are net, Cancelled items are included, or the window differs.
+  close_but_wrong: >-
+    Attributing revenue to the traffic source of each event session instead of the ordering user fails because the values differ, and net-revenue values fail on every row.
+- id: m07
+  correct_answer: >-
+    The count of distinct non-cancelled orders per calendar month of 2024, keyed by YYYY-MM from 2024-01 with 3417 to 2024-12 with 5725, pinned as the 12-row table in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when items are counted instead of distinct orders, Cancelled orders are included, any month is missing, or the year differs.
+  close_but_wrong: >-
+    Month keys as full dates such as 2024-01-01 and month names such as January pass the lenient verdict but fail the strict verdict, and both forms appear in committed runs.
+- id: m08
+  correct_answer: >-
+    The top 5 product categories by net revenue in calendar 2024, where net revenue excludes Cancelled and Returned, ordered by revenue descending with category name breaking ties, pinned as Jeans, Accessories, Outerwear & Coats, Fashion Hoodies & Sweatshirts, Tops & Tees in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the ranking uses gross revenue, units sold, or any other year, when the order is wrong, or when any of the five categories is missing or replaced.
+  close_but_wrong: >-
+    The right five categories with appended revenue such as Jeans: 379473.50 passes the lenient verdict but fails the strict verdict, and a committed run with every value 100 times too large fails both.
+- id: h01
+  correct_answer: >-
+    The calendar month of 2024 with the largest month-over-month increase in gross revenue in dollars, computed with a LAG window over monthly non-cancelled revenue and excluding January, pinned as 2024-11 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when it names the month with the largest revenue instead of the largest increase, uses net revenue, ranks by percent change, includes January, or uses any window other than 2024.
+  close_but_wrong: >-
+    The peak-revenue month answers a different question and fails, and a month name such as November passes the lenient verdict for a YYYY-MM key but fails the strict verdict.
+- id: h02
+  correct_answer: >-
+    The product name with the highest return rate in calendar 2024 among products with at least 100 non-cancelled order items, with ties broken by lowest product id, pinned as Dockers Mens Comfort Waist Khaki D3 Classic Fit Flat Front Pant in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the 100-item threshold is missing or counts the wrong rows, the rate denominator includes Cancelled items, a product id is returned instead of the name, or ties are broken any other way.
+  close_but_wrong: >-
+    A high-rate product below the 100-item threshold fails because the threshold is part of the question, and the right name with an appended parenthetical passes lenient but fails strict.
+- id: h03
+  correct_answer: >-
+    Gross margin by distribution center in calendar 2024, which is SUM of sale_price minus SUM of item cost per center through inventory_items, excluding Cancelled and Returned, pinned as the 10-row table in bench/answers.json with Los Angeles CA first at 244635.02.
+  failure_criteria: >-
+    The answer is wrong when cost is never subtracted so the values are revenue instead of margin, when the status filter differs, when centers are joined through any other path, or when the window differs.
+  close_but_wrong: >-
+    Revenue by distribution center looks complete but every value is wrong and fails, and gross values that include Returned items fail because the margin definition excludes them.
+- id: h04
+  correct_answer: >-
+    The share of distinct 2024 sessions with at least one Purchase event, pinned as 0.095689 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when events are counted instead of distinct sessions, the share is over users or orders instead of sessions, the event filter names any other type, or the window differs.
+  close_but_wrong: >-
+    Reporting the share as a percentage such as 9.57 fails 100 times outside tolerance, while 0.0957 rounded passes within the 1 percent tolerance.
+- id: h05
+  correct_answer: >-
+    The share of users created in January 2024 who placed at least two non-cancelled orders within 90 days after their own creation time, pinned as 0.183478 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the 90-day window is fixed for the whole cohort instead of relative to each user, items are counted instead of distinct orders, the repeat threshold is anything other than two, Cancelled orders are included, or the cohort differs.
+  close_but_wrong: >-
+    Defining repeat as one or more orders inflates the share and fails, and a single window of January plus 90 days for all users fails because late-January users get extra days.
+- id: h06
+  correct_answer: >-
+    The user traffic source with the highest gross revenue per 2024-created user, counting 2024 non-cancelled order revenue over the 2024 cohort, pinned as Facebook in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when total revenue is compared instead of revenue per user, the cohort includes any other year, the revenue uses net instead of gross, or the window differs.
+  close_but_wrong: >-
+    Search has the highest total revenue but not the highest revenue per user and fails, and the right source with an appended value such as Facebook: 54.15 fails both string verdicts because string grading has no colon rule.
+- id: h07
+  correct_answer: >-
+    The median hours from creation to delivery for Complete order items created in calendar 2024 with a non-null delivery time, pinned as 175.233889 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the mean is returned instead of the median, any other status is included, null delivery times are counted, the unit is anything other than hours, or the window differs.
+  close_but_wrong: >-
+    The median in days at about 7.3 fails outside tolerance, and the mean delivery time fails because the question asks for the median.
+- id: h08
+  correct_answer: >-
+    For each 2024 acquisition month the users created and their total 2024 net revenue, keyed by YYYY-MM with 2300 users in 2024-01, pinned as the 12-row table in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when revenue is gross instead of net, the revenue window is not pinned to 2024, orders are counted instead of users, the cohort window differs, or any month is missing.
+  close_but_wrong: >-
+    Month labels as January 2024 pass the lenient verdict under the month-name rule but fail the strict verdict, and a committed cheap run with those labels failed lenient under the older grader.
+- id: x01
+  correct_answer: >-
+    The median days from first to second non-cancelled order for users with traffic source Facebook created in 2024, where each order time is the minimum created_at of its non-cancelled items and only users with at least two orders count, pinned as 95.8189 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the cohort uses any other source or year, order time uses a single row instead of the minimum per order, the ranking counts items instead of orders, the mean is returned, Cancelled items are included, or the unit is anything other than days.
+  close_but_wrong: >-
+    Committed runs answered 89, 75 and 67 by ranking item rows instead of orders, and all fail outside the 1 percent tolerance.
+- id: x02
+  correct_answer: >-
+    The 2024 acquisition month with the highest share of new users placing at least one non-cancelled order within 30 days after their own creation time, with ties broken ascending, pinned as 2024-12 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the 30-day window is fixed per month instead of relative to each registration, items are counted instead of first orders, the threshold differs, or ties are broken any other way.
+  close_but_wrong: >-
+    A committed run answered 2024-01 from a fixed-window formulation and fails, and a month name such as December passes lenient but fails strict.
+- id: x03
+  correct_answer: >-
+    The median days from second to third non-cancelled order for users with traffic source Facebook created in 2024, where each order time is the minimum created_at of its non-cancelled items and only users with at least three orders count, pinned as 86.01505 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the cohort uses any other source or year, the gap uses any other pair of orders, order time uses a single row instead of the minimum per order, the ranking counts items instead of orders, or the mean is returned.
+  close_but_wrong: >-
+    Committed runs answered 64 and 64.38 by ranking item rows instead of orders, and both fail outside the 1 percent tolerance.
+- id: x04
+  correct_answer: >-
+    The 90th percentile of per-user 2024 gross spend, where each user first sums their non-cancelled items in the closed 2024 window, pinned as 149.95 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the percentile runs over items or orders instead of per-user sums, net spend is used instead of gross, any other percentile or the mean is returned, or the window differs.
+  close_but_wrong: >-
+    A committed run answered 148.08 from a grouped SUM CASE pattern, which is 1.2 percent low and fails just outside the 1 percent tolerance.
+- id: x05
+  correct_answer: >-
+    The median days from first to second non-cancelled order for users with traffic source Organic created in 2024, where each order time is the minimum created_at of its non-cancelled items and only users with at least two orders count, pinned as 94.46139 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the cohort uses any other source or year, order time uses a single row instead of the minimum per order, the ranking counts items instead of orders, the mean is returned, Cancelled items are included, or the unit is anything other than days.
+  close_but_wrong: >-
+    Committed runs answered 69, 74 and 87 by ranking item rows instead of orders, and all fail outside the 1 percent tolerance.
+- id: x06
+  correct_answer: >-
+    The first-order median order value minus the repeat-order median in 2024, where each order sums its non-cancelled items and each user's earliest 2024 order is their first, pinned as 0.5 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the subtraction runs the other way, order values sum the wrong rows, per-item values are used instead of per-order sums, the mean is used instead of the median, or first means first ever instead of earliest in 2024.
+  close_but_wrong: >-
+    A committed run answered 0.65, which is 30 percent high and fails, and the sign-flipped -0.5 fails because the question subtracts the repeat median from the first median.
+- id: x07
+  correct_answer: >-
+    The 95th percentile of days from first to second non-cancelled 2024 order across users with at least two 2024 orders, where each order time is the minimum created_at of its non-cancelled items, pinned as 208.56213 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the median or any other percentile is returned, the ranking counts items instead of orders, the cohort is restricted to one source, or the window differs.
+  close_but_wrong: >-
+    A committed run answered 203 by ranking item rows instead of orders, which is 2.7 percent low and fails outside the 1 percent tolerance.
+- id: x08
+  correct_answer: >-
+    The median days from first to second non-cancelled order for users with traffic source Search created in 2024, where each order time is the minimum created_at of its non-cancelled items and only users with at least two orders count, pinned as 94.49479 in bench/answers.json.
+  failure_criteria: >-
+    The answer is wrong when the cohort uses any other source or year, order time uses a single row instead of the minimum per order, the ranking counts items instead of orders, the mean is returned, Cancelled items are included, or the unit is anything other than days.
+  close_but_wrong: >-
+    Committed runs answered 69 and 74 by ranking item rows instead of orders, and both fail outside the 1 percent tolerance.

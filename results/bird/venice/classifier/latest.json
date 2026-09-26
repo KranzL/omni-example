@@ -1,0 +1,81 @@
+{
+  "config": "classifier",
+  "provider": "venice",
+  "timestamp": "20260924T232838Z",
+  "source": "results/bird/venice/classifier/20260924T232838Z.jsonl",
+  "repeat": 1,
+  "total": 30,
+  "correct": 21,
+  "accuracy": 0.7,
+  "correct_strict": 21,
+  "accuracy_strict": 0.7,
+  "by_difficulty": {
+    "challenging": {
+      "total": 10,
+      "correct": 7,
+      "accuracy": 0.7,
+      "correct_strict": 7,
+      "accuracy_strict": 0.7,
+      "ex_correct": 7,
+      "ex_accuracy": 0.7
+    },
+    "moderate": {
+      "total": 10,
+      "correct": 7,
+      "accuracy": 0.7,
+      "correct_strict": 7,
+      "accuracy_strict": 0.7,
+      "ex_correct": 4,
+      "ex_accuracy": 0.4
+    },
+    "simple": {
+      "total": 10,
+      "correct": 7,
+      "accuracy": 0.7,
+      "correct_strict": 7,
+      "accuracy_strict": 0.7,
+      "ex_correct": 7,
+      "ex_accuracy": 0.7
+    }
+  },
+  "total_cost_usd": 0.045545220000000004,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0.00826965,
+  "confusion": {
+    "challenging": {
+      "cheap": 3,
+      "mid": 6,
+      "top": 1
+    },
+    "moderate": {
+      "cheap": 5,
+      "mid": 5
+    },
+    "simple": {
+      "cheap": 8,
+      "top": 2
+    }
+  },
+  "route_match": 14,
+  "fail_reasons": {
+    "wrong_items": 2,
+    "wrong_number": 2,
+    "wrong_row_labels": 5
+  },
+  "cost_per_correct_usd": 0.00216882,
+  "ex_correct": 18,
+  "ex_total": 30,
+  "ex_accuracy": 0.6,
+  "cost_per_ex_correct_usd": 0.00253029,
+  "mean_latency_ms": 12980.966666666667,
+  "p95_latency_ms": 41231,
+  "omni": {
+    "questions": 30,
+    "repeats": 1,
+    "total_tokens": 530410,
+    "tokens_per_correct": 25257.619047619046,
+    "median_latency_ms": 7550,
+    "error_free": 26,
+    "error_free_rate": 0.8666666666666667
+  }
+}

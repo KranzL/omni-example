@@ -1,0 +1,163 @@
+schema: main
+dataset: BIRD Mini-Dev toxicology database (SQLite)
+title: the BIRD Mini-Dev toxicology SQLite database
+tables:
+    - name: atom
+      purpose: The atom table of the database.
+      grain: One row per atom record.
+      approx_rows: 9111
+      primary_key: atom_id
+      foreign_keys:
+        - column: molecule_id
+          references: molecule.molecule_id
+      columns:
+        - name: atom_id
+          type: TEXT
+          description: The atom_id column (TEXT). Part of the primary key.
+        - name: molecule_id
+          type: TEXT
+          description: The molecule_id column (TEXT).
+        - name: element
+          type: TEXT
+          description: The element column (TEXT).
+    - name: bond
+      purpose: The bond table of the database.
+      grain: One row per bond record.
+      approx_rows: 9156
+      primary_key: bond_id
+      foreign_keys:
+        - column: molecule_id
+          references: molecule.molecule_id
+      columns:
+        - name: bond_id
+          type: TEXT
+          description: The bond_id column (TEXT). Part of the primary key.
+        - name: molecule_id
+          type: TEXT
+          description: The molecule_id column (TEXT).
+        - name: bond_type
+          type: TEXT
+          description: The bond_type column (TEXT).
+    - name: connected
+      purpose: The connected table of the database.
+      grain: One row per connected record.
+      approx_rows: 18312
+      primary_key: atom_id
+      foreign_keys:
+        - column: bond_id
+          references: bond.bond_id
+        - column: atom_id2
+          references: atom.atom_id
+        - column: atom_id
+          references: atom.atom_id
+      columns:
+        - name: atom_id
+          type: TEXT
+          description: The atom_id column (TEXT). Part of the primary key.
+        - name: atom_id2
+          type: TEXT
+          description: The atom_id2 column (TEXT). Part of the primary key.
+        - name: bond_id
+          type: TEXT
+          description: The bond_id column (TEXT).
+    - name: molecule
+      purpose: The molecule table of the database.
+      grain: One row per molecule record.
+      approx_rows: 343
+      primary_key: molecule_id
+      foreign_keys: []
+      columns:
+        - name: molecule_id
+          type: TEXT
+          description: The molecule_id column (TEXT). Part of the primary key.
+        - name: label
+          type: TEXT
+          description: The label column (TEXT).
+enums:
+    - column: atom.element
+      values:
+        - br
+        - c
+        - ca
+        - cl
+        - cu
+        - f
+        - h
+        - i
+        - k
+        - "n"
+        - na
+        - o
+        - p
+        - pb
+        - s
+        - sn
+        - "y"
+        - zn
+    - column: bond.bond_type
+      values:
+        - '#'
+        - '-'
+        - =
+    - column: molecule.label
+      values:
+        - +
+        - '-'
+metrics: []
+paths:
+    - name: atom-to-molecule
+      description: Join atom to molecule.
+      grain: One row per atom row.
+      steps:
+        - from: atom
+          join: molecule
+          "on": atom.molecule_id = molecule.molecule_id
+    - name: bond-to-molecule
+      description: Join bond to molecule.
+      grain: One row per bond row.
+      steps:
+        - from: bond
+          join: molecule
+          "on": bond.molecule_id = molecule.molecule_id
+    - name: connected-to-bond
+      description: Join connected to bond.
+      grain: One row per connected row.
+      steps:
+        - from: connected
+          join: bond
+          "on": connected.bond_id = bond.bond_id
+    - name: connected-to-atom
+      description: Join connected to atom.
+      grain: One row per connected row.
+      steps:
+        - from: connected
+          join: atom
+          "on": connected.atom_id2 = atom.atom_id
+    - name: connected-to-atom-on-atom_id
+      description: Join connected to atom.
+      grain: One row per connected row.
+      steps:
+        - from: connected
+          join: atom
+          "on": connected.atom_id = atom.atom_id
+synonyms:
+    - term: atom
+      refers_to: atom
+    - term: bond
+      refers_to: bond
+    - term: connected
+      refers_to: connected
+    - term: molecule
+      refers_to: molecule
+conventions:
+    - 'This database is SQLite. Use SQLite syntax and functions: STRFTIME for dates, || for string concatenation, CAST(x AS FLOAT) for ratios.'
+    - Query read-only with one SELECT or WITH statement and no trailing semicolon.
+    - Quote identifiers that contain spaces or special characters with double quotes.
+    - Copy ON clauses from the join paths verbatim.
+gotchas:
+    - 'Integer division truncates: CAST one side to FLOAT before dividing.'
+    - Some columns store dates as TEXT; compare them as strings in YYYY-MM-DD form.
+    - NULL values never equal anything; use IS NULL or IS NOT NULL to test them.
+examples:
+    - question: How many rows are in connected?
+      sql: SELECT COUNT(*) FROM connected

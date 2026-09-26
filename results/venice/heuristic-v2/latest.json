@@ -1,0 +1,94 @@
+{
+  "config": "heuristic-v2",
+  "provider": "venice",
+  "timestamp": "20260924T221725Z",
+  "source": "results/venice/heuristic-v2/20260924T221725Z.jsonl",
+  "repeat": 3,
+  "total": 96,
+  "correct": 84,
+  "accuracy": 0.875,
+  "correct_strict": 76,
+  "accuracy_strict": 0.7916666666666666,
+  "by_difficulty": {
+    "easy": {
+      "total": 24,
+      "correct": 23,
+      "accuracy": 0.9583333333333334,
+      "correct_strict": 23,
+      "accuracy_strict": 0.9583333333333334
+    },
+    "expert": {
+      "total": 24,
+      "correct": 20,
+      "accuracy": 0.8333333333333334,
+      "correct_strict": 20,
+      "accuracy_strict": 0.8333333333333334
+    },
+    "hard": {
+      "total": 24,
+      "correct": 23,
+      "accuracy": 0.9583333333333334,
+      "correct_strict": 20,
+      "accuracy_strict": 0.8333333333333334
+    },
+    "moderate": {
+      "total": 24,
+      "correct": 18,
+      "accuracy": 0.75,
+      "correct_strict": 13,
+      "accuracy_strict": 0.5416666666666666
+    }
+  },
+  "total_cost_usd": 0.3096607609999999,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0,
+  "confusion": {
+    "easy": {
+      "cheap": 24
+    },
+    "expert": {
+      "top": 24
+    },
+    "hard": {
+      "cheap": 3,
+      "mid": 15,
+      "top": 6
+    },
+    "moderate": {
+      "cheap": 21,
+      "mid": 3
+    }
+  },
+  "route_match": 57,
+  "fail_reasons": {
+    "wrong_items": 2,
+    "wrong_number": 4,
+    "wrong_row_labels": 6
+  },
+  "format_reasons": {
+    "count_appended": 5,
+    "month_format": 3
+  },
+  "cost_per_correct_usd": 0.0036864376309523796,
+  "mean_latency_ms": 24001.291666666668,
+  "p95_latency_ms": 77612,
+  "omni": {
+    "questions": 32,
+    "repeats": 3,
+    "total_tokens": 1634592,
+    "tokens_per_correct": 19459.428571428572,
+    "median_latency_ms": 9948,
+    "error_free": 93,
+    "error_free_rate": 0.96875,
+    "consistent": 25,
+    "consistency_rate": 0.78125,
+    "answers_changed": 7,
+    "answer_texts_changed": 10
+  },
+  "regraded": {
+    "at": "2026-09-25T00:37:02Z",
+    "lines": 96,
+    "verdicts_changed": 0,
+    "strict_changed": 0
+  }
+}
