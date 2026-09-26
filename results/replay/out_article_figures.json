@@ -540,6 +540,14 @@
    }
   }
  },
+ "case_when_filter": {
+  "definition": "Expert-question answers from runs after the rules were added to semantic/ecomm.yaml (20260924T052300Z), whose SQL uses SUM or COUNT over CASE WHEN on status. BIRD, judge and trace files are excluded.",
+  "expert_answers": 414,
+  "with_case_when": 28,
+  "with_case_when_wrong": 16,
+  "without_case_when": 386,
+  "without_case_when_wrong": 60
+ },
  "bird": [
   {
    "label": "Opus 5.5",

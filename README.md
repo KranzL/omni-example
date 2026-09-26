@@ -265,6 +265,10 @@ The article "Routing Data Questions by Difficulty" takes every figure from the r
 | Haiku with a 4,096-token thinking budget on the expert questions | harness bench run --config always-cheap --only x01,x02,x03,x04,x05,x06,x07,x08 --repeat 3 --cheap-thinking 4096 --tag thinking | results/always-cheap-subset-thinking/20260926T155727Z.jsonl |
 | Haiku with context routing, and the byte-identical cached prefix | harness bench run --config always-cheap --repeat 3 --route-context --capture-requests --tag routectx | results/always-cheap-routectx/20260926T160100Z.jsonl, results/replay/out_route_context_prefix.json |
 | BIRD execution check for Opus, Haiku, Qwen 3.5 9B and DeepSeek | harness bench run --bench bird --config NAME [--provider venice] | out_article_figures.json under bird |
+| Muse on everything, 31/32, $0.1225, 55.4 s mean | harness bench run --config always-muse --provider muse | results/muse/always-muse/20260925T025144Z.jsonl |
+| Three added rules moved Sonnet from 31/32 to 32/32 | harness bench run --config always-mid, before and after the gotchas section of semantic/ecomm.yaml | results/always-mid/20260924T051043Z.jsonl (31/32) and results/always-mid/20260924T052236Z.jsonl (32/32) |
+| Removing BIRD's evidence notes, Haiku 20/30 to 13/30 and Qwen 3.5 9B 22/30 to 8/30 | harness bench run --bench bird --config always-cheap [--provider venice] --no-evidence | results/bird/always-cheap-noevidence and results/bird/venice/always-cheap-noevidence |
+| Expert answers that filtered with CASE WHEN on status, 16 of 28 wrong against 60 of 386 | python3 results/replay/article_figures.py | out_article_figures.json under case_when_filter |
 | Context levels, model only 26/32 and model plus topic 32/32 on Sonnet | harness bench run --config always-mid --context-levels model and --context-levels model,topic | results/always-mid-levels-model and results/always-mid-levels-model-topic |
 
 ## Report

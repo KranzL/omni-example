@@ -201,6 +201,29 @@ def main():
         figures["route_context"] = {"file": os.path.relpath(ctx[-1], REPO), "passes": pass_stats(cr), **latency(cr),
                                     "expert": expert_block([os.path.relpath(ctx[-1], REPO)], "Haiku 4.5 with context routing")}
 
+    case_pattern = __import__("re").compile(r"(SUM|COUNT)\s*\(\s*CASE\s+WHEN[^)]*status", __import__("re").I | __import__("re").S)
+    total = with_case = case_wrong = rest_wrong = 0
+    for f in sorted(glob.glob(path("results/**/*.jsonl"), recursive=True)):
+        rel = os.path.relpath(f, REPO)
+        if any(part in rel for part in ("/traces/", "/judge/", "/bird/", "/replay/")):
+            continue
+        if os.path.basename(rel)[:15] < "20260924T052300":
+            continue
+        for r in lines(rel):
+            if r.get("difficulty") != "expert" or not r.get("sql"):
+                continue
+            total += 1
+            if case_pattern.search(r["sql"]):
+                with_case += 1
+                case_wrong += 0 if r.get("correct") else 1
+            else:
+                rest_wrong += 0 if r.get("correct") else 1
+    figures["case_when_filter"] = {
+        "definition": "Expert-question answers from runs after the rules were added to semantic/ecomm.yaml (20260924T052300Z), whose SQL uses SUM or COUNT over CASE WHEN on status. BIRD, judge and trace files are excluded.",
+        "expert_answers": total, "with_case_when": with_case, "with_case_when_wrong": case_wrong,
+        "without_case_when": total - with_case, "without_case_when_wrong": rest_wrong,
+    }
+
     bird = []
     for label, cfg in (("Opus 5.5", "bird/always-top"), ("Haiku 4.5", "bird/always-cheap"), ("Qwen 3.5 9B", "bird/venice/always-cheap"), ("Qwen 3.7 Plus", "bird/venice/always-top"), ("DeepSeek V4 Flash", "bird/venice/always-mid")):
         L = latest(cfg)
