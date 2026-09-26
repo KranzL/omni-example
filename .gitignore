@@ -10,3 +10,4 @@ results/requests/
 /local/
 /results/*.md
 /results/*.svg
+__pycache__/

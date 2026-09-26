@@ -1,0 +1,1090 @@
+[
+ {
+  "id": "e01",
+  "set": "bench",
+  "label": "easy",
+  "question": "What is the email address of the user with id 123?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.7
+ },
+ {
+  "id": "e02",
+  "set": "bench",
+  "label": "easy",
+  "question": "What brand makes the product with id 100?",
+  "features": {
+   "words": 8,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.4
+ },
+ {
+  "id": "e03",
+  "set": "bench",
+  "label": "easy",
+  "question": "How many distribution centers are there?",
+  "features": {
+   "words": 6,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 0.9
+ },
+ {
+  "id": "e04",
+  "set": "bench",
+  "label": "easy",
+  "question": "How many order items had status Cancelled in calendar 2024?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.6
+ },
+ {
+  "id": "e05",
+  "set": "bench",
+  "label": "easy",
+  "question": "How many users were created in calendar 2023?",
+  "features": {
+   "words": 8,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.1
+ },
+ {
+  "id": "e06",
+  "set": "bench",
+  "label": "easy",
+  "question": "How many products are in the Jeans category?",
+  "features": {
+   "words": 8,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.4
+ },
+ {
+  "id": "e07",
+  "set": "bench",
+  "label": "easy",
+  "question": "How many events of type Purchase occurred in March 2024?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.3
+ },
+ {
+  "id": "e08",
+  "set": "bench",
+  "label": "easy",
+  "question": "Which distinct order item statuses were observed in calendar 2024?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.3
+ },
+ {
+  "id": "m01",
+  "set": "bench",
+  "label": "moderate",
+  "question": "What was the gross revenue by product category in calendar 2024?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.7
+ },
+ {
+  "id": "m02",
+  "set": "bench",
+  "label": "moderate",
+  "question": "What are the top 5 brands by units sold in calendar 2023?",
+  "features": {
+   "words": 12,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2
+ },
+ {
+  "id": "m03",
+  "set": "bench",
+  "label": "moderate",
+  "question": "What was the return rate by department in calendar 2024?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 2,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.1
+ },
+ {
+  "id": "m04",
+  "set": "bench",
+  "label": "moderate",
+  "question": "What was the average order value in March 2024?",
+  "features": {
+   "words": 9,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.7
+ },
+ {
+  "id": "m05",
+  "set": "bench",
+  "label": "moderate",
+  "question": "How many distinct users placed at least one non-cancelled order item in calendar 2024?",
+  "features": {
+   "words": 15,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 3.35
+ },
+ {
+  "id": "m06",
+  "set": "bench",
+  "label": "moderate",
+  "question": "What was the gross revenue by user traffic source in calendar 2024?",
+  "features": {
+   "words": 12,
+   "schema_mentions": 3,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.1
+ },
+ {
+  "id": "m07",
+  "set": "bench",
+  "label": "moderate",
+  "question": "How many distinct non-cancelled orders were placed in each calendar month of 2024?",
+  "features": {
+   "words": 14,
+   "schema_mentions": 0,
+   "aggregation": 0,
+   "time": 1,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 2.6500000000000004
+ },
+ {
+  "id": "m08",
+  "set": "bench",
+  "label": "moderate",
+  "question": "What are the top 5 product categories by net revenue in calendar 2024?",
+  "features": {
+   "words": 13,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.4000000000000004
+ },
+ {
+  "id": "h01",
+  "set": "bench",
+  "label": "hard",
+  "question": "Which calendar month of 2024, as YYYY-MM, had the largest month-over-month increase in gross revenue in dollars?",
+  "features": {
+   "words": 20,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 1,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 3.3000000000000003
+ },
+ {
+  "id": "h02",
+  "set": "bench",
+  "label": "hard",
+  "question": "Which product had the highest return rate in calendar 2024 among products with at least 100 non-cancelled order items?",
+  "features": {
+   "words": 20,
+   "schema_mentions": 4,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 2,
+   "reasoning": 0,
+   "qualifier": 2
+  },
+  "score": 6.2
+ },
+ {
+  "id": "h03",
+  "set": "bench",
+  "label": "hard",
+  "question": "What was the gross margin by distribution center in calendar 2024?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 2,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.2
+ },
+ {
+  "id": "h04",
+  "set": "bench",
+  "label": "hard",
+  "question": "What share of distinct 2024 sessions included at least one Purchase event?",
+  "features": {
+   "words": 12,
+   "schema_mentions": 2,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 3.55
+ },
+ {
+  "id": "h05",
+  "set": "bench",
+  "label": "hard",
+  "question": "What share of users created in January 2024 placed at least two non-cancelled orders within 90 days after their own creation time?",
+  "features": {
+   "words": 23,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 1,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 3
+  },
+  "score": 6.35
+ },
+ {
+  "id": "h06",
+  "set": "bench",
+  "label": "hard",
+  "question": "Which user traffic source had the highest gross revenue per user in 2024, counting users created in 2024 and their 2024 non-cancelled order revenue?",
+  "features": {
+   "words": 25,
+   "schema_mentions": 4,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 4.7
+ },
+ {
+  "id": "h07",
+  "set": "bench",
+  "label": "hard",
+  "question": "What was the median time in hours from creation to delivery for Complete order items created in calendar 2024?",
+  "features": {
+   "words": 19,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 1,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 3.2
+ },
+ {
+  "id": "h08",
+  "set": "bench",
+  "label": "hard",
+  "question": "For each 2024 acquisition month, how many users were created and what was their total net revenue in 2024?",
+  "features": {
+   "words": 19,
+   "schema_mentions": 2,
+   "aggregation": 1,
+   "time": 2,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 4.75
+ },
+ {
+  "id": "x01",
+  "set": "bench",
+  "label": "expert",
+  "question": "What was the median days from first to second non-cancelled order for users acquired through Facebook in 2024?",
+  "features": {
+   "words": 19,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 2,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 2
+  },
+  "score": 5.2
+ },
+ {
+  "id": "x02",
+  "set": "bench",
+  "label": "expert",
+  "question": "Which 2024 acquisition month, as YYYY-MM, had the highest share of new users placing at least one non-cancelled order within 30 days after their own creation time?",
+  "features": {
+   "words": 29,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 3,
+   "ranking": 2,
+   "reasoning": 0,
+   "qualifier": 3
+  },
+  "score": 8.45
+ },
+ {
+  "id": "x03",
+  "set": "bench",
+  "label": "expert",
+  "question": "What was the median days from second to third non-cancelled order for users acquired through Facebook in 2024?",
+  "features": {
+   "words": 19,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 2,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 2
+  },
+  "score": 5.2
+ },
+ {
+  "id": "x04",
+  "set": "bench",
+  "label": "expert",
+  "question": "What was the 90th percentile of per-user 2024 gross spend, summing each user's non-cancelled items first?",
+  "features": {
+   "words": 19,
+   "schema_mentions": 1,
+   "aggregation": 2,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 2
+  },
+  "score": 4.7
+ },
+ {
+  "id": "x05",
+  "set": "bench",
+  "label": "expert",
+  "question": "What was the median days from first to second non-cancelled order for users acquired through Organic in 2024?",
+  "features": {
+   "words": 19,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 2,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 2
+  },
+  "score": 5.2
+ },
+ {
+  "id": "x06",
+  "set": "bench",
+  "label": "expert",
+  "question": "What is the difference in median order value between first orders and repeat orders in 2024, subtracting the repeat median from the first median? Each user's earliest 2024 non-cancelled order is their first order.",
+  "features": {
+   "words": 36,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 5
+  },
+  "score": 8.65
+ },
+ {
+  "id": "x07",
+  "set": "bench",
+  "label": "expert",
+  "question": "What was the 95th percentile of days from first to second non-cancelled order in 2024 across users with at least two non-cancelled orders in 2024?",
+  "features": {
+   "words": 27,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 1,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 3
+  },
+  "score": 6.75
+ },
+ {
+  "id": "x08",
+  "set": "bench",
+  "label": "expert",
+  "question": "What was the median days from first to second non-cancelled order for users acquired through Search in 2024?",
+  "features": {
+   "words": 19,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 2,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 2
+  },
+  "score": 5.2
+ },
+ {
+  "id": "se01",
+  "set": "seed",
+  "label": "easy",
+  "question": "What is the full name of the user with id 5000?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.4000000000000001
+ },
+ {
+  "id": "se02",
+  "set": "seed",
+  "label": "easy",
+  "question": "Which department does the product with id 250 belong to?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.6
+ },
+ {
+  "id": "se03",
+  "set": "seed",
+  "label": "easy",
+  "question": "How many products have a retail price above 100 dollars?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.6
+ },
+ {
+  "id": "se04",
+  "set": "seed",
+  "label": "easy",
+  "question": "How many users list Canada as their country?",
+  "features": {
+   "words": 8,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.4
+ },
+ {
+  "id": "se05",
+  "set": "seed",
+  "label": "easy",
+  "question": "What city is the distribution center with id 3 located in?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.7
+ },
+ {
+  "id": "se06",
+  "set": "seed",
+  "label": "easy",
+  "question": "How many events were recorded on 2024-01-15?",
+  "features": {
+   "words": 9,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.2
+ },
+ {
+  "id": "se07",
+  "set": "seed",
+  "label": "easy",
+  "question": "What is the status of the order item with id 999?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.7
+ },
+ {
+  "id": "se08",
+  "set": "seed",
+  "label": "easy",
+  "question": "How many products are in the Swim category?",
+  "features": {
+   "words": 8,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.4
+ },
+ {
+  "id": "se09",
+  "set": "seed",
+  "label": "easy",
+  "question": "What is the retail price of the product with id 777?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.7
+ },
+ {
+  "id": "se10",
+  "set": "seed",
+  "label": "easy",
+  "question": "How many users arrived through the Email traffic source?",
+  "features": {
+   "words": 9,
+   "schema_mentions": 3,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.8
+ },
+ {
+  "id": "se11",
+  "set": "seed",
+  "label": "easy",
+  "question": "How many distribution centers are located in the United States?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.3
+ },
+ {
+  "id": "se12",
+  "set": "seed",
+  "label": "easy",
+  "question": "What is the username of the user with id 7?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.3
+ },
+ {
+  "id": "sm01",
+  "set": "seed",
+  "label": "moderate",
+  "question": "What was the total net revenue in calendar 2023?",
+  "features": {
+   "words": 9,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.7
+ },
+ {
+  "id": "sm02",
+  "set": "seed",
+  "label": "moderate",
+  "question": "Which 5 products sold the most units in February 2024?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.8
+ },
+ {
+  "id": "sm03",
+  "set": "seed",
+  "label": "moderate",
+  "question": "What was the average retail price of products by brand?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 3,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.4
+ },
+ {
+  "id": "sm04",
+  "set": "seed",
+  "label": "moderate",
+  "question": "How many orders were delivered in each quarter of 2023?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 0,
+   "aggregation": 0,
+   "time": 1,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 2.25
+ },
+ {
+  "id": "sm05",
+  "set": "seed",
+  "label": "moderate",
+  "question": "What was the cancellation rate by product category in 2023?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 2,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.1
+ },
+ {
+  "id": "sm06",
+  "set": "seed",
+  "label": "moderate",
+  "question": "Which traffic source brought the most new users in 2024?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.1
+ },
+ {
+  "id": "sm07",
+  "set": "seed",
+  "label": "moderate",
+  "question": "What was the gross revenue by user gender in calendar 2024?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 3,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2
+ },
+ {
+  "id": "sm08",
+  "set": "seed",
+  "label": "moderate",
+  "question": "What are the top 3 cities by number of orders in 2024?",
+  "features": {
+   "words": 12,
+   "schema_mentions": 0,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.7000000000000002
+ },
+ {
+  "id": "sm09",
+  "set": "seed",
+  "label": "moderate",
+  "question": "How many distinct products were sold in each month of 2023?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 1,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 2.6500000000000004
+ },
+ {
+  "id": "sm10",
+  "set": "seed",
+  "label": "moderate",
+  "question": "What was the average number of items per order in 2024?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 0,
+   "aggregation": 2,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.1
+ },
+ {
+  "id": "sm11",
+  "set": "seed",
+  "label": "moderate",
+  "question": "Which distribution center handled the most returned items in 2023?",
+  "features": {
+   "words": 10,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 1.8
+ },
+ {
+  "id": "sm12",
+  "set": "seed",
+  "label": "moderate",
+  "question": "What was the total cost of goods sold by department in 2024?",
+  "features": {
+   "words": 12,
+   "schema_mentions": 2,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.3
+ },
+ {
+  "id": "sh01",
+  "set": "seed",
+  "label": "hard",
+  "question": "What share of users who bought something in January 2024 bought again the next month?",
+  "features": {
+   "words": 15,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 1,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.8
+ },
+ {
+  "id": "sh02",
+  "set": "seed",
+  "label": "hard",
+  "question": "What was the median order value by traffic source for repeat buyers in 2024?",
+  "features": {
+   "words": 14,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 2.95
+ },
+ {
+  "id": "sh03",
+  "set": "seed",
+  "label": "hard",
+  "question": "Which product category grew fastest between 2023 and 2024 in net revenue?",
+  "features": {
+   "words": 12,
+   "schema_mentions": 2,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 2.55
+ },
+ {
+  "id": "sh04",
+  "set": "seed",
+  "label": "hard",
+  "question": "What was the 30-day repeat purchase rate for users acquired in March 2024?",
+  "features": {
+   "words": 14,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 2,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 3.95
+ },
+ {
+  "id": "sh05",
+  "set": "seed",
+  "label": "hard",
+  "question": "Which brand shows the highest average days between the first and third purchase?",
+  "features": {
+   "words": 13,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 1,
+   "ranking": 1,
+   "reasoning": 0,
+   "qualifier": 3
+  },
+  "score": 5.35
+ },
+ {
+  "id": "sh06",
+  "set": "seed",
+  "label": "hard",
+  "question": "What fraction of 2024 revenue came from users created before 2023?",
+  "features": {
+   "words": 11,
+   "schema_mentions": 1,
+   "aggregation": 0,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 2.1500000000000004
+ },
+ {
+  "id": "sh07",
+  "set": "seed",
+  "label": "hard",
+  "question": "What was the median time from signup to first order by country in 2024?",
+  "features": {
+   "words": 14,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 2.95
+ },
+ {
+  "id": "sh08",
+  "set": "seed",
+  "label": "hard",
+  "question": "Which month of 2023 had the steepest week-over-week drop in order volume?",
+  "features": {
+   "words": 14,
+   "schema_mentions": 0,
+   "aggregation": 0,
+   "time": 2,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.4000000000000004
+ },
+ {
+  "id": "sh09",
+  "set": "seed",
+  "label": "hard",
+  "question": "What share of sessions with a Cart event ended in a Purchase within one day?",
+  "features": {
+   "words": 15,
+   "schema_mentions": 2,
+   "aggregation": 1,
+   "time": 1,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 1
+  },
+  "score": 3.85
+ },
+ {
+  "id": "sh10",
+  "set": "seed",
+  "label": "hard",
+  "question": "Which distribution center has the slowest median delivery time for orders over 50 dollars?",
+  "features": {
+   "words": 14,
+   "schema_mentions": 1,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 0
+  },
+  "score": 2.2
+ },
+ {
+  "id": "sh11",
+  "set": "seed",
+  "label": "hard",
+  "question": "How did the return rate change from the first half to the second half of 2024 by department?",
+  "features": {
+   "words": 18,
+   "schema_mentions": 2,
+   "aggregation": 1,
+   "time": 0,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 2
+  },
+  "score": 4.4
+ },
+ {
+  "id": "sh12",
+  "set": "seed",
+  "label": "hard",
+  "question": "What was the 75th percentile of days from first to fifth order among 2024 buyers?",
+  "features": {
+   "words": 15,
+   "schema_mentions": 0,
+   "aggregation": 1,
+   "time": 1,
+   "ranking": 0,
+   "reasoning": 0,
+   "qualifier": 2
+  },
+  "score": 4
+ }
+]

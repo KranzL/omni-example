@@ -1,0 +1,133 @@
+{
+ "note": "first no-semantic-layer v0 pass, transcribed from console output at 2 decimals because the file was overwritten by the rerun",
+ "rows": {
+  "e01": {
+   "p_nested_2dp": 0.0,
+   "latency_ms": 321
+  },
+  "e02": {
+   "p_nested_2dp": 0.0,
+   "latency_ms": 373
+  },
+  "e03": {
+   "p_nested_2dp": 0.0,
+   "latency_ms": 377
+  },
+  "e04": {
+   "p_nested_2dp": 0.0,
+   "latency_ms": 330
+  },
+  "e05": {
+   "p_nested_2dp": 0.0,
+   "latency_ms": 325
+  },
+  "e06": {
+   "p_nested_2dp": 0.0,
+   "latency_ms": 321
+  },
+  "e07": {
+   "p_nested_2dp": 0.0,
+   "latency_ms": 316
+  },
+  "e08": {
+   "p_nested_2dp": 0.01,
+   "latency_ms": 313
+  },
+  "m01": {
+   "p_nested_2dp": 0.0,
+   "latency_ms": 313
+  },
+  "m02": {
+   "p_nested_2dp": 0.02,
+   "latency_ms": 346
+  },
+  "m03": {
+   "p_nested_2dp": 0.12,
+   "latency_ms": 301
+  },
+  "m04": {
+   "p_nested_2dp": 0.0,
+   "latency_ms": 339
+  },
+  "m05": {
+   "p_nested_2dp": 0.44,
+   "latency_ms": 294
+  },
+  "m06": {
+   "p_nested_2dp": 0.01,
+   "latency_ms": 291
+  },
+  "m07": {
+   "p_nested_2dp": 0.04,
+   "latency_ms": 289
+  },
+  "m08": {
+   "p_nested_2dp": 0.03,
+   "latency_ms": 312
+  },
+  "h01": {
+   "p_nested_2dp": 0.8,
+   "latency_ms": 302
+  },
+  "h02": {
+   "p_nested_2dp": 0.4,
+   "latency_ms": 307
+  },
+  "h03": {
+   "p_nested_2dp": 0.02,
+   "latency_ms": 334
+  },
+  "h04": {
+   "p_nested_2dp": 0.76,
+   "latency_ms": 327
+  },
+  "h05": {
+   "p_nested_2dp": 1.0,
+   "latency_ms": 326
+  },
+  "h06": {
+   "p_nested_2dp": 0.71,
+   "latency_ms": 287
+  },
+  "h07": {
+   "p_nested_2dp": 0.17,
+   "latency_ms": 308
+  },
+  "h08": {
+   "p_nested_2dp": 0.47,
+   "latency_ms": 288
+  },
+  "x01": {
+   "p_nested_2dp": 1.0,
+   "latency_ms": 311
+  },
+  "x02": {
+   "p_nested_2dp": 0.98,
+   "latency_ms": 302
+  },
+  "x03": {
+   "p_nested_2dp": 1.0,
+   "latency_ms": 303
+  },
+  "x04": {
+   "p_nested_2dp": 1.0,
+   "latency_ms": 291
+  },
+  "x05": {
+   "p_nested_2dp": 1.0,
+   "latency_ms": 352
+  },
+  "x06": {
+   "p_nested_2dp": 0.99,
+   "latency_ms": 304
+  },
+  "x07": {
+   "p_nested_2dp": 0.99,
+   "latency_ms": 307
+  },
+  "x08": {
+   "p_nested_2dp": 1.0,
+   "latency_ms": 330
+  }
+ }
+}

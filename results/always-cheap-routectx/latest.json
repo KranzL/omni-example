@@ -1,0 +1,84 @@
+{
+  "config": "always-cheap",
+  "provider": "anthropic",
+  "tag": "routectx",
+  "timestamp": "20260926T160100Z",
+  "source": "results/always-cheap-routectx/20260926T160100Z.jsonl",
+  "repeat": 3,
+  "total": 96,
+  "correct": 93,
+  "accuracy": 0.96875,
+  "correct_strict": 79,
+  "accuracy_strict": 0.8229166666666666,
+  "by_difficulty": {
+    "easy": {
+      "total": 24,
+      "correct": 24,
+      "accuracy": 1,
+      "correct_strict": 24,
+      "accuracy_strict": 1
+    },
+    "expert": {
+      "total": 24,
+      "correct": 21,
+      "accuracy": 0.875,
+      "correct_strict": 21,
+      "accuracy_strict": 0.875
+    },
+    "hard": {
+      "total": 24,
+      "correct": 24,
+      "accuracy": 1,
+      "correct_strict": 19,
+      "accuracy_strict": 0.7916666666666666
+    },
+    "moderate": {
+      "total": 24,
+      "correct": 24,
+      "accuracy": 1,
+      "correct_strict": 15,
+      "accuracy_strict": 0.625
+    }
+  },
+  "total_cost_usd": 0.4842394,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0,
+  "confusion": {
+    "easy": {
+      "cheap": 24
+    },
+    "expert": {
+      "cheap": 24
+    },
+    "hard": {
+      "cheap": 24
+    },
+    "moderate": {
+      "cheap": 24
+    }
+  },
+  "route_match": 24,
+  "fail_reasons": {
+    "wrong_number": 2,
+    "wrong_value": 1
+  },
+  "format_reasons": {
+    "csv_rows": 14
+  },
+  "cost_per_correct_usd": 0.005206875268817204,
+  "mean_latency_ms": 6454.4375,
+  "p95_latency_ms": 14453,
+  "omni": {
+    "questions": 32,
+    "repeats": 3,
+    "total_tokens": 1645661,
+    "tokens_per_correct": 17695.279569892475,
+    "median_latency_ms": 6076,
+    "error_free": 95,
+    "error_free_rate": 0.9895833333333334,
+    "consistent": 29,
+    "consistency_rate": 0.90625,
+    "answers_changed": 3,
+    "answer_texts_changed": 10
+  }
+}

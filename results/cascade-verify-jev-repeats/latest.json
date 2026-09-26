@@ -1,0 +1,133 @@
+{
+  "config": "cascade-verify-jev",
+  "provider": "anthropic",
+  "tag": "repeats",
+  "timestamp": "20260926T155331Z",
+  "source": "results/cascade-verify-jev-repeats/20260926T155331Z.jsonl",
+  "repeat": 2,
+  "total": 64,
+  "correct": 59,
+  "accuracy": 0.921875,
+  "correct_strict": 51,
+  "accuracy_strict": 0.796875,
+  "by_difficulty": {
+    "easy": {
+      "total": 16,
+      "correct": 16,
+      "accuracy": 1,
+      "correct_strict": 16,
+      "accuracy_strict": 1
+    },
+    "expert": {
+      "total": 16,
+      "correct": 11,
+      "accuracy": 0.6875,
+      "correct_strict": 11,
+      "accuracy_strict": 0.6875
+    },
+    "hard": {
+      "total": 16,
+      "correct": 16,
+      "accuracy": 1,
+      "correct_strict": 13,
+      "accuracy_strict": 0.8125
+    },
+    "moderate": {
+      "total": 16,
+      "correct": 16,
+      "accuracy": 1,
+      "correct_strict": 11,
+      "accuracy_strict": 0.6875
+    }
+  },
+  "total_cost_usd": 0.820842772,
+  "judge_cost_usd": 0,
+  "route_cost_usd": 0.19895947200000003,
+  "confusion": {
+    "easy": {
+      "cheap": 15,
+      "mid": 1
+    },
+    "expert": {
+      "cheap": 8,
+      "mid": 7,
+      "top": 1
+    },
+    "hard": {
+      "cheap": 15,
+      "mid": 1
+    },
+    "moderate": {
+      "cheap": 13,
+      "mid": 3
+    }
+  },
+  "route_match": 19,
+  "escalation": {
+    "easy": {
+      "total": 16,
+      "escalated": 1,
+      "rate": 0.0625,
+      "reached_top": 0
+    },
+    "expert": {
+      "total": 16,
+      "escalated": 8,
+      "rate": 0.5,
+      "reached_top": 1
+    },
+    "hard": {
+      "total": 16,
+      "escalated": 1,
+      "rate": 0.0625,
+      "reached_top": 0
+    },
+    "moderate": {
+      "total": 16,
+      "escalated": 3,
+      "rate": 0.1875,
+      "reached_top": 0
+    }
+  },
+  "signals": {
+    "low_confidence": 1,
+    "no_submit": 2,
+    "verifier_reject": 12
+  },
+  "verifier": {
+    "verified": 75,
+    "accepted": 63,
+    "rejected": 12,
+    "errors": 0,
+    "accepted_correct": 58,
+    "accepted_wrong": 5,
+    "rejected_correct": 6,
+    "rejected_wrong": 6,
+    "false_reject_rate": 0.09375,
+    "false_accept_rate": 0.45454545454545453
+  },
+  "fail_reasons": {
+    "wrong_number": 4,
+    "wrong_value": 1
+  },
+  "format_reasons": {
+    "csv_rows": 7,
+    "month_format": 1
+  },
+  "cost_per_correct_usd": 0.013912589355932203,
+  "mean_latency_ms": 14239.390625,
+  "p95_latency_ms": 39704,
+  "omni": {
+    "questions": 32,
+    "repeats": 2,
+    "total_tokens": 2341508,
+    "tokens_per_correct": 39686.57627118644,
+    "median_latency_ms": 9859,
+    "error_free": 64,
+    "error_free_rate": 1,
+    "consistent": 29,
+    "consistency_rate": 0.90625,
+    "answers_changed": 3,
+    "answer_texts_changed": 8
+  }
+}

@@ -1,0 +1,94 @@
+[
+ {
+  "model": "english",
+  "ver": "v0",
+  "auc_bench": 0.504,
+  "auc_seeds": 0.514,
+  "caught_at_05": "0/5",
+  "false_mid_at_05": "1/27",
+  "hard_seeds_at_05": "0/12",
+  "easy_seeds_flagged": "0/24",
+  "replay_05": "27/32 $0.2515 -30.7% (31 cheap)",
+  "seed_thr": 0.2322,
+  "replay_seed_thr": "32/32 $0.3470 -4.4% (3 cheap)",
+  "x_probs": {
+   "x01": 0.311,
+   "x02": 0.254,
+   "x03": 0.276,
+   "x04": 0.299,
+   "x05": 0.268,
+   "x06": 0.402,
+   "x07": 0.353,
+   "x08": 0.287
+  }
+ },
+ {
+  "model": "english",
+  "ver": "v1",
+  "auc_bench": 0.585,
+  "auc_seeds": 0.675,
+  "caught_at_05": "1/5",
+  "false_mid_at_05": "7/27",
+  "hard_seeds_at_05": "6/12",
+  "easy_seeds_flagged": "8/24",
+  "replay_05": "28/32 $0.2861 -21.2% (24 cheap)",
+  "seed_thr": 0.458,
+  "replay_seed_thr": "31/32 $0.2923 -19.5% (12 cheap)",
+  "x_probs": {
+   "x01": 0.492,
+   "x02": 0.375,
+   "x03": 0.524,
+   "x04": 0.476,
+   "x05": 0.394,
+   "x06": 0.488,
+   "x07": 0.63,
+   "x08": 0.47
+  }
+ },
+ {
+  "model": "typed-decisions",
+  "ver": "v0",
+  "auc_bench": 0.637,
+  "auc_seeds": 0.585,
+  "caught_at_05": "3/5",
+  "false_mid_at_05": "9/27",
+  "hard_seeds_at_05": "4/12",
+  "easy_seeds_flagged": "5/24",
+  "replay_05": "30/32 $0.2514 -30.8% (20 cheap)",
+  "seed_thr": 0.382,
+  "replay_seed_thr": "32/32 $0.3460 -4.7% (3 cheap)",
+  "x_probs": {
+   "x01": 0.516,
+   "x02": 0.453,
+   "x03": 0.506,
+   "x04": 0.447,
+   "x05": 0.475,
+   "x06": 0.6,
+   "x07": 0.564,
+   "x08": 0.502
+  }
+ },
+ {
+  "model": "typed-decisions",
+  "ver": "v1",
+  "auc_bench": 0.589,
+  "auc_seeds": 0.663,
+  "caught_at_05": "5/5",
+  "false_mid_at_05": "18/27",
+  "hard_seeds_at_05": "9/12",
+  "easy_seeds_flagged": "18/24",
+  "replay_05": "32/32 $0.3110 -14.3% (9 cheap)",
+  "seed_thr": 0.469,
+  "replay_seed_thr": "32/32 $0.3360 -7.5% (5 cheap)",
+  "x_probs": {
+   "x01": 0.574,
+   "x02": 0.532,
+   "x03": 0.583,
+   "x04": 0.521,
+   "x05": 0.532,
+   "x06": 0.633,
+   "x07": 0.725,
+   "x08": 0.554
+  }
+ }
+]
