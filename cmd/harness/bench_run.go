@@ -84,7 +84,7 @@ func newCascade(name string, a router.AgentRunner, client llm.Provider, semText 
 	return router.NewCascade(name, a, v), nil
 }
 
-const benchRunUsage = `usage: harness bench run --config always-cheap|always-mid|always-top|always-muse|heuristic|heuristic-v2|classifier|embedding|jev-classifier|cascade-signals|cascade-verify-haiku|cascade-verify-sonnet|cascade-verify-jev [--bench ecomm|bird] [--set starter|full] [--repeat N] [--concurrency K] [--only ID[,ID...]] [--difficulty easy,moderate,hard] [--shadow RATE] [--provider anthropic|venice|muse] [--context-levels model,topic,field] [--tag TAG] [--no-cache] [--no-evidence] [--capture-requests]`
+const benchRunUsage = `usage: harness bench run --config always-cheap|always-mid|always-top|always-muse|heuristic|heuristic-v2|classifier|embedding|jev-classifier|cascade-signals|cascade-verify-haiku|cascade-verify-sonnet|cascade-verify-jev [--bench ecomm|bird] [--set starter|full] [--repeat N] [--concurrency K] [--only ID[,ID...]] [--difficulty easy,moderate,hard] [--shadow RATE] [--provider anthropic|venice|muse] [--context-levels model,topic,field] [--tag TAG] [--no-cache] [--no-evidence] [--capture-requests] [--route-context] [--cheap-thinking BUDGET]`
 
 type benchRunArgs struct {
 	config      string
@@ -101,6 +101,8 @@ type benchRunArgs struct {
 	noCache     bool
 	noEvidence  bool
 	capture     bool
+	routeCtx    bool
+	cheapThink  int64
 }
 
 func parseBenchRunArgs(args []string) (benchRunArgs, error) {
@@ -121,6 +123,10 @@ func parseBenchRunArgs(args []string) (benchRunArgs, error) {
 		}
 		if !hasValue && name == "capture-requests" {
 			out.capture = true
+			continue
+		}
+		if !hasValue && name == "route-context" {
+			out.routeCtx = true
 			continue
 		}
 		if !hasValue {
@@ -180,6 +186,12 @@ func parseBenchRunArgs(args []string) (benchRunArgs, error) {
 				return out, err
 			}
 			out.levels = levels
+		case "cheap-thinking":
+			n, err := strconv.ParseInt(value, 10, 64)
+			if err != nil || n < 1024 {
+				return out, fmt.Errorf("--cheap-thinking must be a token budget of at least 1024")
+			}
+			out.cheapThink = n
 		case "tag":
 			if !validTag(value) {
 				return out, fmt.Errorf("--tag must be letters, digits, dash or underscore, starting with a letter or digit")
@@ -218,6 +230,9 @@ func parseBenchRunArgs(args []string) (benchRunArgs, error) {
 	}
 	if out.noEvidence && out.bench != bench.BenchBird {
 		return out, fmt.Errorf("--no-evidence needs --bench bird")
+	}
+	if (out.routeCtx || out.cheapThink > 0) && out.tag == "" {
+		return out, fmt.Errorf("--route-context and --cheap-thinking need --tag so the run lands in its own folder")
 	}
 	return out, nil
 }
@@ -284,6 +299,11 @@ func runBench(args []string) (string, error) {
 	if opts.capture {
 		enableCapture(client, "")
 	}
+	if opts.cheapThink > 0 {
+		if err := enableCheapThinking(client, opts.cheapThink); err != nil {
+			return "", err
+		}
+	}
 	if cfg.DatabaseURL == "" {
 		return "", fmt.Errorf("missing %s", config.DatabaseURLName)
 	}
@@ -314,6 +334,9 @@ func runBench(args []string) (string, error) {
 	a = agent.NewPrefix(client, querier, semText)
 	if opts.noCache {
 		a = agent.NewPrefixNoCache(client, querier, semText)
+	}
+	if opts.routeCtx {
+		a = contextRoutingAgent{inner: a}
 	}
 	if provider == llm.ProviderMuse {
 		ma, err := newMuseAgent(cfg, semText)
@@ -354,8 +377,8 @@ func runBench(args []string) (string, error) {
 	if opts.noCache {
 		cache = "off"
 	}
-	fmt.Printf("bench run provider=%s config=%s set=%s router=%s questions=%d repeat=%d concurrency=%d cache=%s levels=%s capture=%t timeout=%s\n",
-		provider, opts.config, opts.set, routerName, len(qs), opts.repeat, opts.concurrency, cache, opts.levels.String(), opts.capture, timeout.Round(time.Minute))
+	fmt.Printf("bench run provider=%s config=%s set=%s router=%s questions=%d repeat=%d concurrency=%d cache=%s levels=%s capture=%t route_context=%t cheap_thinking=%d timeout=%s\n",
+		provider, opts.config, opts.set, routerName, len(qs), opts.repeat, opts.concurrency, cache, opts.levels.String(), opts.capture, opts.routeCtx, opts.cheapThink, timeout.Round(time.Minute))
 	lines, err := r.Run(ctx)
 	if err != nil {
 		return "", err
